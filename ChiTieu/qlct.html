@@ -83,39 +83,39 @@
     <nav class="header-nav ms-auto">
       <ul class="nav d-flex align-items-center nav-tabs-bordered" style="border-bottom: none !important;">
         <li class="nav-item pe-3" role="presentation">
-          <button class="nav-link active" id="tab-home" data-bs-toggle="tab" data-bs-target="#home" type="button"
-            role="tab" aria-controls="home" aria-selected="true"><strong>Trang chủ</strong></button>
+          <a class="nav-link " id="tab-home" href="../index.html" type="button" role="tab" aria-controls="home"
+            aria-selected="true"><strong>Trang chủ</strong></a>
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <button class="nav-link" id="tab-chi-tieu" data-bs-toggle="tab" data-bs-target="#chi-tieu" type="button"
-            role="tab" aria-controls="chi-tieu" aria-selected="false"><strong>Chi tiêu</strong></button>
+          <a class="nav-link active" id="tab-chi-tieu" data-bs-toggle="tab" data-bs-target="#chi-tieu" type="button"
+            role="tab" aria-controls="chi-tieu" aria-selected="false"><strong>Chi tiêu</strong></a>
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <button class="nav-link" id="tab-lich-trinh" data-bs-toggle="tab" data-bs-target="#lich-trinh" type="button"
-            role="tab" aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></button>
+          <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
+            aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <button class="nav-link" id="tab-ghi-chu" data-bs-toggle="tab" data-bs-target="#ghi-chu" type="button"
-            role="tab" aria-controls="ghi-chu" aria-selected="false"><strong>Ghi chú</strong></button>
+          <a class="nav-link" id="tab-ghi-chu" href="../GhiChu/qlgc.html" type="button" role="tab"
+            aria-controls="ghi-chu" aria-selected="false"><strong>Ghi chú</strong></a>
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <button class="nav-link" id="tab-tai-lieu" data-bs-toggle="tab" data-bs-target="#tai-lieu" type="button"
-            role="tab" aria-controls="tai-lieu" aria-selected="false"><strong>Tài liệu</strong></button>
+          <a class="nav-link" id="tab-tai-lieu" href="../TaiLieu/qltl.html" type="button" role="tab"
+            aria-controls="tai-lieu" aria-selected="false"><strong>Tài liệu</strong></a>
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <button class="nav-link" id="tab-diem-khac-biet" data-bs-toggle="tab" data-bs-target="#diem-khac-biet"
-            type="button" role="tab" aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
-              biệt</strong></button>
+          <a class="nav-link" id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
+            aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
+              biệt</strong></a>
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <button class="nav-link" id="tab-phan-hoi" data-bs-toggle="tab" data-bs-target="#phan-hoi" type="button"
-            role="tab" aria-controls="phan-hoi" aria-selected="false"><strong>Phản hồi</strong></button>
+          <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab" aria-controls="phan-hoi"
+            aria-selected="false"><strong>Phản hồi</strong></a>
         </li>
 
 
@@ -1049,6 +1049,33 @@
   <!-- Daterangepicker -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+  <script>
+    document.querySelectorAll('.nav-link').forEach(tab => {
+      tab.addEventListener('click', function () {
+        // Bỏ active ở tất cả
+        document.querySelectorAll('.nav-link').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+
+        // Lấy URL HTML từ thuộc tính
+        const url = this.getAttribute('data-tab-url');
+
+        // Load file HTML vào #tab-content
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('tab-content').innerHTML = data;
+          })
+          .catch(error => {
+            document.getElementById('tab-content').innerHTML = '<p class="text-danger">Không thể tải nội dung.</p>';
+          });
+      });
+    });
+
+    // Tự động load tab đầu tiên khi trang mở
+    document.querySelector('.nav-link.active').click();
+  </script>
+
 
   <script>
     $(function () {
