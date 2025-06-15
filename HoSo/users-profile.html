@@ -43,13 +43,17 @@
     <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet" />
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <style>
+      .social-links a {
+        color: black !important; /* Màu icon đen */
+        margin-right: 5px; /* Cách nhau 1px */
+        font-size: 1.5rem; /* Tùy chỉnh kích thước nếu muốn */
+      }
+
+      .social-links a:last-child {
+        margin-right: 0;
+      }
+    </style>
   </head>
 
   <body>
@@ -168,7 +172,7 @@
                 alt="Profile"
                 class="rounded-circle"
               />
-              <span class="d-none d-md-block ps-2">Nguyễn Văn A</span> </a
+              <span class="d-none d-md-block ps-2">Điền Bá Quang</span> </a
             ><!-- End Profile Iamge Icon -->
           </li>
           <!-- End Profile Nav -->
@@ -268,7 +272,7 @@
                     </button>
                   </li>
                 </ul>
-                <div class="tab-content pt-2">
+                <div class="tab-content pt-2 pb-5">
                   <div
                     class="tab-pane fade show active profile-overview"
                     id="profile-overview"
@@ -303,7 +307,6 @@
                       <div class="col-sm-4 profile-label">
                         <span class="text-danger">*</span>
                         Số điện thoại
-                        <small class="text-muted">(optional)</small>
                       </div>
                       <div class="col-sm-8 profile-value">0123456789</div>
                     </div>
@@ -317,11 +320,6 @@
                         diensinhgai@gmail.com
                       </div>
                     </div>
-
-                    <div class="mt-4 text-end">
-                      <a href="#" class="btn btn-primary">Chỉnh sửa</a>
-                      <a href="#" class="btn btn-secondary">Quay lại</a>
-                    </div>
                   </div>
 
                   <div
@@ -329,215 +327,108 @@
                     id="profile-edit"
                   >
                     <!-- Profile Edit Form -->
-                    <form>
-                      <div class="row mb-3">
-                        <label
-                          for="fullName"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Full Name</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="fullName"
-                            type="text"
-                            class="form-control"
-                            id="fullName"
-                            value="Kevin Anderson"
-                          />
+                    <form id="studentForm" novalidate>
+                      <!-- Tên sinh viên -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Tên sinh viên
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="fullName"
+                          value="Điền Bá Quang"
+                        />
+                        <div class="invalid-feedback">
+                          Tên không hợp lệ (chỉ chứa chữ cái)
                         </div>
                       </div>
 
-                      <div class="row mb-3">
-                        <label
-                          for="about"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >About</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <textarea
-                            name="about"
-                            class="form-control"
-                            id="about"
-                            style="height: 100px"
+                      <!-- Giới tính -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Giới tính </label
+                        ><br />
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gender"
+                            id="male"
+                            value="Nam"
+                            checked
+                          />
+                          <label class="form-check-label" for="male">Nam</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gender"
+                            id="female"
+                            value="Nữ"
+                          />
+                          <label class="form-check-label" for="female"
+                            >Nữ</label
                           >
-Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea
-                          >
                         </div>
                       </div>
 
-                      <div class="row mb-3">
-                        <label
-                          for="company"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Company</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="company"
-                            type="text"
-                            class="form-control"
-                            id="company"
-                            value="Lueilwitz, Wisoky and Leuschke"
-                          />
+                      <!-- Ngày sinh -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Ngày sinh
+                        </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="dob"
+                          value="29-12-2004"
+                        />
+                        <div class="invalid-feedback">
+                          Ngày sinh phải nhỏ hơn ngày hiện tại
                         </div>
                       </div>
 
-                      <div class="row mb-3">
-                        <label
-                          for="Job"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Job</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="job"
-                            type="text"
-                            class="form-control"
-                            id="Job"
-                            value="Web Designer"
-                          />
+                      <!-- Số điện thoại -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Số điện thoại
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="phone"
+                          value="0123456789"
+                        />
+                        <div class="invalid-feedback">
+                          Số điện thoại phải đủ 10 chữ số
                         </div>
                       </div>
 
-                      <div class="row mb-3">
-                        <label
-                          for="Country"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Country</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="country"
-                            type="text"
-                            class="form-control"
-                            id="Country"
-                            value="USA"
-                          />
+                      <!-- Email -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Email
+                        </label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          value="diensinhgai@gmail.com"
+                        />
+                        <div class="invalid-feedback">
+                          Định dạng email không hợp lệ
                         </div>
                       </div>
 
-                      <div class="row mb-3">
-                        <label
-                          for="Address"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Address</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="address"
-                            type="text"
-                            class="form-control"
-                            id="Address"
-                            value="A108 Adam Street, New York, NY 535022"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="row mb-3">
-                        <label
-                          for="Phone"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Phone</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="phone"
-                            type="text"
-                            class="form-control"
-                            id="Phone"
-                            value="(436) 486-3538 x29071"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="row mb-3">
-                        <label
-                          for="Email"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Email</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="email"
-                            type="email"
-                            class="form-control"
-                            id="Email"
-                            value="k.anderson@example.com"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="row mb-3">
-                        <label
-                          for="Twitter"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Twitter Profile</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="twitter"
-                            type="text"
-                            class="form-control"
-                            id="Twitter"
-                            value="https://twitter.com/#"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="row mb-3">
-                        <label
-                          for="Facebook"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Facebook Profile</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="facebook"
-                            type="text"
-                            class="form-control"
-                            id="Facebook"
-                            value="https://facebook.com/#"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="row mb-3">
-                        <label
-                          for="Instagram"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Instagram Profile</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="instagram"
-                            type="text"
-                            class="form-control"
-                            id="Instagram"
-                            value="https://instagram.com/#"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="row mb-3">
-                        <label
-                          for="Linkedin"
-                          class="col-md-4 col-lg-3 col-form-label"
-                          >Linkedin Profile</label
-                        >
-                        <div class="col-md-8 col-lg-9">
-                          <input
-                            name="linkedin"
-                            type="text"
-                            class="form-control"
-                            id="Linkedin"
-                            value="https://linkedin.com/#"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-primary">
-                          Save Changes
+                      <!-- Buttons -->
+                      <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary me-2">
+                          Lưu
+                        </button>
+                        <button type="button" class="btn btn-secondary">
+                          Quay lại
                         </button>
                       </div>
                     </form>
@@ -546,64 +437,77 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
 
                   <div class="tab-pane fade pt-3" id="profile-change-password">
                     <!-- Change Password Form -->
-                    <form>
-                      <div class="row mb-3">
+                    <form id="changePasswordForm" novalidate>
+                      <div class="mb-3">
                         <label
                           for="currentPassword"
                           class="col-md-4 col-lg-3 col-form-label"
-                          >Mật khẩu hiện tại</label
                         >
-                        <div class="col-md-8 col-lg-9">
+                          <span class="text-danger">*</span> Mật khẩu hiện tại
+                        </label>
+                        <div>
                           <input
-                            name="password"
                             type="password"
                             class="form-control"
                             id="currentPassword"
                           />
+                          <div
+                            class="invalid-feedback"
+                            id="currentPasswordError"
+                          ></div>
                         </div>
                       </div>
 
-                      <div class="row mb-3">
+                      <div class="mb-3">
                         <label
                           for="newPassword"
                           class="col-md-4 col-lg-3 col-form-label"
-                          >Mật khẩu mới</label
                         >
-                        <div class="col-md-8 col-lg-9">
+                          <span class="text-danger">*</span> Mật khẩu mới
+                        </label>
+                        <div>
                           <input
-                            name="newpassword"
                             type="password"
                             class="form-control"
                             id="newPassword"
                           />
+                          <div
+                            class="invalid-feedback"
+                            id="newPasswordError"
+                          ></div>
                         </div>
                       </div>
 
-                      <div class="row mb-3">
+                      <div class="mb-3">
                         <label
                           for="renewPassword"
                           class="col-md-4 col-lg-3 col-form-label"
-                          >Xác nhận mật khẩu</label
                         >
-                        <div class="col-md-8 col-lg-9">
+                          <span class="text-danger">*</span> Xác nhận mật khẩu
+                        </label>
+                        <div>
                           <input
-                            name="renewpassword"
                             type="password"
                             class="form-control"
                             id="renewPassword"
                           />
+                          <div
+                            class="invalid-feedback"
+                            id="renewPasswordError"
+                          ></div>
                         </div>
                       </div>
 
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-primary">
+                      <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary me-2">
                           Xác nhận
                         </button>
-                        <button type="submit" class="btn btn-primary">
-                          Quay Lại
+                        <button type="button" class="btn btn-secondary">
+                          Quay lại
                         </button>
                       </div>
                     </form>
+
                     <!-- End Change Password Form -->
                   </div>
                 </div>
@@ -618,7 +522,7 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
 
     <!-- ======= Footer ======= -->
     <footer>
-      <div class="container">
+      <div class="container pb-5">
         <div class="row">
           <div class="col-md-2 social-links">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -689,5 +593,7 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
+
+    <script src="../assets/js/validate.js"></script>
   </body>
 </html>
