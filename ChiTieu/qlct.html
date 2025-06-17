@@ -33,6 +33,12 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+  <!-- Select2 danh mục chi tiêu - truy vấn-->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- Date range truy vấn-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
   <style>
     .parent {
       display: grid;
@@ -40,7 +46,7 @@
       grid-template-rows: 1fr;
       /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
       gap: 15px;
-      height: 85%;
+      height: 258px;
       /* tùy theo bạn muốn card cao tối đa cỡ nào */
     }
 
@@ -57,15 +63,104 @@
       justify-content: space-between;
       /* nếu bạn muốn nội dung giãn đều */
     }
+
+    input.is-invalid {
+      background-image: none !important;
+    }
+
+    select.form-select.is-invalid {
+      background-image: none !important;
+    }
+
+    .custom-range {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(to right, #66ccff 94.7%, #e5e5e5 94.7%);
+      outline: none;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #66ccff;
+      cursor: pointer;
+      margin-top: -6px;
+    }
+
+    .custom-range::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #66ccff;
+      cursor: pointer;
+    }
+
+    #rangeValue {
+      transition: left 0.15s ease;
+      font-weight: 500;
+      font-size: 16px;
+      position: absolute;
+      top: 29px;
+      transform: translateX(-50%);
+      color: #000;
+    }
+
+    .modal-tabs .nav-link.active {
+      background-color: #FFF !important;
+    }
+
+    .modal-tabs {
+      background-color: #FFF !important;
+    }
+
+    /* Select2 - Chỉnh sửa giao diện Select2 */
+    /* Khung tổng thể của Select2 */
+    .select2-container--default .select2-selection--single {
+      height: 37.6px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      /* căn giữa chiều dọc */
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    /* Phần hiển thị nội dung đã chọn */
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      padding-left: 0;
+      /* bỏ padding dư */
+      padding-right: 0;
+      line-height: 1.5;
+      /* dòng hợp lý */
+      font-size: 14px;
+    }
+
+    /* Icon dropdown ▼ */
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: 100%;
+      top: 0;
+      right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .select2-container--default .select2-selection--multiple {
+      min-height: 37.6px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+
+    }
   </style>
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -76,7 +171,6 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="../index.html" class="logo d-flex align-items-center">
         <img src="../assets/img/students_logo.png" alt="">
-
       </a>
     </div><!-- End Logo -->
 
@@ -133,23 +227,49 @@
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
-
   <!-- ======= Sidebar ======= -->
 
 
   <main id="main" class="main">
-
-    <!--<div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div>-->
-    <!-- End Page Title -->
     <section class="section dashboard">
+
+      <!-- Alert Success ghiNhanChiTieu -->
+      <div id="alertSuccess_ghiNhanChiTieu" class="alert alert-success alert-dismissible fade show d-none" role="alert"
+        style="width: 300px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; ">
+        <p class="text-dark mt-1 mb-1 me-3">
+          <i class="bi bi-check-circle text-success"></i> Lưu chi tiêu thành công.
+        </p>
+        <button type="button" class="btn-close mt-1 mb-1" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <!-- Alert Error ghiNhanChiTieu -->
+      <div id="alertError_ghiNhanChiTieu" class="alert alert-danger alert-dismissible fade show d-none" role="alert"
+        style="width: 300px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        <p class="text-dark mt-1 mb-1 me-3">
+          <i class="bi bi-x-circle text-danger"></i> Lưu chi tiêu thất bại.
+        </p>
+        <button type="button" class="btn-close mt-1 mb-1" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <!-- Alert Success cài đặt ngân sách-->
+      <div id="alertSuccess_caiDatNganSach" class="alert alert-success alert-dismissible fade show d-none" role="alert"
+        style="width: 350px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        <p class="text-dark mt-1 mb-1 me-3">
+          <i class="bi bi-check-circle text-success"></i> Cài đặt ngân sách thành công.
+        </p>
+        <button type="button" class="btn-close mt-1 mb-1" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <!-- Alert Error cài đặt ngân sách-->
+      <div id="alertError_caiDatNganSach" class="alert alert-danger alert-dismissible fade show d-none" role="alert"
+        style="width: 350px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        <p class="text-dark mt-1 mb-1 me-3">
+          <i class="bi bi-x-circle text-danger"></i> Cài đặt ngân sách thất bại.
+        </p>
+        <button type="button" class="btn-close mt-1 mb-1" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+
       <div class="parent">
         <div class="div1">
           <div class="card info-card sales-card ">
@@ -224,7 +344,7 @@
               <div class="d-flex align-items-center">
 
                 <div class="ps-1">
-                  <h6>44</h6>
+                  <h6>78%</h6>
                   <img src="../assets/img/HSCTHL.png" alt="" class="img-fluid w-100 " style="object-fit: cover;">
 
                 </div>
@@ -237,727 +357,1479 @@
         <div class="div5">
           <div class="col-xxl-12 col-md-12">
             <div class="ps-1">
-              <button class="btn btn-outline-dark w-100 p-3 mb-4 mt-1">Ghi nhận chi tiêu</button>
-              <button class="btn btn-outline-dark w-100 p-3 mb-4">Ngân sách & Cảnh báo</button>
-              <button class="btn btn-outline-dark w-100 p-3 mb-4">Chi tiêu tự động</button>
+              <button class="btn btn-outline-dark w-100 p-3 mb-4 mt-1" data-bs-toggle="modal"
+                data-bs-target="#ghiNhanChiTieuModal"
+                style="background-color: #FFFFFF; color: black; border-color: black;"
+                onmousedown="this.style.backgroundColor='#e6e6e6'" onmouseup="this.style.backgroundColor='#FFFFFF'">
+                Ghi nhận chi tiêu
+              </button>
+
+              <button class="btn btn-outline-dark w-100 p-3 mb-4" data-bs-toggle="modal" data-bs-target="#nganSachModal"
+                style="background-color: #FFFFFF; color: black; border-color: black;"
+                onmousedown="this.style.backgroundColor='#e6e6e6'" onmouseup="this.style.backgroundColor='#FFFFFF'">Ngân
+                sách & Cảnh
+                báo</button>
+              <a href="qlct_ckcttd.html" class=" btn btn-outline-dark w-100 p-3 mb-4"
+                style="background-color: #FFFFFF; color: black; border-color: black;"
+                onmousedown="this.style.backgroundColor='#e6e6e6'" onmouseup="this.style.backgroundColor='#FFFFFF'">Chi
+                tiêu tự
+                động</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Truy vấn giao dịch</h5>
-              <!-- Custom Styled Validation -->
-              <form class="row g-3 needs-validation" novalidate>
-                <div class="col-md-2 ">
-                  <label for="validationCustom" class="form-label">Danh mục chi tiêu</label>
-                  <select class="form-select" id="validationCustom">
-                    <option selected value="">Tất cả</option>
-                    <option>Lương</option>
-                    <option>Đầu tư kinh doanh</option>
-                    <option>Ba mẹ gửi</option>
-                    <option>Học bổng</option>
-                    <option>Thu nợ</option>
-                    <option> Ăn uống</option>
-                    <option> Học tập</option>
-                    <option> Giải trí</option>
-                    <option> Di chuyển</option>
-                    <option> Nhà ở</option>
-                    <option> Mua sắm</option>
-                    <option> Sức khỏe</option>
-                  </select>
-                </div>
+      <!-- Modal Ghi nhận chi tiêu -->
+      <div class=" modal fade mt-4" id="ghiNhanChiTieuModal" tabindex="-1" aria-labelledby="ghiNhanChiTieuModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content" style="background-color: #F0F2F5; position: relative; height: 590px;">
+            <!-- Nút X đóng modal -->
+            <button type="button" class="btn-close position-absolute top-0 end-0" style="width: 40px; height: 37px; "
+              data-bs-dismiss="modal" aria-label="Close">
+            </button>
+            <!-- Modal header có title và tabs -->
+            <div class="p-4 border-bottom mx-4"
+              style="background-color: #FFFFFF; border-radius: 8px; margin-top: 37px; height: 115px;">
+              <h5 class="fw-bold mb-3" id="ghiNhanChiTieuModalLabel">Ghi nhận chi tiêu</h5>
+              <!-- Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered2 modal-tabs" id="ghiNhanTab" role="tablist"
+                style="background-color: #FFFFFF !important;">
+                <li class=" nav-item" role="presentation">
+                  <button class="nav-link active " id="thuNhap-tab" data-bs-toggle="tab" data-bs-target="#tab-thuNhap"
+                    type="button" role="tab" aria-controls="tab-thuNhap" aria-selected="true">Thu nhập</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="chiTieu-tab" data-bs-toggle="tab" data-bs-target="#tab-chiTieu"
+                    type="button" role="tab" aria-controls="tab-chiTieu" aria-selected="false">Chi tiêu</button>
+                </li>
+              </ul>
+            </div>
+            <!-- Tab Content -->
+            <div class="tab-content " id="ghiNhanTabContent">
+              <!-- Tab Thu nhập -->
+              <div class="tab-pane fade show active" id="tab-thuNhap" role="tabpanel" aria-labelledby="thuNhap-tab">
+                <form class="mt-2 needs-validation" novalidate>
+                  <!-- Danh mục -->
+                  <div class="mb-2 bg-white p-3 rounded mx-4  "
+                    style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                    <label class="form-label ">
+                      <span class="text-danger">*</span> Danh mục chi tiêu
+                    </label>
+                    <select class="form-select pe-5" id="danhMucSelect_thuNhap" required>
+                      <option value="" disabled selected>Nhập hoặc chọn</option>
+                      <option>Lương</option>
+                      <option>Đầu tư kinh doanh</option>
+                      <option>Ba mẹ gửi</option>
+                      <option>Học bổng</option>
+                      <option>Thu nợ</option>
+                    </select>
+                    <div class="invalid-feedback">Vui lòng chọn danh mục chi tiêu.</div>
+                  </div>
+                  <!-- Số tiền -->
+                  <div class="mb-2 bg-white p-3 rounded mx-4"
+                    style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                    <label class="form-label"><span class="text-danger">*</span> Số tiền</label>
+                    <!-- Wrapper riêng cho input + VND -->
+                    <div class="position-relative" style="height: 38px;">
+                      <input type="text" class="form-control text-end pe-5 h-100" id="soTienInput" placeholder="0"
+                        required>
+                      <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted">VND</span>
+                      <div class="invalid-feedback">Vui lòng nhập số tiền chi tiêu.</div>
+                    </div>
+                  </div>
 
-                <div class="col-md-9">
-                  <label for="validationCustom04" class="form-label">Chọn khoảng thời gian chi tiêu</label>
-                  <div class="col-md-12">
-                    <div class="d-flex flex-wrap align-items-center gap-3">
+
+                  <!-- Ghi chú -->
+                  <div class="mb-2 bg-white p-3 rounded mx-4"
+                    style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                    <label class="form-label ">Ghi chú</label>
+                    <input type="text" class="form-control" placeholder="Nhập ghi chú">
+                    <div class="invalid-feedback" id="ghiChuError">Ghi chú vượt quá 200 ký tự. Vui lòng nhập lại.</div>
+                  </div>
+
+                </form>
+              </div>
+              <!-- Tab Chi tiêu -->
+              <div class="tab-pane fade" id="tab-chiTieu" role="tabpanel" aria-labelledby="chiTieu-tab">
+                <form class="mt-2">
+                  <!-- Danh mục -->
+                  <div class="mb-2 bg-white p-3 rounded mx-4"
+                    style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                    <label class="form-label "><span class="text-danger">*</span> Danh mục chi tiêu</label>
+                    <select class="form-select pe-5" id="danhMucSelect_chiTieu" required>
+                      <option value="" disabled selected>Nhập hoặc chọn</option>
+                      <option>Ăn uống</option>
+                      <option>Học tập</option>
+                      <option>Giải trí</option>
+                      <option>Di chuyển</option>
+                      <option>Nhà ở</option>
+                      <option>Mua sắm</option>
+                      <option>Sức khỏe</option>
+                    </select>
+                    <div class="invalid-feedback">Vui lòng chọn danh mục chi tiêu.</div>
+                  </div>
+                  <!-- Số tiền -->
+                  <div class="mb-2 bg-white p-3 rounded mx-4"
+                    style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                    <label class="form-label"><span class="text-danger">*</span> Số tiền</label>
+                    <!-- Wrapper riêng cho input + VND -->
+                    <div class="position-relative" style="height: 38px;">
+                      <input type="text" class="form-control text-end pe-5 h-100" id="soTienInput" placeholder="0"
+                        required>
+                      <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted">VND</span>
+                      <div class="invalid-feedback">Vui lòng nhập số tiền chi tiêu.</div>
+                    </div>
+                  </div>
+                  <!-- Ghi chú -->
+                  <div class="mb-2 bg-white p-3 rounded mx-4"
+                    style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                    <label class="form-label ">Ghi chú</label>
+                    <input type="text" class="form-control" placeholder="Nhập ghi chú">
+                    <div class="invalid-feedback" id="ghiChuError">Ghi chú vượt quá 200 ký tự. Vui lòng nhập lại.</div>
+                  </div>
+                </form>
+              </div>
+              <div class="d-flex justify-content-end gap-3 mt-3 me-4">
+                <button type="button" class="btn btn-primary " style="border-radius: 2px; width: 85.9px; ">Lưu</button>
+                <button type="button" class="btn btn-light " style="border-radius: 2px;" data-bs-dismiss="modal">Quay
+                  lại</button>
+              </div>
+            </div>
+            <!-- Footer -->
+          </div>
+        </div>
+      </div>
+      <!-- End Modal Ghi nhận chi tiêu -->
+
+
+      <!-- Modal Cài đặt ngân sách -->
+      <div class=" modal fade mt-4" id="nganSachModal" tabindex="-1" aria-labelledby="caiDatNganSachModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content"
+            style="background-color: #F0F2F5; position: relative; width: 530px; height: 665px;">
+            <!-- Nút X đóng modal -->
+            <button type="button" class="btn-close position-absolute top-0 end-0" style="width: 40px; height: 37px; "
+              data-bs-dismiss="modal" aria-label="Close">
+            </button>
+            <!-- Modal header có title -->
+            <div class="p-4 border-bottom mx-4"
+              style="background-color: #FFFFFF; border-radius: 8px; margin-top: 37px; height: 64px;">
+              <h5 class="fw-bold mb-3" id="ghiNhanChiTieuModalLabel">Ngân sách & Cảnh báo</h5>
+            </div>
+            <form class="mt-2 needs-validation" novalidate>
+              <!-- Danh mục -->
+              <div class="mb-2 bg-white p-3 rounded mx-4"
+                style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                <div class="row ">
+                  <!-- Danh mục chi tiêu -->
+                  <div class="col-md-6 ">
+                    <label class="form-label">
+                      <span class="text-danger">*</span> Danh mục chi tiêu
+                    </label>
+                    <select class="form-select pe-5" id="danhMucSelect_nganSach" required>
+                      <option value="" disabled selected>Nhập hoặc chọn</option>
+                      <option>Ăn uống</option>
+                      <option>Học tập</option>
+                      <option>Giải trí</option>
+                      <option>Di chuyển</option>
+                      <option>Nhà ở</option>
+                      <option>Mua sắm</option>
+                      <option>Sức khỏe</option>
+                    </select>
+                    <div class="invalid-feedback">Vui lòng chọn danh mục chi tiêu.</div>
+                  </div>
+                  <!-- Số tiền -->
+                  <div class=" col-md-6 ">
+                    <label class=" form-label">
+                      <span class="text-danger">*</span> Số tiền
+                    </label>
+                    <div class="position-relative" style="height: 37.6px; width: auto;">
+                      <input type="text" class="form-control text-end pe-5 h-100" id="soTienInput" placeholder="0"
+                        required>
+                      <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted">VND</span>
+                      <div class="invalid-feedback">Vui lòng nhập số tiền chi tiêu.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Ngưỡng cảnh báo -->
+              <div class="mb-2 bg-white p-3 rounded mx-4" style="background-color: #FFFFFF;">
+                <label class="form-label mb-3">Ngưỡng cảnh báo</label>
+                <div class="position-relative w-100 me-2 mt-1">
+                  <div class="position-relative w-100">
+                    <input type="range" id="warningRange" class="form-range custom-range" min="0" max="95" step="5"
+                      value="90">
+
+                    <!-- Tooltip dưới thanh -->
+                    <div id="rangeValue" class="position-absolute top-50 start-50 translate-middle-x mt-1"></div>
+                    <!-- Mốc dưới cùng -->
+                    <div class="d-flex justify-content-between mt-1">
+                      <span>0%</span>
+                      <span>95%</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Kênh nhận thông báo -->
+              <div class="mb-2 bg-white p-3 rounded mx-4"
+                style="background-color: #FFFFFF; border-radius: 5px; height: 105px;">
+                <label class="form-label ">Kênh nhận thông báo</label>
+                <div class="d-flex flex-wrap align-items-center gap-4 mt-1">
+                  <div class="form-check ps-4">
+                    <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios1" value="option1"
+                      checked>
+                    <label class="form-check-label me-3" for="gridRadios1">Tất cả</label>
+                  </div>
+                  <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label class="form-check-label me-3" for="gridRadios2">Email</label>
+                  </div>
+                  <div class="form-check  ">
+                    <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                    <label class="form-check-label" for="gridRadios3">
+                      Website
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- Thời gian áp dụng -->
+              <div class="mb-2 bg-white p-3 rounded mx-4"
+                style="background-color: #FFFFFF; border-radius: 5px; height: 115px;">
+                <label class="form-label "><span class="text-danger">*</span> Thời gian áp dụng</label>
+                <div class="row">
+                  <div class="col-md-5">
+                    <select class="form-select" id="selectMonth" required>
+                      <option value="" disabled selected>Chọn tháng</option>
+                      <option>Tháng 1</option>
+                      <option>Tháng 2</option>
+                      <option>Tháng 3</option>
+                      <option>Tháng 4</option>
+                      <option>Tháng 5</option>
+                      <option>Tháng 6</option>
+                      <option>Tháng 7</option>
+                      <option>Tháng 8</option>
+                      <option>Tháng 9</option>
+                      <option>Tháng 10</option>
+                      <option>Tháng 11</option>
+                      <option>Tháng 12</option>
+                    </select>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="position-relative">
+                      <input type="text" name="daterange" class="form-control" id="customDateRange3"
+                        placeholder="Ngày bắt đầu - Ngày kết thúc">
+                      <i class="bi bi-calendar4 position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback" id="thoiGianApDungError">Vui lòng chọn thời gian áp dụng.</div>
+                </div>
+              </div>
+            </form>
+
+            <div class="d-flex justify-content-end gap-3 mt-1 me-4">
+              <button type="button" class="btn btn-primary " style="border-radius: 2px; width: 85.9px; ">Lưu</button>
+              <button type="button" class="btn btn-light " style="border-radius: 2px;" data-bs-dismiss="modal">Quay
+                lại</button>
+            </div>
+
+            <!-- Footer -->
+          </div>
+        </div>
+      </div>
+      <!-- End Modal Ghi nhận chi tiêu -->
+
+
+      <div class="row">
+        <div class="col-lg-12 ">
+          <div class="card">
+            <h5 class="card-header "> <strong>Truy vấn giao dịch</strong></h5>
+            <div class="card-body mt-2 ">
+              <!-- Custom Styled Validation -->
+              <form class=" row " id="formTruyVan" validate>
+                <div class="col-md-12 d-flex align-items-start ">
+                  <!-- Danh mục chi tiêu -->
+                  <div class="col-md-2 ps-4">
+                    <label for="selectDanhMucChiTieu" class="form-label">Danh mục chi tiêu</label>
+                    <div class="position-relative">
+                      <select class="form-select pe-5" id="selectDanhMucChiTieu" multiple>
+                        <option value="" disabled>Tất cả</option>
+                        <option>Lương</option>
+                        <option>Đầu tư kinh doanh</option>
+                        <option>Ba mẹ gửi</option>
+                        <option>Học bổng</option>
+                        <option>Thu nợ</option>
+                        <option>Ăn uống</option>
+                        <option>Học tập</option>
+                        <option>Giải trí</option>
+                        <option>Di chuyển</option>
+                        <option>Nhà ở</option>
+                        <option>Mua sắm</option>
+                        <option>Sức khỏe</option>
+                      </select>
+                      <i
+                        class="bi bi-chevron-down position-absolute top-50 end-0 translate-middle-y me-2 text-muted pointer-events-none"></i>
+                    </div>
+                  </div>
+
+                  <!-- Khoảng thời gian -->
+                  <div class="col-md-10 ps-5">
+                    <label for="chonTuan" class="form-label ps-5">Chọn khoảng thời gian chi tiêu</label>
+                    <div class="d-flex flex-wrap align-items-start justify-content-center gap-4">
                       <!-- Tuần -->
-                      <div class="form-check me-4">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
-                          checked>
-                        <label class="form-check-label" for="gridRadios1">
-                          Tuần
-                        </label>
+                      <div class="col-md-1 form-check mt-2">
+                        <input class="form-check-input" type="radio" name="chonKhoangThoiGian" id="chonTuan"
+                          value="tuan" checked>
+                        <label class="form-check-label" for="chonTuan">Tuần</label>
                       </div>
+
                       <!-- Tháng -->
-                      <div class="form-check me-4">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
-                          Tháng
-                        </label>
+                      <div class="col-md-1 form-check mt-2">
+                        <input class="form-check-input" type="radio" name="chonKhoangThoiGian" id="chonThang"
+                          value="thang">
+                        <label class="form-check-label" for="chonThang">Tháng</label>
                       </div>
 
                       <!-- Quý -->
-                      <div class="form-check d-flex align-items-center me-4">
-                        <input class="form-check-input me-2" type="radio" name="gridRadios" id="gridRadios3"
-                          value="option3">
-                        <label class="form-check-label me-2" for="gridRadios3">
-                          Quý
-                        </label>
-                        <select class="form-select" style="width: 120px;" required>
-                          <option selected disabled value="">Chọn quý</option>
-                          <option>Quý 1</option>
-                          <option>Quý 2</option>
-                          <option>Quý 3</option>
-                          <option>Quý 4</option>
-                        </select>
+                      <div class="col-md-3 form-check d-flex align-items-start justify-content-center me-3"
+                        style="width: 230px;">
+                        <div class="mt-2"><input class="form-check-input me-2" type="radio" name="chonKhoangThoiGian"
+                            id="chonQuy" value="quy">
+                          <label class="form-check-label me-2" for="chonQuy">Quý</label>
+                        </div>
+
+                        <div class="">
+                          <select class="form-select me-2" id="selectQuy" disabled>
+                            <option selected disabled value="">Chọn quý</option>
+                            <option>Quý 1</option>
+                            <option>Quý 2</option>
+                            <option>Quý 3</option>
+                            <option>Quý 4</option>
+                          </select>
+                          <div class="invalid-feedback" id="errorQuy">Vui lòng chọn quý.</div>
+                        </div>
                       </div>
 
                       <!-- Tùy chỉnh -->
-                      <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2" type="radio" name="gridRadios" id="gridRadios4"
-                          value="option4">
-                        <label class="form-check-label me-2" for="gridRadios4">
-                          Tùy chỉnh
-                        </label>
-                        <input type="text" name="daterange" class="form-control" style="width: 220px;"
-                          value="01-01-2023 - 31-12-2023"><i class="bi bi-calendar4"></i>
+                      <div class="col-md-4 form-check d-flex align-items-start justify-content-center">
+                        <div class="mt-2"><input class="form-check-input me-2" type="radio" name="chonKhoangThoiGian"
+                            id="chonTuyChinh" value="tuychinh">
+                          <label class="form-check-label me-2" for="chonTuyChinh">Tùy chỉnh</label>
+                        </div>
+                        <div class="position-relative">
+                          <input type="text" name="daterange" class="form-control me-5" id="inputTuyChinhNgay"
+                            placeholder="Ngày bắt đầu - Ngày kết thúc" disabled>
+                          <i
+                            class="bi bi-calendar4 position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+                        </div>
+                        <div class="invalid-feedback">Vui lòng chọn khoảng thời gian.</div>
                       </div>
 
+                      <!-- Nút truy vấn -->
+                      <div class="col-md-1">
+                        <button class="btn btn-primary" type="submit" id="btnTruyVan" style="width: 132.47px;">Truy
+                          vấn</button>
+                      </div>
                     </div>
-
-                    <div class="invalid-feedback mt-2">
-                      Vui lòng chọn mốc thời gian hợp lệ.
-                    </div>
-
-
                   </div>
-                </div>
-                <div class="col-1">
-                  <button class="btn btn-primary" type="submit">Truy vấn</button>
                 </div>
               </form><!-- End Custom Styled Validation -->
+
             </div>
           </div>
         </div>
 
-        <div class="col-lg-12">
+
+        <!-- Tổng quan tài chính -->
+        <div class="col-md-12 ">
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">General Form Elements</h5>
-
-              <!-- General Form Elements -->
-              <form>
-
-
-                <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control">
-                  </div>
-                </div>
-
-                <fieldset class="row mb-3">
-                  <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
-                        checked>
-                      <label class="form-check-label" for="gridRadios1">
-                        First radio
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                      <label class="form-check-label" for="gridRadios2">
-                        Second radio
-                      </label>
-                    </div>
-                    <div class="form-check disabled">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios" value="option"
-                        disabled>
-                      <label class="form-check-label" for="gridRadios3">
-                        Third disabled radio
-                      </label>
-                    </div>
-                  </div>
-                </fieldset>
-                <div class="row mb-3">
-                  <legend class="col-form-label col-sm-2 pt-0">Checkboxes</legend>
-                  <div class="col-sm-10">
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
-                      <label class="form-check-label" for="gridCheck1">
-                        Example checkbox
-                      </label>
-                    </div>
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-                      <label class="form-check-label" for="gridCheck2">
-                        Example checkbox 2
-                      </label>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Disabled</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" value="Read only / Disabled" disabled>
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Select</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Multi Select</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" multiple aria-label="multiple select example">
-                      <option selected>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Submit Button</label>
-                  <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit Form</button>
-                  </div>
-                </div>
-
-              </form><!-- End General Form Elements -->
-
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Reports -->
-        <div class="col-12">
-          <div class="card">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="mb-0"><strong>Tổng quan tài chính</strong></h5>
+              <div class="btn-group" id="filter-buttons" role="group">
+                <button type="button" class="btn filter-btn active" data-type="all">Tất cả</button>
+                <button type="button" class="btn filter-btn" data-type="thu">Thu</button>
+                <button type="button" class="btn filter-btn" data-type="chi">Chi</button>
+              </div>
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">Reports <span>/Today</span></h5>
+              <!-- Tỉ lệ chi tiêu theo danh mục -->
+              <div class="row">
+                <div class="col-4">
+                  <div id="chartChiTieu" style="min-height: 410px; " class="echart "></div>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      const chart = echarts.init(document.getElementById('chartChiTieu'));
 
-              <!-- Line Chart -->
-              <div id="reportsChart"></div>
+                      const datasets = {
+                        all: [
+                          { value: 33, name: 'Lương', color: '#fbc02d', up: true },
+                          { value: 28, name: 'Ăn uống', color: '#1976d2', up: true },
+                          { value: 27, name: 'Học tập', color: '#43a047', up: true },
+                          { value: 12, name: 'Giải trí', color: '#e53935', up: false }
+                        ],
+                        thu: [
+                          { value: 40, name: 'Lương', color: '#fbc02d', up: true },
+                          { value: 20, name: 'Ba mẹ gửi', color: '#4caf50', up: true },
+                          { value: 15, name: 'Học bổng', color: '#2196f3', up: true },
+                          { value: 10, name: 'Thu nợ', color: '#00bcd4', up: false },
+                          { value: 15, name: 'Đầu tư', color: '#ff9800', up: false }
+                        ],
+                        chi: [
+                          { value: 25, name: 'Ăn uống', color: '#1976d2', up: true },
+                          { value: 20, name: 'Học tập', color: '#43a047', up: true },
+                          { value: 15, name: 'Giải trí', color: '#e53935', up: false },
+                          { value: 25, name: 'Di chuyển', color: '#00acc1', up: false },
+                          { value: 15, name: 'Nhà ở', color: '#8e24aa', up: true }
 
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#reportsChart"), {
-                    series: [{
-                      name: 'Sales',
-                      data: [31, 40, 28, 51, 42, 82, 56],
-                    }, {
-                      name: 'Revenue',
-                      data: [11, 32, 45, 32, 34, 52, 41]
-                    }, {
-                      name: 'Customers',
-                      data: [15, 11, 32, 18, 9, 24, 11]
-                    }],
-                    chart: {
-                      height: 350,
-                      type: 'area',
-                      toolbar: {
-                        show: false
-                      },
-                    },
-                    markers: {
-                      size: 4
-                    },
-                    colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                    fill: {
-                      type: "gradient",
-                      gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.3,
-                        opacityTo: 0.4,
-                        stops: [0, 90, 100]
+                        ]
+                      };
+
+                      function renderChart(type = 'all') {
+                        const data = datasets[type];
+
+                        chart.setOption({
+                          title: {
+                            text: 'Tỉ lệ chi tiêu theo danh mục',
+                            left: 'left',
+                            top: 20,
+                            textStyle: {
+                              fontSize: 18,
+                              fontWeight: 500,
+                              color: '#012970',
+                              fontFamily: 'Poppins, sans-serif'
+                            }
+                          },
+                          tooltip: {
+                            trigger: 'item',
+                            formatter: '{b}: {d}%'
+                          },
+                          legend: {
+                            orient: 'vertical',
+                            left: 'center',
+                            bottom: 0,
+                            formatter: function (name) {
+                              const item = data.find(i => i.name === name);
+                              const arrowType = item.up ? 'arrowUp' : 'arrowDown';
+                              const arrowSymbol = item.up ? '↑' : '↓';
+                              return `{name|${name}} {value|${item.value}%} {${arrowType}|${arrowSymbol}}`;
+                            },
+                            textStyle: {
+                              rich: {
+                                name: { width: 90, fontSize: 13, fontFamily: 'Poppins, sans-serif' },
+                                value: { width: 40, fontSize: 13, fontFamily: 'Poppins, sans-serif' },
+                                arrowUp: {
+                                  fontSize: 13,
+                                  color: '#4CAF50',
+                                  fontFamily: 'Poppins, sans-serif'
+                                },
+                                arrowDown: {
+                                  fontSize: 13,
+                                  color: '#F44336',
+                                  fontFamily: 'Poppins, sans-serif'
+                                }
+                              }
+                            }
+                          },
+                          series: [{
+                            name: 'Chi tiêu',
+                            type: 'pie',
+                            radius: ['30%', '50%'],
+                            center: ['50%', '43%'],
+                            avoidLabelOverlap: false,
+                            label: { show: false },
+                            emphasis: {
+                              label: {
+                                show: false,
+                                fontSize: 18,
+                                fontFamily: 'Poppins, sans-serif',
+                                fontWeight: 'bold'
+                              }
+                            },
+                            labelLine: { show: false },
+                            data: data.map(item => ({
+                              value: item.value,
+                              name: item.name,
+                              itemStyle: { color: item.color }
+                            }))
+                          }]
+                        });
                       }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'smooth',
-                      width: 2
-                    },
-                    xaxis: {
-                      type: 'datetime',
-                      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                    },
-                    tooltip: {
-                      x: {
-                        format: 'dd/MM/yy HH:mm'
-                      },
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Line Chart -->
 
+                      // Lần đầu load mặc định là "all"
+                      renderChart('all');
+
+                      // Sự kiện click nút
+                      document.querySelectorAll('#filter-buttons .filter-btn').forEach(button => {
+                        button.addEventListener('click', () => {
+                          document.querySelectorAll('#filter-buttons .filter-btn').forEach(btn => btn.classList.remove('active'));
+                          button.classList.add('active');
+
+                          const type = button.getAttribute('data-type');
+                          renderChart(type);
+                        });
+                      });
+                    });
+                  </script>
+
+                </div><!-- End Tỉ lệ chi tiêu theo danh mục -->
+                <!-- Biểu đồ cột thu nhập và chi tiêu -->
+                <div class="col-8">
+                  <h5 class="card-title d-flex justify-content-center">Thu nhập và chi tiêu</h5>
+                  <!-- Column Chart -->
+                  <div id="columnChart"></div>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      // Dữ liệu gốc
+                      const seriesData = [
+                        {
+                          name: 'Thu nhập',
+                          data: [44, 58, 57, 56, 61, 78, 63, 60, 66]
+                        },
+                        {
+                          name: 'Chi tiêu',
+                          data: [76, 55, 101, 98, 87, 54, 91, 114, 94]
+                        }
+                      ];
+
+                      // Khởi tạo biểu đồ
+                      const chart = new ApexCharts(document.querySelector("#columnChart"), {
+                        series: seriesData,
+                        chart: {
+                          type: 'bar',
+                          height: 350,
+                          toolbar: { show: false }
+                        },
+                        plotOptions: {
+                          bar: {
+                            horizontal: false,
+                            columnWidth: '55%',
+                            endingShape: 'rounded'
+                          }
+                        },
+                        dataLabels: { enabled: false },
+                        stroke: {
+                          show: false,
+                          width: 2,
+                          colors: ['transparent']
+                        },
+                        xaxis: {
+                          categories: ['1/6', '2/6', '3/6', '4/6', '5/6', '6/6', '7/6', '8/6', '9/6']
+                        },
+                        yaxis: {
+                          min: 0,
+                          max: 120,
+                          tickAmount: 6,
+                          labels: {
+                            formatter: function (val) {
+                              return val.toLocaleString('vi-VN') + ' 000 VND';
+                            }
+                          }
+
+                        },
+                        fill: { opacity: 1 },
+                        tooltip: {
+                          y: {
+                            formatter: function (val) {
+                              return val + " 000 VND"
+                            }
+                          }
+                        }
+                      });
+
+                      chart.render();
+
+                      // Gắn xử lý lọc dữ liệu
+                      const btnGroup = document.getElementById("filter-buttons");
+                      if (btnGroup) {
+                        const buttons = btnGroup.querySelectorAll("button");
+
+                        buttons.forEach(btn => {
+                          btn.addEventListener("click", function () {
+                            buttons.forEach(b => b.classList.remove("active"));
+                            this.classList.add("active");
+
+                            const type = this.dataset.type;
+                            let newSeries = [];
+
+                            if (type === "all") {
+                              newSeries = seriesData;
+                            } else if (type === "thu") {
+                              newSeries = [seriesData[0]];
+                            } else if (type === "chi") {
+                              newSeries = [seriesData[1]];
+                            }
+                            if (type === "thu") {
+                              chart.updateOptions({ colors: ['#008ffb'] }); // màu mặc định hoặc màu xanh đậm
+                            } else if (type === "chi") {
+                              chart.updateOptions({ colors: ['#20c997'] }); // màu xanh ngọc cho Chi tiêu
+                            } else {
+                              chart.updateOptions({ colors: ['#008ffb', '#20c997'] }); // Thu + Chi
+                            }
+                            chart.updateSeries(newSeries);
+                            // Cập nhật màu cho từng loại dữ liệu
+
+
+                          });
+                        });
+                      }
+                    });
+                  </script>
+                  <!-- End Column Chart -->
+                </div>
+              </div><!-- End Biểu đồ cột thu nhập và chi tiêu -->
             </div>
-
           </div>
-        </div><!-- End Reports -->
+        </div>
+      </div><!-- End Reports -->
 
-        <!-- Recent Sales -->
-        <div class="col-12">
-          <div class="card recent-sales overflow-auto">
 
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
+      <!-- Recent Sales -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><strong>Danh sách chi tiêu</strong></h5>
+            <div class="btn-group" role="group">
+              <div class="btn-group" id="filter-buttons" role="group">
+                <button type="button" class="btn filter-btn2 " data-type="ngay">Ngày</button>
+                <button type="button" class="btn filter-btn2" data-type="tuan">Tuần</button>
+                <button type="button" class="btn filter-btn2" data-type="thang">Tháng</button>
+                <button type="button" class="btn filter-btn2 active" data-type="nam">Năm</button>
+              </div>
+              <input type="text" name="daterange" class="form-control pe-5" id="customDateRange"
+                placeholder="Ngày bắt đầu - Ngày kết thúc">
+              <i class="bi bi-calendar4 position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
             </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-              <table class="table table-borderless datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="#">#2457</a></th>
-                    <td>Brandon Jacob</td>
-                    <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                    <td>$64</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#2147</a></th>
-                    <td>Bridie Kessler</td>
-                    <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                    <td>$47</td>
-                    <td><span class="badge bg-warning">Pending</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#2049</a></th>
-                    <td>Ashleigh Langosh</td>
-                    <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                    <td>$147</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#2644</a></th>
-                    <td>Angus Grady</td>
-                    <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                    <td>$67</td>
-                    <td><span class="badge bg-danger">Rejected</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#2644</a></th>
-                    <td>Raheem Lehner</td>
-                    <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                    <td>$165</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                </tbody>
-              </table>
-
-            </div>
-
           </div>
-        </div><!-- End Recent Sales -->
-
-        <!-- Top Selling -->
-        <div class="col-12">
-          <div class="card top-selling overflow-auto">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Top Selling <span>| Today</span></h5>
-
-              <table class="table table-borderless">
-                <thead>
-                  <tr>
-                    <th scope="col">Preview</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Sold</th>
-                    <th scope="col">Revenue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="#"><img src="../assets/img/product-1.jpg" alt=""></a></th>
-                    <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                    <td>$64</td>
-                    <td class="fw-bold">124</td>
-                    <td>$5,828</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#"><img src="../assets/img/product-2.jpg" alt=""></a></th>
-                    <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                    <td>$46</td>
-                    <td class="fw-bold">98</td>
-                    <td>$4,508</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#"><img src="../assets/img/product-3.jpg" alt=""></a></th>
-                    <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                    <td>$59</td>
-                    <td class="fw-bold">74</td>
-                    <td>$4,366</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#"><img src="../assets/img/product-4.jpg" alt=""></a></th>
-                    <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                    <td>$32</td>
-                    <td class="fw-bold">63</td>
-                    <td>$2,016</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#"><img src="../assets/img/product-5.jpg" alt=""></a></th>
-                    <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                    <td>$79</td>
-                    <td class="fw-bold">41</td>
-                    <td>$3,239</td>
-                  </tr>
-                </tbody>
-              </table>
-
-            </div>
-
+          <div class="card-body">
+            <!-- Table with stripped rows -->
+            <table class="table datatable">
+              <thead class="">
+                <tr>
+                  <th>
+                    STT
+                  </th>
+                  <th>Danh mục chi tiêu</th>
+                  <th>Thể loại</th>
+                  <th class="pe-5">Số tiền</th>
+                  <th data-type="date" data-format="DD/MM/YYYY">Ngày</th>
+                  <th>Ghi chú</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">120,000</td>
+                  <td>06/01/2025</td>
+                  <td>Bữa sáng</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>06/01/2025</td>
+                  <td>Lương tháng 6</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">350,000</td>
+                  <td>06/02/2025</td>
+                  <td>Mua sách</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">200,000</td>
+                  <td>06/02/2025</td>
+                  <td>Xem phim</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>06/03/2025</td>
+                  <td>Tiền sinh hoạt</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">50,000</td>
+                  <td>06/03/2025</td>
+                  <td>Grab đi học</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>06/04/2025</td>
+                  <td>Tiền phòng</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">2,000,000</td>
+                  <td>06/04/2025</td>
+                  <td>Lãi đầu tư</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">400,000</td>
+                  <td>06/05/2025</td>
+                  <td>Mua quần áo</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">150,000</td>
+                  <td>06/05/2025</td>
+                  <td>Mua thuốc</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">300,000</td>
+                  <td>06/06/2025</td>
+                  <td>Bạn trả nợ</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">90,000</td>
+                  <td>06/06/2025</td>
+                  <td>Bữa trưa</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">120,000</td>
+                  <td>06/07/2025</td>
+                  <td>In tài liệu</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">80,000</td>
+                  <td>06/07/2025</td>
+                  <td>Chơi game</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>06/08/2025</td>
+                  <td>Lương tháng 7</td>
+                </tr>
+                <tr>
+                  <td>16</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>06/08/2025</td>
+                  <td>Tiền ăn</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">60,000</td>
+                  <td>06/09/2025</td>
+                  <td>Xe buýt</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>06/09/2025</td>
+                  <td>Tiền điện nước</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>06/10/2025</td>
+                  <td>Lãi bán hàng</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">250,000</td>
+                  <td>06/10/2025</td>
+                  <td>Mua sách vở</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">200,000</td>
+                  <td>06/11/2025</td>
+                  <td>Khám bệnh</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">500,000</td>
+                  <td>06/11/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">110,000</td>
+                  <td>06/12/2025</td>
+                  <td>Bữa tối</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">80,000</td>
+                  <td>06/12/2025</td>
+                  <td>Đóng học phí</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">150,000</td>
+                  <td>13/06/2025</td>
+                  <td>Đi cafe</td>
+                </tr>
+                <tr>
+                  <td>26</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>13/06/2025</td>
+                  <td>Lương tháng 8</td>
+                </tr>
+                <tr>
+                  <td>27</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>14/06/2025</td>
+                  <td>Tiền học thêm</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">70,000</td>
+                  <td>14/06/2025</td>
+                  <td>Taxi</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>15/06/2025</td>
+                  <td>Tiền thuê nhà</td>
+                </tr>
+                <tr>
+                  <td>30</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">2,500,000</td>
+                  <td>15/06/2025</td>
+                  <td>Chốt đơn hàng</td>
+                </tr>
+                <tr>
+                  <td>31</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">300,000</td>
+                  <td>16/06/2025</td>
+                  <td>Mua balo</td>
+                </tr>
+                <tr>
+                  <td>32</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">100,000</td>
+                  <td>16/06/2025</td>
+                  <td>Mua vitamin</td>
+                </tr>
+                <tr>
+                  <td>33</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">200,000</td>
+                  <td>17/06/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>34</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">95,000</td>
+                  <td>17/06/2025</td>
+                  <td>Bữa sáng</td>
+                </tr>
+                <tr>
+                  <td>35</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">150,000</td>
+                  <td>18/06/2025</td>
+                  <td>Đóng lệ phí</td>
+                </tr>
+                <tr>
+                  <td>36</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">120,000</td>
+                  <td>18/06/2025</td>
+                  <td>Đi dã ngoại</td>
+                </tr>
+                <tr>
+                  <td>37</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>19/06/2025</td>
+                  <td>Lương tháng 9</td>
+                </tr>
+                <tr>
+                  <td>38</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>19/06/2025</td>
+                  <td>Tiền ăn</td>
+                </tr>
+                <tr>
+                  <td>39</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">55,000</td>
+                  <td>20/06/2025</td>
+                  <td>Xe ôm</td>
+                </tr>
+                <tr>
+                  <td>40</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>20/06/2025</td>
+                  <td>Tiền phòng</td>
+                </tr>
+                <tr>
+                  <td>41</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,800,000</td>
+                  <td>21/06/2025</td>
+                  <td>Lãi đầu tư</td>
+                </tr>
+                <tr>
+                  <td>42</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">500,000</td>
+                  <td>21/06/2025</td>
+                  <td>Mua giày</td>
+                </tr>
+                <tr>
+                  <td>43</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">180,000</td>
+                  <td>22/06/2025</td>
+                  <td>Khám răng</td>
+                </tr>
+                <tr>
+                  <td>44</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">400,000</td>
+                  <td>22/06/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>45</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">130,000</td>
+                  <td>23/06/2025</td>
+                  <td>Bữa trưa</td>
+                </tr>
+                <tr>
+                  <td>46</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">200,000</td>
+                  <td>23/06/2025</td>
+                  <td>Mua tài liệu</td>
+                </tr>
+                <tr>
+                  <td>47</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">100,000</td>
+                  <td>24/06/2025</td>
+                  <td>Đi chơi</td>
+                </tr>
+                <tr>
+                  <td>48</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>24/06/2025</td>
+                  <td>Lương tháng 10</td>
+                </tr>
+                <tr>
+                  <td>49</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>25/06/2025</td>
+                  <td>Tiền sinh hoạt</td>
+                </tr>
+                <tr>
+                  <td>50</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">65,000</td>
+                  <td>25/06/2025</td>
+                  <td>Xe buýt</td>
+                </tr>
+                <tr>
+                  <td>51</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>26/06/2025</td>
+                  <td>Tiền điện nước</td>
+                </tr>
+                <tr>
+                  <td>52</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">2,200,000</td>
+                  <td>26/06/2025</td>
+                  <td>Lãi bán hàng</td>
+                </tr>
+                <tr>
+                  <td>53</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">350,000</td>
+                  <td>27/06/2025</td>
+                  <td>Mua đồng hồ</td>
+                </tr>
+                <tr>
+                  <td>54</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">120,000</td>
+                  <td>27/06/2025</td>
+                  <td>Mua thuốc</td>
+                </tr>
+                <tr>
+                  <td>55</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">250,000</td>
+                  <td>28/06/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>56</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">105,000</td>
+                  <td>28/06/2025</td>
+                  <td>Bữa tối</td>
+                </tr>
+                <tr>
+                  <td>57</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">170,000</td>
+                  <td>29/06/2025</td>
+                  <td>Đóng học phí</td>
+                </tr>
+                <tr>
+                  <td>58</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">90,000</td>
+                  <td>29/06/2025</td>
+                  <td>Chơi game</td>
+                </tr>
+                <tr>
+                  <td>59</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>30/06/2025</td>
+                  <td>Lương tháng 11</td>
+                </tr>
+                <tr>
+                  <td>60</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>30/06/2025</td>
+                  <td>Tiền ăn</td>
+                </tr>
+                <tr>
+                  <td>61</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">75,000</td>
+                  <td>01/07/2025</td>
+                  <td>Taxi</td>
+                </tr>
+                <tr>
+                  <td>62</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>01/07/2025</td>
+                  <td>Tiền thuê nhà</td>
+                </tr>
+                <tr>
+                  <td>63</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">2,800,000</td>
+                  <td>02/07/2025</td>
+                  <td>Chốt đơn hàng</td>
+                </tr>
+                <tr>
+                  <td>64</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">400,000</td>
+                  <td>02/07/2025</td>
+                  <td>Mua áo khoác</td>
+                </tr>
+                <tr>
+                  <td>65</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">160,000</td>
+                  <td>03/07/2025</td>
+                  <td>Khám bệnh</td>
+                </tr>
+                <tr>
+                  <td>66</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">350,000</td>
+                  <td>03/07/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>67</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">115,000</td>
+                  <td>04/07/2025</td>
+                  <td>Bữa sáng</td>
+                </tr>
+                <tr>
+                  <td>68</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">130,000</td>
+                  <td>04/07/2025</td>
+                  <td>Mua sách</td>
+                </tr>
+                <tr>
+                  <td>69</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">110,000</td>
+                  <td>05/07/2025</td>
+                  <td>Xem phim</td>
+                </tr>
+                <tr>
+                  <td>70</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>05/07/2025</td>
+                  <td>Lương tháng 12</td>
+                </tr>
+                <tr>
+                  <td>71</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>06/07/2025</td>
+                  <td>Tiền học thêm</td>
+                </tr>
+                <tr>
+                  <td>72</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">80,000</td>
+                  <td>06/07/2025</td>
+                  <td>Xe buýt</td>
+                </tr>
+                <tr>
+                  <td>73</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>07/07/2025</td>
+                  <td>Tiền điện nước</td>
+                </tr>
+                <tr>
+                  <td>74</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">2,000,000</td>
+                  <td>07/07/2025</td>
+                  <td>Lãi bán hàng</td>
+                </tr>
+                <tr>
+                  <td>75</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">450,000</td>
+                  <td>08/07/2025</td>
+                  <td>Mua túi xách</td>
+                </tr>
+                <tr>
+                  <td>76</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">140,000</td>
+                  <td>08/07/2025</td>
+                  <td>Mua thuốc</td>
+                </tr>
+                <tr>
+                  <td>77</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">450,000</td>
+                  <td>09/07/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>78</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">125,000</td>
+                  <td>09/07/2025</td>
+                  <td>Bữa trưa</td>
+                </tr>
+                <tr>
+                  <td>79</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">180,000</td>
+                  <td>10/07/2025</td>
+                  <td>In tài liệu</td>
+                </tr>
+                <tr>
+                  <td>80</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">130,000</td>
+                  <td>10/07/2025</td>
+                  <td>Đi cafe</td>
+                </tr>
+                <tr>
+                  <td>81</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>11/07/2025</td>
+                  <td>Lương tháng 1</td>
+                </tr>
+                <tr>
+                  <td>82</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>11/07/2025</td>
+                  <td>Tiền sinh hoạt</td>
+                </tr>
+                <tr>
+                  <td>83</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">85,000</td>
+                  <td>12/07/2025</td>
+                  <td>Xe ôm</td>
+                </tr>
+                <tr>
+                  <td>84</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>12/07/2025</td>
+                  <td>Tiền phòng</td>
+                </tr>
+                <tr>
+                  <td>85</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">2,100,000</td>
+                  <td>13/07/2025</td>
+                  <td>Lãi đầu tư</td>
+                </tr>
+                <tr>
+                  <td>86</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">500,000</td>
+                  <td>13/07/2025</td>
+                  <td>Mua quần áo</td>
+                </tr>
+                <tr>
+                  <td>87</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">170,000</td>
+                  <td>14/07/2025</td>
+                  <td>Khám bệnh</td>
+                </tr>
+                <tr>
+                  <td>88</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">300,000</td>
+                  <td>14/07/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>89</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">135,000</td>
+                  <td>15/07/2025</td>
+                  <td>Bữa tối</td>
+                </tr>
+                <tr>
+                  <td>90</td>
+                  <td>Học tập</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">190,000</td>
+                  <td>15/07/2025</td>
+                  <td>Đóng học phí</td>
+                </tr>
+                <tr>
+                  <td>91</td>
+                  <td>Giải trí</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">140,000</td>
+                  <td>16/07/2025</td>
+                  <td>Đi chơi</td>
+                </tr>
+                <tr>
+                  <td>92</td>
+                  <td>Lương</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">5,000,000</td>
+                  <td>16/07/2025</td>
+                  <td>Lương tháng 2</td>
+                </tr>
+                <tr>
+                  <td>93</td>
+                  <td>Ba mẹ gửi</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">1,000,000</td>
+                  <td>17/07/2025</td>
+                  <td>Tiền ăn</td>
+                </tr>
+                <tr>
+                  <td>94</td>
+                  <td>Di chuyển</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">90,000</td>
+                  <td>17/07/2025</td>
+                  <td>Taxi</td>
+                </tr>
+                <tr>
+                  <td>95</td>
+                  <td>Nhà ở</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">1,500,000</td>
+                  <td>18/07/2025</td>
+                  <td>Tiền thuê nhà</td>
+                </tr>
+                <tr>
+                  <td>96</td>
+                  <td>Đầu tư kinh doanh</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">2,300,000</td>
+                  <td>18/07/2025</td>
+                  <td>Chốt đơn hàng</td>
+                </tr>
+                <tr>
+                  <td>97</td>
+                  <td>Mua sắm</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">550,000</td>
+                  <td>19/07/2025</td>
+                  <td>Mua balo</td>
+                </tr>
+                <tr>
+                  <td>98</td>
+                  <td>Sức khỏe</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">180,000</td>
+                  <td>19/07/2025</td>
+                  <td>Mua vitamin</td>
+                </tr>
+                <tr>
+                  <td>99</td>
+                  <td>Thu nợ</td>
+                  <td>Thu</td>
+                  <td class="text-end pe-5">500,000</td>
+                  <td>20/07/2025</td>
+                  <td>Bạn trả tiền</td>
+                </tr>
+                <tr>
+                  <td>100</td>
+                  <td>Ăn uống</td>
+                  <td>Chi</td>
+                  <td class="text-end pe-5">140,000</td>
+                  <td>20/07/2025</td>
+                  <td>Bữa sáng</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
           </div>
-        </div><!-- End Top Selling -->
-
+        </div>
+      </div><!-- End Recent Sales -->
       </div>
       </div><!-- End Left side columns -->
 
-      <!-- Right side columns -->
-      <div class="col-lg-4">
 
-        <!-- Recent Activity -->
-        <div class="card">
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body">
-            <h5 class="card-title">Recent Activity <span>| Today</span></h5>
-
-            <div class="activity">
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">32 min</div>
-                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                <div class="activity-content">
-                  Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">56 min</div>
-                <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                <div class="activity-content">
-                  Voluptatem blanditiis blanditiis eveniet
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">2 hrs</div>
-                <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                <div class="activity-content">
-                  Voluptates corrupti molestias voluptatem
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">1 day</div>
-                <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                <div class="activity-content">
-                  Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">2 days</div>
-                <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                <div class="activity-content">
-                  Est sit eum reiciendis exercitationem
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">4 weeks</div>
-                <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                <div class="activity-content">
-                  Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                </div>
-              </div><!-- End activity item-->
-
-            </div>
-
-          </div>
-        </div><!-- End Recent Activity -->
-
-        <!-- Budget Report -->
-        <div class="card">
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body pb-0">
-            <h5 class="card-title">Budget Report <span>| This Month</span></h5>
-
-            <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-            <script>
-              document.addEventListener("DOMContentLoaded", () => {
-                var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                  legend: {
-                    data: ['Allocated Budget', 'Actual Spending']
-                  },
-                  radar: {
-                    // shape: 'circle',
-                    indicator: [{
-                      name: 'Sales',
-                      max: 6500
-                    },
-                    {
-                      name: 'Administration',
-                      max: 16000
-                    },
-                    {
-                      name: 'Information Technology',
-                      max: 30000
-                    },
-                    {
-                      name: 'Customer Support',
-                      max: 38000
-                    },
-                    {
-                      name: 'Development',
-                      max: 52000
-                    },
-                    {
-                      name: 'Marketing',
-                      max: 25000
-                    }
-                    ]
-                  },
-                  series: [{
-                    name: 'Budget vs spending',
-                    type: 'radar',
-                    data: [{
-                      value: [4200, 3000, 20000, 35000, 50000, 18000],
-                      name: 'Allocated Budget'
-                    },
-                    {
-                      value: [5000, 14000, 28000, 26000, 42000, 21000],
-                      name: 'Actual Spending'
-                    }
-                    ]
-                  }]
-                });
-              });
-            </script>
-
-          </div>
-        </div><!-- End Budget Report -->
-
-        <!-- Website Traffic -->
-        <div class="card">
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body pb-0">
-            <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-            <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-            <script>
-              document.addEventListener("DOMContentLoaded", () => {
-                echarts.init(document.querySelector("#trafficChart")).setOption({
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  legend: {
-                    top: '5%',
-                    left: 'center'
-                  },
-                  series: [{
-                    name: 'Access From',
-                    type: 'pie',
-                    radius: ['40%', '70%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                      show: false,
-                      position: 'center'
-                    },
-                    emphasis: {
-                      label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold'
-                      }
-                    },
-                    labelLine: {
-                      show: false
-                    },
-                    data: [{
-                      value: 1048,
-                      name: 'Search Engine'
-                    },
-                    {
-                      value: 735,
-                      name: 'Direct'
-                    },
-                    {
-                      value: 580,
-                      name: 'Email'
-                    },
-                    {
-                      value: 484,
-                      name: 'Union Ads'
-                    },
-                    {
-                      value: 300,
-                      name: 'Video Ads'
-                    }
-                    ]
-                  }]
-                });
-              });
-            </script>
-
-          </div>
-        </div><!-- End Website Traffic -->
-
-        <!-- News & Updates Traffic -->
-        <div class="card">
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body pb-0">
-            <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-            <div class="news">
-              <div class="post-item clearfix">
-                <img src="../assets/img/news-1.jpg" alt="">
-                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="../assets/img/news-2.jpg" alt="">
-                <h4><a href="#">Quidem autem et impedit</a></h4>
-                <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="../assets/img/news-3.jpg" alt="">
-                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="../assets/img/news-4.jpg" alt="">
-                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="../assets/img/news-5.jpg" alt="">
-                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-              </div>
-
-            </div><!-- End sidebar recent posts-->
-
-          </div>
-        </div><!-- End News & Updates -->
-
-      </div><!-- End Right side columns -->
 
       </div>
     </section>
@@ -965,16 +1837,57 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+  <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+    <div class="parent mx-5" style="height: 200px ;">
+      <div class="div1">
+        <div class="social-links mt-5 fs-3 "> <!-- fs-3: tăng kích thước icon -->
+          <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="div2">
+        <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Giới Thiệu</li>
+          <li class="text-black m-1">Sứ Mệnh</li>
+          <li class="text-black m-1">Đội Ngũ</li>
+          <li class="text-black m-1">Liên Hệ</li>
+          <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+        </ul>
+      </div>
+      <div class="div3">
+        <h5 class="mb-4"><strong>Khám phá</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Góc học tập</li>
+          <li class="text-black m-1">Kỹ năng mềm</li>
+          <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+          <li class="text-black m-1">Học bổng & Cơ hội</li>
+          <li class="text-black m-1">Hướng nghiệp</li>
+        </ul>
+      </div>
+      <div class="div4">
+        <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Tài liệu học tập</li>
+          <li class="text-black m-1">Công cụ học tập</li>
+          <li class="text-black m-1">Gợi ý khóa học</li>
+          <li class="text-black m-1">Cộng đồng sinh viên</li>
+          <li class="text-black m-1">Góp ý & báo lỗi</li>
+        </ul>
+      </div>
+      <div class="div5">
+        <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+          <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+          <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+          <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+          <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+        </ul>
+      </div>
     </div>
   </footer><!-- End Footer -->
 
@@ -994,43 +1907,17 @@
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
 
-  <!-- jQuery (bắt buộc) -->
+  <!-- jQuery Select2 danh mục chi tiêu - truy vấn -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <!-- Moment.js -->
   <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
-  <!-- Daterangepicker -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <!-- Daterangepicker truy vấn -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-  <script>
-    document.querySelectorAll('.nav-link').forEach(tab => {
-      tab.addEventListener('click', function () {
-        // Bỏ active ở tất cả
-        document.querySelectorAll('.nav-link').forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-
-        // Lấy URL HTML từ thuộc tính
-        const url = this.getAttribute('data-tab-url');
-
-        // Load file HTML vào #tab-content
-        fetch(url)
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('tab-content').innerHTML = data;
-          })
-          .catch(error => {
-            document.getElementById('tab-content').innerHTML = '<p class="text-danger">Không thể tải nội dung.</p>';
-          });
-      });
-    });
-
-    // Tự động load tab đầu tiên khi trang mở
-    document.querySelector('.nav-link.active').click();
-  </script>
-
-
+  <!-- Daterangepicker truy vấn -->
   <script>
     $(function () {
       $('input[name="daterange"]').daterangepicker({
@@ -1048,6 +1935,427 @@
       });
     });
   </script>
+
+  <!-- Daterangepicker ngân sách và cảnh báo -->
+  <script>
+    $(function () {
+      $('#customDateRange3').daterangepicker({
+        opens: 'left',          // Hướng mở (trái)
+        drops: 'up',            // Mở lên trên
+        locale: {
+          format: 'DD-MM-YYYY',
+          applyLabel: "Chọn",
+          cancelLabel: "Hủy",
+          fromLabel: "Từ",
+          toLabel: "Đến",
+          customRangeLabel: "Tùy chọn",
+          daysOfWeek: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+          monthNames: [
+            "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+            "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+          ],
+        }
+      });
+    });
+  </script>
+
+
+  <!-- Select2 Truy vấn -->
+  <script>
+    $(document).ready(function () {
+      $('#selectDanhMucChiTieu').select2({
+        placeholder: "Tất cả",
+        allowClear: false,
+        width: '100%',
+        language: {
+          noResults: function () {
+            return "Không có danh mục";
+          }
+        }
+      });
+    });
+  </script>
+
+
+  <!-- Select2 Ghi nhận thu nhập -->
+  <script>
+    $(document).ready(function () {
+      $('#danhMucSelect_thuNhap').select2({
+        placeholder: "Nhập hoặc chọn",
+        width: '100%',
+
+        dropdownParent: $('#ghiNhanChiTieuModal'),
+
+        language: {
+          noResults: function () {
+            return "Không có danh mục";
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- Select2 Ghi nhận chi tiêu -->
+  <script>
+    $(document).ready(function () {
+      $('#danhMucSelect_chiTieu').select2({
+        placeholder: "Nhập hoặc chọn",
+        width: '100%',
+
+        dropdownParent: $('#ghiNhanChiTieuModal'),
+        language: {
+          noResults: function () {
+            return "Không có danh mục";
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- Select2 Ngân sách -->
+  <script>
+    $(document).ready(function () {
+      $('#danhMucSelect_nganSach').select2({
+        placeholder: "Nhập hoặc chọn",
+        width: '100%',
+        dropdownParent: $('#nganSachModal'),
+        language: {
+          noResults: function () {
+            return "Không có danh mục";
+          }
+        }
+      });
+    });
+  </script>
+
+
+
+
+  <!-- Filter buttons Danh sách chi tiêu-->
+  <script>
+    document.querySelectorAll('.filter-btn2').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn2').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+
+  <!-- số tiền chi tiêu-->
+  <script>
+    const input = document.getElementById('soTienInput');
+
+    input.addEventListener('input', function (e) {
+      let value = e.target.value.replace(/[^0-9]/g, '');
+      if (value) {
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      }
+      e.target.value = value;
+    });
+  </script>
+
+  <!-- Cập nhật thanh trượt cảnh báo -->
+  <script>
+    const range = document.getElementById('warningRange');
+    const rangeValue = document.getElementById('rangeValue');
+
+    function updateSlider() {
+      let val = parseInt(range.value);
+      if (val < 50) {
+        val = 50;
+        range.value = 50;
+      }
+
+
+      const percent = val / 95;
+      const rangeWidth = range.offsetWidth;
+      const thumbLeft = percent * rangeWidth;
+
+      rangeValue.innerText = val + "%";
+      rangeValue.style.left = `${thumbLeft}px`;
+
+      range.style.background = `linear-gradient(to right, #66ccff ${percent * 100}%, #e5e5e5 ${percent * 100}%)`;
+    }
+    range.addEventListener('input', updateSlider);
+
+    // Đợi một chút sau khi trang load để đảm bảo DOM render xong
+    window.addEventListener('load', () => {
+      setTimeout(updateSlider, 5); // delay 50ms là đủ
+    });
+
+
+  </script>
+
+  <!-- validate Ghi nhận chi tiêu -->
+  <script>
+    document.querySelector('#ghiNhanChiTieuModal .btn-primary').addEventListener('click', function () {
+      let isValid = true;
+
+      const activeTab = document.querySelector('.tab-pane.active');
+      const isThuNhap = activeTab.id === 'tab-thuNhap';
+
+      const danhMucSelect = isThuNhap
+        ? document.getElementById('danhMucSelect_thuNhap')
+        : document.getElementById('danhMucSelect_chiTieu');
+      $(danhMucSelect).next('.select2-container').find('.select2-selection').toggleClass('border-danger', !danhMucSelect.value);
+
+      if (!danhMucSelect.value) {
+        danhMucSelect.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        danhMucSelect.classList.remove('is-invalid');
+      }
+
+      const soTienInput = activeTab.querySelector('#soTienInput');
+      const raw = soTienInput.value.replace(/\s/g, '');
+      if (!raw || isNaN(raw)) {
+        soTienInput.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        soTienInput.classList.remove('is-invalid');
+      }
+
+      const ghiChuInput = activeTab.querySelector('input[placeholder="Nhập ghi chú"]');
+      const ghiChuError = activeTab.querySelector('#thoiGianApDungError');
+      if (ghiChuInput && ghiChuInput.value.length > 200) {
+        ghiChuInput.classList.add('is-invalid');
+        if (ghiChuError) ghiChuError.style.display = 'block';
+        isValid = false;
+      } else {
+        ghiChuInput.classList.remove('is-invalid');
+        if (ghiChuError) ghiChuError.style.display = 'none';
+      }
+
+      if (isValid) {
+        // Ẩn modal
+        const modalEl = document.getElementById('ghiNhanChiTieuModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+
+        // Reset form sau khi đóng modal
+        modalEl.addEventListener('hidden.bs.modal', function handler() {
+          const inputs = modalEl.querySelectorAll('input');
+          inputs.forEach(input => {
+            input.value = '';
+            input.classList.remove('is-invalid');
+          });
+
+          const selects = modalEl.querySelectorAll('select');
+          selects.forEach(select => {
+            select.selectedIndex = 0;
+            select.classList.remove('is-invalid');
+            // Nếu là select2 thì reset và xoá viền đỏ
+            $(select).val(null).trigger('change');
+            $(select).next('.select2-container').find('.select2-selection').removeClass('border-danger');
+          });
+
+          const errors = modalEl.querySelectorAll('.invalid-feedback');
+          errors.forEach(err => err.style.display = 'none');
+
+          // Xóa listener sau khi dùng xong để tránh chạy nhiều lần
+          modalEl.removeEventListener('hidden.bs.modal', handler);
+        });
+
+        // Xác suất 90% thành công
+        const success = Math.random() < 0.9;
+        showAlertGhiNhanChiTieu(success ? 'success' : 'error');
+      }
+      function showAlertGhiNhanChiTieu(type) {
+        const alertBox = document.getElementById(type === 'success' ? 'alertSuccess_ghiNhanChiTieu' : 'alertError_ghiNhanChiTieu');
+        alertBox.classList.remove('d-none');
+
+        // Auto hide after 5 seconds
+        setTimeout(() => {
+          const bsAlert = bootstrap.Alert.getOrCreateInstance(alertBox);
+          bsAlert.close();
+        }, 5000);
+      }
+    });
+  </script>
+
+  <!-- validate Ngân sách -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const modalEl = document.getElementById('nganSachModal');
+      const danhMucSelect = document.getElementById('danhMucSelect_nganSach');
+      const soTienInput = modalEl.querySelector('#soTienInput');
+      const thangSelect = modalEl.querySelector('#selectMonth');
+      const dateRangeInput = modalEl.querySelector('#customDateRange3');
+      const dateError = modalEl.querySelector('#thoiGianApDungError');
+
+      // ========== XỬ LÝ CHỌN 1 TRONG 2 ==========
+      dateRangeInput.readOnly = true;
+
+      thangSelect.addEventListener('change', () => {
+        if (thangSelect.value !== "") {
+          dateRangeInput.value = "";
+          dateRangeInput.readOnly = true;
+          thangSelect.disabled = false;
+        }
+      });
+
+      dateRangeInput.addEventListener('focus', () => {
+        if (dateRangeInput.readOnly) {
+          dateRangeInput.readOnly = false;
+          thangSelect.value = "";
+          thangSelect.disabled = true;
+        }
+      });
+
+      // ========== XỬ LÝ SUBMIT ==========
+      document.querySelector('#nganSachModal .btn-primary').addEventListener('click', function () {
+        let isValid = true;
+
+        // Validate danh mục
+        $(danhMucSelect).next('.select2-container').find('.select2-selection')
+          .toggleClass('border-danger', !danhMucSelect.value);
+
+        if (!danhMucSelect.value) {
+          danhMucSelect.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          danhMucSelect.classList.remove('is-invalid');
+        }
+
+        // Validate số tiền
+        const raw = soTienInput.value.replace(/\s/g, '');
+        if (!raw || isNaN(raw)) {
+          soTienInput.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          soTienInput.classList.remove('is-invalid');
+        }
+
+        // Validate thời gian áp dụng
+        const thangValue = thangSelect.value;
+        const dateRangeValue = dateRangeInput.value.trim();
+
+        if (!thangValue && !dateRangeValue) {
+          thangSelect.classList.add('is-invalid');
+
+          dateError.style.display = 'block';
+          isValid = false;
+        } else {
+          thangSelect.classList.remove('is-invalid');
+
+          dateError.style.display = 'none';
+        }
+
+        if (isValid) {
+          // Ẩn modal
+          const modal = bootstrap.Modal.getInstance(modalEl);
+          modal.hide();
+
+
+          modalEl.addEventListener('hidden.bs.modal', function handler() {
+            // Reset form
+            modalEl.querySelectorAll('input').forEach(input => {
+              input.value = '';
+              input.classList.remove('is-invalid');
+              if (input.id === 'customDateRange3') input.readOnly = true;
+            });
+
+            const selects = modalEl.querySelectorAll('select');
+            selects.forEach(select => {
+              select.selectedIndex = 0;
+              select.classList.remove('is-invalid');
+              // Nếu là select2 thì reset và xoá viền đỏ
+              $(select).val(null).trigger('change');
+              $(select).next('.select2-container').find('.select2-selection').removeClass('border-danger');
+            });
+
+            modalEl.removeEventListener('hidden.bs.modal', handler);
+          });
+
+          // 90% success
+          const success = Math.random() < 0.9;
+          showAlertCaiDatNganSach(success ? 'success' : 'error');
+        }
+      });
+
+      // ========== HÀM HIỂN THỊ ALERT ==========
+      function showAlertCaiDatNganSach(type) {
+        const alertBox = document.getElementById(type === 'success'
+          ? 'alertSuccess_caiDatNganSach'
+          : 'alertError_caiDatNganSach');
+        alertBox.classList.remove('d-none');
+
+        setTimeout(() => {
+          const bsAlert = bootstrap.Alert.getOrCreateInstance(alertBox);
+          bsAlert.close();
+        }, 5000);
+      }
+    });
+  </script>
+
+  <script>
+    // Lấy các phần tử
+    const radioTuan = document.getElementById("chonTuan");
+    const radioThang = document.getElementById("chonThang");
+    const radioQuy = document.getElementById("chonQuy");
+    const radioTuyChinh = document.getElementById("chonTuyChinh");
+
+    const selectQuy = document.getElementById("selectQuy");
+    const inputNgayTuyChinh = document.getElementById("inputTuyChinhNgay");
+
+    // Hàm cập nhật trạng thái
+    function capNhatTrangThai() {
+      // Nếu chọn "Quý" thì bật select quý, ngược lại vô hiệu
+      selectQuy.disabled = !radioQuy.checked;
+      // Nếu chọn "Tùy chỉnh" thì bật input ngày, ngược lại vô hiệu
+      inputNgayTuyChinh.disabled = !radioTuyChinh.checked;
+    }
+
+    // Gán sự kiện cho tất cả radio
+    const allRadios = document.querySelectorAll('input[name="chonKhoangThoiGian"]');
+    allRadios.forEach(radio => {
+      radio.addEventListener('change', capNhatTrangThai);
+    });
+
+    // Gọi khi trang load lần đầu
+    capNhatTrangThai();
+  </script>
+
+  <script>document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector("#formTruyVan");
+      const radioQuy = document.getElementById("chonQuy");
+      const selectQuy = document.getElementById("selectQuy");
+      const errorQuy = selectQuy.nextElementSibling;
+
+
+      // Enable/disable inputs based on radio selection
+      radioQuy.addEventListener("change", function () {
+        selectQuy.disabled = !radioQuy.checked;
+        inputDateRange.disabled = radioQuy.checked;
+      });
+
+
+
+      form.addEventListener("submit", function (e) {
+        let isValid = true;
+
+
+        // Validate "Quý" selection
+        if (radioQuy.checked) {
+          if (!selectQuy.value) {
+            selectQuy.classList.add("is-invalid");
+            isValid = false;
+          } else {
+            selectQuy.classList.remove("is-invalid");
+            errorQuy.style.display = "none";
+          }
+        } else {
+          selectQuy.classList.remove("is-invalid");
+          errorQuy.style.display = "none";
+        }
+
+        if (!isValid) {
+          e.preventDefault(); // Prevent form submission if validation fails
+        }
+      });
+    });</script>
+
+
 </body>
 
 </html>

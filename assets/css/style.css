@@ -228,7 +228,7 @@ h6 {
 .card-footer {
   border-color: #ebeef4;
   background-color: #fff;
-  color: #798eb3;
+  color: #070707;
   padding: 15px;
 }
 
@@ -338,6 +338,7 @@ h6 {
   margin-bottom: -2px;
   border: none;
   color: #2c384e;
+  background-color: #F9FAFE !important;
 }
 
 .nav-tabs-bordered .nav-link:hover,
@@ -346,6 +347,29 @@ h6 {
 }
 
 .nav-tabs-bordered .nav-link.active {
+  background-color: #fff;
+  color: #4154f1;
+  border-bottom: 2px solid #4154f1;
+}
+
+/* Bordered Tabs 2 */
+.nav-tabs-bordered2 {
+  border-bottom: 2px solid #ebeef4;
+}
+
+.nav-tabs-bordered2 .nav-link {
+  margin-bottom: -2px;
+  border: none;
+  color: #2c384e;
+  background-color: #fff !important;
+}
+
+.nav-tabs-bordered2 .nav-link:hover,
+.nav-tabs-bordered2 .nav-link:focus {
+  color: #4154f1;
+}
+
+.nav-tabs-bordered2 .nav-link.active {
   background-color: #fff;
   color: #4154f1;
   border-bottom: 2px solid #4154f1;
@@ -381,7 +405,7 @@ h6 {
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: #F9FAFE;
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
@@ -1149,6 +1173,39 @@ h6 {
   padding: 12px 15px;
 }
 
+.filter-btn {
+  border: 1px solid #ced4da;
+  /* viền xám nhạt */
+  background-color: white;
+  color: #212529;
+  /* chữ đen */
+  font-weight: 500;
+  border-radius: 0;
+}
+
+.filter-btn.active {
+  color: #0d6efd;
+  /* chữ xanh Bootstrap primary */
+  border-color: #0d6efd;
+  background-color: white;
+}
+
+/* Filter Button 2 của Danh sách chi tiêu */
+.filter-btn2 {
+  border: none;
+  background-color: transparent;
+  color: #000;
+  /* Mặc định là đen */
+  font-weight: 500;
+}
+
+.filter-btn2.active {
+  color: #0d6efd;
+  /* Màu xanh khi active */
+  border: none;
+}
+
+
 .contact .php-email-form button[type=submit] {
   background: #4154f1;
   border: 0;
@@ -1215,7 +1272,7 @@ h6 {
 --------------------------------------------------------------*/
 .footer {
   padding: 20px 0;
-  font-size: 14px;
+  font-size: 16px;
   transition: all 0.3s;
   border-top: 1px solid #cddfff;
 }
