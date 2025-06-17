@@ -1,3 +1,4 @@
+//Validation Edit
 document.getElementById("studentForm").addEventListener("submit", function (e) {
   e.preventDefault();
   let isValid = true;
@@ -68,11 +69,16 @@ document.getElementById("studentForm").addEventListener("submit", function (e) {
   }
 
   if (isValid) {
-    alert("✅ Dữ liệu hợp lệ!");
-    // Submit hoặc xử lý tiếp
+    showToast("toastEdit");
+    // showErrorToast("customToastErrorEdit");
+    const tabTrigger = document.querySelector(
+      '[data-bs-target="#profile-overview"]'
+    );
+    bootstrap.Tab.getOrCreateInstance(tabTrigger).show();
   }
 });
 
+// Validation Change Password
 document
   .getElementById("changePasswordForm")
   .addEventListener("submit", function (e) {
@@ -133,6 +139,102 @@ document
 
     // Nếu tất cả hợp lệ
     if (isValid && current !== "" && newPass !== "" && rePass !== "") {
-      alert("✅ Đổi mật khẩu thành công!");
+      showToast("toastPassword");
+      // showErrorToast("customToastErrorChangePass");
+      currentPassword.value = "";
+      newPassword.value = "";
+      renewPassword.value = "";
+
+      // Xóa class lỗi và thông báo lỗi
+      [currentPassword, newPassword, renewPassword].forEach((input) => {
+        input.classList.remove("is-invalid");
+      });
+
+      [currentPasswordError, newPasswordError, renewPasswordError].forEach(
+        (err) => (err.textContent = "")
+      );
+      const tabTrigger = document.querySelector(
+        '[data-bs-target="#profile-overview"]'
+      );
+      bootstrap.Tab.getOrCreateInstance(tabTrigger).show();
     }
   });
+
+// Notification Success
+function showToast(id) {
+  const toast = document.getElementById(id);
+  toast.style.display = "block";
+  toast.style.opacity = "1";
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 4000);
+}
+
+function hideToast(id) {
+  const toast = document.getElementById(id);
+  toast.style.display = "none";
+}
+
+// Notification Error
+function showErrorToast(id) {
+  const toast = document.getElementById(id);
+  toast.style.display = "block";
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 4000);
+}
+
+function hideErrorToast(id) {
+  const toast = document.getElementById(id);
+  toast.style.display = "none";
+}
+
+// function showCustomNotification(message) {
+//   const notification = document.createElement("div");
+//   notification.style.cssText = `
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     background-color: #e6ffe6;
+//     border: 2px solid #d4edda;
+//     border-radius: 5px;
+//     padding: 10px 20px;
+//     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+//     z-index: 1000;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     width: 300px;
+//   `;
+
+//   const icon = document.createElement("span");
+//   icon.innerHTML = "✓"; // Checkmark symbol
+//   icon.style.cssText = `
+//     color: #28a745;
+//     font-size: 20px;
+//     margin-right: 10px;
+//   `;
+
+//   const text = document.createElement("span");
+//   text.textContent = message;
+//   text.style.cssText = `color: #155724;`;
+
+//   const closeBtn = document.createElement("span");
+//   closeBtn.innerHTML = "×";
+//   closeBtn.style.cssText = `
+//     color: #721c24;
+//     font-size: 20px;
+//     cursor: pointer;
+//   `;
+//   closeBtn.onclick = () => document.body.removeChild(notification);
+
+//   notification.appendChild(icon);
+//   notification.appendChild(text);
+//   notification.appendChild(closeBtn);
+//   document.body.appendChild(notification);
+
+//   setTimeout(() => {
+//     document.body.removeChild(notification);
+//   }, 3000); // Auto-close after 3 seconds
+// }

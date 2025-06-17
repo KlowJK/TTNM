@@ -7,6 +7,10 @@
     <title>StudentLife</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
     <!-- Favicons -->
     <link href="../assets/img/students_logo.png" rel="icon" />
@@ -181,6 +185,80 @@
       <!-- End Icons Navigation -->
     </header>
     <!-- End Header -->
+
+    <!-- Notification Popup -->
+    <div id="toastEdit" class="custom-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-success">
+            <i class="bi bi-check"></i>
+          </div>
+          <span class="message-text">Bạn sửa thông tin cá nhân thành công</span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideToast('toastEdit')"
+        ></button>
+      </div>
+    </div>
+
+    <div id="toastPassword" class="custom-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-success">
+            <i class="bi bi-check"></i>
+          </div>
+          <span class="message-text">Thay đổi mật khẩu thành công</span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideToast('toastPassword')"
+        ></button>
+      </div>
+    </div>
+
+    <div id="customToastErrorEdit" class="custom-toast error-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-fail">
+            <i class="bi bi-x-circle"></i>
+          </div>
+          <span class="message-text ms-2">
+            Sửa thông tin cá nhân thất bại. Vui lòng thử lại sau
+          </span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideCustomToastError()"
+        ></button>
+      </div>
+    </div>
+
+    <div id="customToastErrorChangePass" class="custom-toast error-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-fail">
+            <i class="bi bi-x-circle"></i>
+          </div>
+          <span class="message-text ms-2">
+            Thay đổi mật khẩu thất bại. Vui lòng thử lại sau
+          </span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideCustomToastError()"
+        ></button>
+      </div>
+    </div>
+    <!-- End Notification Popup -->
 
     <!-- ======= Sidebar ======= -->
 
@@ -383,7 +461,7 @@
                           type="date"
                           class="form-control"
                           id="dob"
-                          value="29-12-2004"
+                          value="2004-12-29"
                         />
                         <div class="invalid-feedback">
                           Ngày sinh phải nhỏ hơn ngày hiện tại
@@ -424,11 +502,11 @@
 
                       <!-- Buttons -->
                       <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary me-2">
+                        <button
+                          type="submit"
+                          class="btn btn-primary me-2 fixed-btn"
+                        >
                           Lưu
-                        </button>
-                        <button type="button" class="btn btn-secondary">
-                          Quay lại
                         </button>
                       </div>
                     </form>
@@ -437,6 +515,7 @@
 
                   <div class="tab-pane fade pt-3" id="profile-change-password">
                     <!-- Change Password Form -->
+
                     <form id="changePasswordForm" novalidate>
                       <div class="mb-3">
                         <label
@@ -502,9 +581,9 @@
                         <button type="submit" class="btn btn-primary me-2">
                           Xác nhận
                         </button>
-                        <button type="button" class="btn btn-secondary">
+                        <!-- <button type="button" class="btn btn-secondary">
                           Quay lại
-                        </button>
+                        </button> -->
                       </div>
                     </form>
 
