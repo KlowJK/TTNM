@@ -1,458 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>StudentLife</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
-  <title>StudentLife</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="../assets/img/students_logo.png" rel="icon" />
+    <link href="../assets/img/students_logo.png" rel="apple-touch-icon" />
 
-  <!-- Favicons -->
-  <link href="../assets/img/students_logo.png" rel="icon">
-  <link href="../assets/img/students_logo.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link
+      href="../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link
+      href="../assets/vendor/simple-datatables/style.css"
+      rel="stylesheet"
+    />
 
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="../index.html" class="logo d-flex align-items-center">
-        <img src="../assets/img/students_logo.png" alt="">
-
-      </a>
-
-    </div><!-- End Logo -->
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet" />
 
 
 
-    <nav class="header-nav ms-auto">
-      <ul class="nav d-flex align-items-center nav-tabs-bordered" style="border-bottom: none !important;">
-        <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link " id="tab-home" href="../index.html" type="button" role="tab" aria-controls="home"
-            aria-selected="true"><strong>Trang chủ</strong></a>
-        </li>
+ <style>
+    .parent {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: 1fr;
+      /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+      gap: 15px;
+      height: 258px;
+      /* tùy theo bạn muốn card cao tối đa cỡ nào */
+    }
 
-        <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link " id="tab-chi-tieu" href="../ChiTieu/qlct.html" type="button" role="tab"
-            aria-controls="chi-tieu" aria-selected="false"><strong>Chi
-              tiêu</strong></a>
-        </li>
+    .parent>div {
+      height: 85%;
+      /* Giúp các div1 - div5 fill chiều cao của hàng */
+    }
+     </style>
+  </head>
 
-        <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link " id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
-            aria-controls="lich-trinh" aria-selected="false"><strong>Lịch
-              trình</strong></a>
-        </li>
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="../index.html" class="logo d-flex align-items-center">
+          <img src="../assets/img/students_logo.png" alt="" />
+        </a>
+      </div>
+      <!-- End Logo -->
 
-        <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link " id="tab-ghi-chu" href="../GhiChu/qlgc.html" type="button" role="tab"
-            aria-controls="ghi-chu" aria-selected="false"><strong>Ghi
-              chú</strong></a>
-        </li>
+      <nav class="header-nav ms-auto">
+        <ul
+          class="nav d-flex align-items-center nav-tabs-bordered"
+          style="border-bottom: none !important"
+        >
+          <li class="nav-item pe-3" role="presentation">
+            <a
+              class="nav-link"
+              id="tab-home"
+              href="../index.html"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+              ><strong>Trang chủ</strong></a
+            >
+          </li>
 
-        <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link " id="tab-tai-lieu" href="../TaiLieu/qltl.html" type="button" role="tab"
-            aria-controls="tai-lieu" aria-selected="false"><strong>Tài
-              liệu</strong></a>
-        </li>
+          <li class="nav-item pe-3" role="presentation">
+            <a
+              class="nav-link"
+              id="tab-chi-tieu"
+              href="../ChiTieu/qlct.html"
+              type="button"
+              role="tab"
+              aria-controls="chi-tieu"
+              aria-selected="false"
+              ><strong>Chi tiêu</strong></a
+            >
+          </li>
 
-        <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link " id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
-            aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
-              biệt</strong></a>
-        </li>
+          <li class="nav-item pe-3" role="presentation">
+            <a
+              class="nav-link"
+              id="tab-lich-trinh"
+              href="../LichTrinh/qltg.html"
+              type="button"
+              role="tab"
+              aria-controls="lich-trinh"
+              aria-selected="false"
+              ><strong>Lịch trình</strong></a
+            >
+          </li>
 
-        <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab" aria-controls="phan-hoi"
-            aria-selected="false"><strong>Phản hồi</strong></a>
-        </li>
+          <li class="nav-item pe-3" role="presentation">
+            <a
+              class="nav-link"
+              id="tab-ghi-chu"
+              href="../GhiChu/qlgc.html"
+              type="button"
+              role="tab"
+              aria-controls="ghi-chu"
+              aria-selected="false"
+              ><strong>Ghi chú</strong></a
+            >
+          </li>
 
+          <li class="nav-item pe-3" role="presentation">
+            <a
+              class="nav-link"
+              id="tab-tai-lieu"
+              href="../TaiLieu/qltl.html"
+              type="button"
+              role="tab"
+              aria-controls="tai-lieu"
+              aria-selected="false"
+              ><strong>Tài liệu</strong></a
+            >
+          </li>
 
+          <li class="nav-item pe-3" role="presentation">
+            <a
+              class="nav-link"
+              id="tab-diem-khac-biet"
+              href="../index.html#diemkhacbiet"
+              type="button"
+              role="tab"
+              aria-controls="diem-khac-biet"
+              aria-selected="false"
+              ><strong>Điểm khác biệt</strong></a
+            >
+          </li>
 
-        <li class="nav-item dropdown pe-3">
-          <a class="nav-link nav-profile d-flex align-items-center pe-2" href="users-profile.html">
-            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block  ps-2">Nguyễn Văn A</span>
-          </a><!-- End Profile Iamge Icon -->
+          <li class="nav-item pe-3" role="presentation">
+            <a
+              class="nav-link"
+              id="tab-phan-hoi"
+              href="../index.html#phanhoi"
+              type="button"
+              role="tab"
+              aria-controls="phan-hoi"
+              aria-selected="false"
+              ><strong>Phản hồi</strong></a
+            >
+          </li>
 
-
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Profile</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
-          <li class="breadcrumb-item active">Profile</li>
-        </ol>
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-2"
+              href="users-profile.html"
+            >
+              <img
+                src="../assets/img/profile-img.jpg"
+                alt="Profile"
+                class="rounded-circle"
+              />
+              <span class="d-none d-md-block ps-2">Điền Bá Quang</span>
+            </a>
+          </li>
+          <!-- End Profile Nav -->
+        </ul>
       </nav>
-    </div><!-- End Page Title -->
+      <!-- End Icons Navigation -->
+    </header>
+    <!-- End Header -->
 
-    <section class="section profile">
-      <div class="row">
-        <div class="col-xl-4">
+    <!-- Notification Popup -->
+    <div id="toastEdit" class="custom-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-success">
+            <i class="bi bi-check"></i>
+          </div>
+          <span class="message-text">Bạn sửa thông tin cá nhân thành công</span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideToast('toastEdit')"
+        ></button>
+      </div>
+    </div>
 
-          <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+    <div id="toastPassword" class="custom-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-success">
+            <i class="bi bi-check"></i>
+          </div>
+          <span class="message-text">Thay đổi mật khẩu thành công</span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideToast('toastPassword')"
+        ></button>
+      </div>
+    </div>
 
-              <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2>Kevin Anderson</h2>
-              <h3>Web Designer</h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    <div id="customToastErrorEdit" class="custom-toast error-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-fail">
+            <i class="bi bi-x-circle"></i>
+          </div>
+          <span class="message-text ms-2">
+            Sửa thông tin cá nhân thất bại. Vui lòng thử lại sau
+          </span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideCustomToastError()"
+        ></button>
+      </div>
+    </div>
+
+    <div id="customToastErrorChangePass" class="custom-toast error-toast">
+      <div class="toast-content">
+        <div class="d-flex align-items-center">
+          <div class="icon-fail">
+            <i class="bi bi-x-circle"></i>
+          </div>
+          <span class="message-text ms-2">
+            Thay đổi mật khẩu thất bại. Vui lòng thử lại sau
+          </span>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          onclick="hideCustomToastError()"
+        ></button>
+      </div>
+    </div>
+    <!-- End Notification Popup -->
+
+    <!-- ======= Sidebar ======= -->
+
+    <main id="main" class="main">
+      <section class="section profile">
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="card">
+              <div
+                class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+              >
+                <img
+                  src="../assets/img/profile-img.jpg"
+                  alt="Profile"
+                  class="rounded-circle"
+                />
+                <h2>Điền Bá Quang</h2>
+                <h3>Sinh viên</h3>
+                <div class="social-links mt-2">
+                  <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                  <a href="#" class="facebook"
+                    ><i class="bi bi-facebook"></i
+                  ></a>
+                  <a href="#" class="instagram"
+                    ><i class="bi bi-instagram"></i
+                  ></a>
+                  <a href="#" class="linkedin"
+                    ><i class="bi bi-linkedin"></i
+                  ></a>
+                </div>
               </div>
             </div>
           </div>
 
-        </div>
+          <div class="col-xl-8">
+            <div class="card">
+              <div class="card-body pt-3">
+                <!-- Bordered Tabs -->
+                <ul class="nav nav-tabs nav-tabs-bordered">
+                  <li class="nav-item">
+                    <button
+                      class="nav-link active"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile-overview"
+                    >
+                      Tổng quan
+                    </button>
+                  </li>
 
-        <div class="col-xl-8">
+                  <li class="nav-item">
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile-edit"
+                    >
+                      Chỉnh sửa
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile-change-password"
+                    >
+                      Thay đổi mật khẩu
+                    </button>
+                  </li>
+                </ul>
+                <div class="tab-content pt-2 pb-5">
+                  <div
+                    class="tab-pane fade show active profile-overview"
+                    id="profile-overview"
+                  >
+                    <h4 class="mt-4 mb-4 fw-bold">Chi tiết sinh viên</h4>
 
-          <div class="card">
-            <div class="card-body pt-3">
-              <!-- Bordered Tabs -->
-              <ul class="nav nav-tabs nav-tabs-bordered">
+                    <div class="row profile-row">
+                      <div class="col-sm-4 profile-label">
+                        <span class="text-danger">*</span>
+                        Tên sinh viên
+                      </div>
+                      <div class="col-sm-8 profile-value">Điền Bá Quang</div>
+                    </div>
 
-                <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab"
-                    data-bs-target="#profile-overview">Overview</button>
-                </li>
+                    <div class="row profile-row">
+                      <div class="col-sm-4 profile-label">
+                        <span class="text-danger">*</span>
+                        Giới tính
+                      </div>
+                      <div class="col-sm-8 profile-value">Nam</div>
+                    </div>
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
-                </li>
+                    <div class="row profile-row">
+                      <div class="col-sm-4 profile-label">
+                        <span class="text-danger">*</span>
+                        Ngày sinh
+                      </div>
+                      <div class="col-sm-8 profile-value">29-12-2004</div>
+                    </div>
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
-                </li>
+                    <div class="row profile-row">
+                      <div class="col-sm-4 profile-label">
+                        <span class="text-danger">*</span>
+                        Số điện thoại
+                      </div>
+                      <div class="col-sm-8 profile-value">0123456789</div>
+                    </div>
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change
-                    Password</button>
-                </li>
-
-              </ul>
-              <div class="tab-content pt-2">
-
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <h5 class="card-title">About</h5>
-                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque
-                    temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem
-                    eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
-
-                  <h5 class="card-title">Profile Details</h5>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="row profile-row">
+                      <div class="col-sm-4 profile-label">
+                        <span class="text-danger">*</span>
+                        Email
+                      </div>
+                      <div class="col-sm-8 profile-value">
+                        diensinhgai@gmail.com
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Company</div>
-                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                  <div
+                    class="tab-pane fade profile-edit pt-3"
+                    id="profile-edit"
+                  >
+                    <!-- Profile Edit Form -->
+                    <form id="studentForm" novalidate>
+                      <!-- Tên sinh viên -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Tên sinh viên
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="fullName"
+                          value="Điền Bá Quang"
+                        />
+                        <div class="invalid-feedback">
+                          Tên không hợp lệ (chỉ chứa chữ cái)
+                        </div>
+                      </div>
+
+                      <!-- Giới tính -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Giới tính </label
+                        ><br />
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gender"
+                            id="male"
+                            value="Nam"
+                            checked
+                          />
+                          <label class="form-check-label" for="male">Nam</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gender"
+                            id="female"
+                            value="Nữ"
+                          />
+                          <label class="form-check-label" for="female"
+                            >Nữ</label
+                          >
+                        </div>
+                      </div>
+
+                      <!-- Ngày sinh -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Ngày sinh
+                        </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="dob"
+                          value="2004-12-29"
+                        />
+                        <div class="invalid-feedback">
+                          Ngày sinh phải nhỏ hơn ngày hiện tại
+                        </div>
+                      </div>
+
+                      <!-- Số điện thoại -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Số điện thoại
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="phone"
+                          value="0123456789"
+                        />
+                        <div class="invalid-feedback">
+                          Số điện thoại phải đủ 10 chữ số
+                        </div>
+                      </div>
+
+                      <!-- Email -->
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">
+                          <span class="text-danger">*</span> Email
+                        </label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          value="diensinhgai@gmail.com"
+                        />
+                        <div class="invalid-feedback">
+                          Định dạng email không hợp lệ
+                        </div>
+                      </div>
+
+                      <!-- Buttons -->
+                      <div class="d-flex justify-content-end">
+                        <button
+                          type="submit"
+                          class="btn btn-primary me-2 fixed-btn"
+                        >
+                          Lưu
+                        </button>
+                      </div>
+                    </form>
+                    <!-- End Profile Edit Form -->
                   </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Job</div>
-                    <div class="col-lg-9 col-md-8">Web Designer</div>
-                  </div>
+                  <div class="tab-pane fade pt-3" id="profile-change-password">
+                    <!-- Change Password Form -->
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Country</div>
-                    <div class="col-lg-9 col-md-8">USA</div>
-                  </div>
+                    <form id="changePasswordForm" novalidate>
+                      <div class="mb-3">
+                        <label
+                          for="currentPassword"
+                          class="col-md-4 col-lg-3 col-form-label"
+                        >
+                          <span class="text-danger">*</span> Mật khẩu hiện tại
+                        </label>
+                        <div>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="currentPassword"
+                          />
+                          <div
+                            class="invalid-feedback"
+                            id="currentPasswordError"
+                          ></div>
+                        </div>
+                      </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
-                  </div>
+                      <div class="mb-3">
+                        <label
+                          for="newPassword"
+                          class="col-md-4 col-lg-3 col-form-label"
+                        >
+                          <span class="text-danger">*</span> Mật khẩu mới
+                        </label>
+                        <div>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="newPassword"
+                          />
+                          <div
+                            class="invalid-feedback"
+                            id="newPasswordError"
+                          ></div>
+                        </div>
+                      </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
-                  </div>
+                      <div class="mb-3">
+                        <label
+                          for="renewPassword"
+                          class="col-md-4 col-lg-3 col-form-label"
+                        >
+                          <span class="text-danger">*</span> Xác nhận mật khẩu
+                        </label>
+                        <div>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="renewPassword"
+                          />
+                          <div
+                            class="invalid-feedback"
+                            id="renewPasswordError"
+                          ></div>
+                        </div>
+                      </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                      <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary me-2">
+                          Xác nhận
+                        </button>
+                      </div>
+                    </form>
+                    <!-- End Change Password Form -->
                   </div>
-
                 </div>
-
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-                  <!-- Profile Edit Form -->
-                  <form>
-                    <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
-                        <img src="../assets/img/profile-img.jpg" alt="Profile">
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
-                              class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
-                              class="bi bi-trash"></i></a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                      <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about"
-                          style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company"
-                          value="Lueilwitz, Wisoky and Leuschke">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address"
-                          value="A108 Adam Street, New York, NY 535022">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter"
-                          value="https://twitter.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook"
-                          value="https://facebook.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram"
-                          value="https://instagram.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin"
-                          value="https://linkedin.com/#">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End Profile Edit Form -->
-
-                </div>
-
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                  <!-- Settings Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">
-                            Changes made to your account
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new products and services
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                          <label class="form-check-label" for="securityNotify">
-                            Security alerts
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End settings Form -->
-
-                </div>
-
-                <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
-                </div>
-
-              </div><!-- End Bordered Tabs -->
-
+                <!-- End Bordered Tabs -->
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
 
+    <!-- ======= Footer ======= -->
+     <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+    <div class="parent mx-5" style="height: 200px ;">
+      <div class="div1">
+        <div class="social-links mt-5 fs-3 "> <!-- fs-3: tăng kích thước icon -->
+          <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
         </div>
       </div>
-    </section>
 
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      <div class="div2">
+        <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Giới Thiệu</li>
+          <li class="text-black m-1">Sứ Mệnh</li>
+          <li class="text-black m-1">Đội Ngũ</li>
+          <li class="text-black m-1">Liên Hệ</li>
+          <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+        </ul>
+      </div>
+      <div class="div3">
+        <h5 class="mb-4"><strong>Khám phá</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Góc học tập</li>
+          <li class="text-black m-1">Kỹ năng mềm</li>
+          <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+          <li class="text-black m-1">Học bổng & Cơ hội</li>
+          <li class="text-black m-1">Hướng nghiệp</li>
+        </ul>
+      </div>
+      <div class="div4">
+        <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Tài liệu học tập</li>
+          <li class="text-black m-1">Công cụ học tập</li>
+          <li class="text-black m-1">Gợi ý khóa học</li>
+          <li class="text-black m-1">Cộng đồng sinh viên</li>
+          <li class="text-black m-1">Góp ý & báo lỗi</li>
+        </ul>
+      </div>
+      <div class="div5">
+        <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+        <ul class="list-unstyled">
+          <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+          <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+          <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+          <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+          <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+        </ul>
+      </div>
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer><!-- End Footer -->
+  </footer>
+    <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
 
-  <!-- Vendor JS Files -->
-  <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="../assets/vendor/echarts/echarts.min.js"></script>
-  <script src="../assets/vendor/quill/quill.js"></script>
-  <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../assets/vendor/quill/quill.js"></script>
+    <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="../assets/js/main.js"></script>
+    <!-- Template Main JS File -->
+    <script src="../assets/js/main.js"></script>
 
-</body>
-
+    <script src="../assets/js/validate.js"></script>
+  </body>
 </html>
