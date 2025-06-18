@@ -9,10 +9,8 @@
 (function() {
   "use strict";
 
-  /**
-   * Easy selector helper function
-   */
-  document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function () {
     const addDocBtn = document.getElementById("addDocBtn");
     const addModal = new bootstrap.Modal(document.getElementById("addDocModal"));
 
@@ -47,6 +45,26 @@
       });
     });
   });
+
+
+
+
+
+
+
+  
+  /**
+   * Easy selector helper function
+   */
+
+    const select = (el, all = false) => {
+    el = el.trim()
+    if (all) {
+      return [...document.querySelectorAll(el)]
+    } else {
+      return document.querySelector(el)
+    }
+  }
 
 
   /**
