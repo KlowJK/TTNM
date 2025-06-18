@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -595,7 +596,7 @@
             <div class="modal-content p-3 mt-4"> <!-- thêm mt-4 để đẩy modal xuống từ top -->
                 <div class="modal-body d-flex align-items-center">
                     <span class="me-2 text-warning fs-4"><i class="bi bi-exclamation-circle text-warning"></i>
-</span>
+                    </span>
                     <span>Bạn chắc chắn muốn xoá ghi chú này không?</span>
                 </div>
                 <div class="modal-footer border-0 justify-content-end">
@@ -744,7 +745,7 @@
 
 
         // ================= XEM GHI CHÚ =================
-        
+
         function viewNote(id) {
             const note = notes.find(n => n.id === id);
             const modal = document.getElementById('noteDetailModal');
@@ -761,10 +762,14 @@
             const note = notes.find(n => n.id === id);
             currentEditId = id;
             const modal = document.getElementById('editNoteModal');
-            modal.querySelector('input').value = note.title;
-            modal.querySelector('textarea').value = note.description;
-            modal.querySelector('.px-3.py-2').textContent = formatTime(note.time);
+            const inputs = modal.querySelectorAll('input');
+            const textareas = modal.querySelectorAll('textarea');
+
+            inputs[0].value = note.title;
+            textareas[0].value = note.description;
+            inputs[1].value = new Date(note.time).toISOString().slice(0, 16); // cập nhật thời gian
         }
+
 
         document.querySelector('#editNoteModal .btn-primary').addEventListener('click', () => {
             const modal = document.getElementById('editNoteModal');
