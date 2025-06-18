@@ -50,7 +50,6 @@
         <div class="d-flex align-items-center justify-content-between">
             <a href="../index.html" class="logo d-flex align-items-center">
                 <img src="../assets/img/students_logo.png" alt="">
-
             </a>
         </div><!-- End Logo -->
 
@@ -62,21 +61,19 @@
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link " id="tab-chi-tieu" href="../ChiTieu/qlct.html" type="button" role="tab"
-                        aria-controls="chi-tieu" aria-selected="false"><strong>Chi
+                    <a class="nav-link active" id="tab-chi-tieu" data-bs-toggle="tab" data-bs-target="#chi-tieu"
+                        type="button" role="tab" aria-controls="chi-tieu" aria-selected="false"><strong>Chi
                             tiêu</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link active" id="tab-lich-trinh" data-bs-toggle="tab" data-bs-target="#ghi-chu"
-                        type="button" role="tab" aria-controls="lich-trinh" aria-selected="false"><strong>Lịch
-                            trình</strong></a>
+                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
+                        aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link " id="tab-ghi-chu" href="../GhiChu/qlgc.html" type="button" role="tab"
-                        aria-controls="ghi-chu" aria-selected="false"><strong>Ghi
-                            chú</strong></a>
+                    <a class="nav-link" id="tab-ghi-chu" href="../GhiChu/qlgc.html" type="button" role="tab"
+                        aria-controls="ghi-chu" aria-selected="false"><strong>Ghi chú</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
@@ -102,6 +99,7 @@
                         <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block  ps-2">Nguyễn Văn A</span>
                     </a><!-- End Profile Iamge Icon -->
+
 
                 </li><!-- End Profile Nav -->
 
@@ -557,6 +555,30 @@
             .form-control.is-invalid {
                 background-image: none !important;
                 /* Ẩn dấu chấm than đỏ */
+            }
+
+            .parent {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: 1fr;
+                /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+                gap: 15px;
+                height: 258px;
+                /* tùy theo bạn muốn card cao tối đa cỡ nào */
+            }
+
+            .parent>div {
+                height: 85%;
+                /* Giúp các div1 - div5 fill chiều cao của hàng */
+            }
+
+            .sales-card {
+                height: 100% !important;
+                /* Ghi đè inline style để fill toàn bộ */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                /* nếu bạn muốn nội dung giãn đều */
             }
         </style>
 
@@ -1122,28 +1144,71 @@
     </div>
 
     <!-- TBao thành công -->
-    <div id="successToast" class="toast align-items-center text-success border-0" role="alert" aria-live="assertive"
-        aria-atomic="true"
-        style="position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 20000; min-width: 380px; max-width: 480px; background: #f6fff2; border: 1.5px solid #8de885; box-shadow: 0 2px 18px rgba(0,0,0,0.05); border-radius: 8px; display: none;">
-        <div class="d-flex align-items-center p-3" style="gap: 12px;">
+    <div id="successToast" class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 20000; min-width: 450px; max-width: 450px; width: 450px; height: 65px;
+    background: #f6fff2; border: 1.5px solid #8de885; box-shadow: 0 2px 18px rgba(0,0,0,0.05);
+    border-radius: 8px; display: none; color: #222;">
+
+        <div class="d-flex justify-content-center align-items-center h-100" style="gap: 18px; height: 100%;">
             <span style="font-size: 2rem; color: #42cb39;"><i class="bi bi-check-circle"></i></span>
-            <span class="fw-semibold fs-5" id="successToastMsg">Thành công!</span>
-            <button type="button" class="btn-close ms-auto" aria-label="Close" onclick="hideSuccessToast()"
-                style="font-size: 1.15rem;"></button>
+            <span class="fw-semibold fs-5" id="successToastMsg" style="color: #222;">Thành công!</span>
+            <button type="button" class="btn-close" aria-label="Close" onclick="hideSuccessToast()"
+                style="font-size: 2.1rem; width: 2.4rem; height: 2.4rem; align-self: center;"></button>
         </div>
     </div>
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            © Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+        <div class="parent mx-5" style="height: 200px ;">
+            <div class="div1">
+                <div class="social-links mt-5 fs-3 "> <!-- fs-3: tăng kích thước icon -->
+                    <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="div2">
+                <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Giới Thiệu</li>
+                    <li class="text-black m-1">Sứ Mệnh</li>
+                    <li class="text-black m-1">Đội Ngũ</li>
+                    <li class="text-black m-1">Liên Hệ</li>
+                    <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+                </ul>
+            </div>
+            <div class="div3">
+                <h5 class="mb-4"><strong>Khám phá</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Góc học tập</li>
+                    <li class="text-black m-1">Kỹ năng mềm</li>
+                    <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+                    <li class="text-black m-1">Học bổng & Cơ hội</li>
+                    <li class="text-black m-1">Hướng nghiệp</li>
+                </ul>
+            </div>
+            <div class="div4">
+                <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Tài liệu học tập</li>
+                    <li class="text-black m-1">Công cụ học tập</li>
+                    <li class="text-black m-1">Gợi ý khóa học</li>
+                    <li class="text-black m-1">Cộng đồng sinh viên</li>
+                    <li class="text-black m-1">Góp ý & báo lỗi</li>
+                </ul>
+            </div>
+            <div class="div5">
+                <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+                    <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+                    <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+                    <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+                    <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+                </ul>
+            </div>
         </div>
     </footer><!-- End Footer -->
 
@@ -1721,16 +1786,28 @@
 
                 // Nếu đang sửa một block lịch trình
                 if (window.editingEvent) {
-                    // Update data trên block
-                    window.editingEvent.dataset.title = title;
-                    window.editingEvent.dataset.description = description;
-                    window.editingEvent.dataset.location = location;
-                    window.editingEvent.dataset.type = eventType.value;
+                    // Cập nhật dữ liệu trong mảng events
+                    const id = window.editingEvent.dataset.id;
+                    const eventObj = this.events.find(ev => ev.id == id);
+                    if (eventObj) {
+                        eventObj.title = title;
+                        eventObj.description = description;
+                        eventObj.location = location;
+                        eventObj.type = eventType.value;
+                        eventObj.startTime = startTime;
+                        eventObj.endTime = endTime;
+                    }
 
                     // Format lại thời gian cho block
                     const startH = parseInt(startTime.split(':')[0]), startM = parseInt(startTime.split(':')[1]);
                     const endH = parseInt(endTime.split(':')[0]), endM = parseInt(endTime.split(':')[1]);
                     const timeDisplay = this.formatTimeDisplay(startH, startM, endH, endM);
+
+                    // Cập nhật dataset của block
+                    window.editingEvent.dataset.title = title;
+                    window.editingEvent.dataset.description = description;
+                    window.editingEvent.dataset.location = location;
+                    window.editingEvent.dataset.type = eventType.value;
                     window.editingEvent.dataset.time = timeDisplay;
 
                     // Update nội dung HTML hiển thị
@@ -1741,10 +1818,11 @@
 
                     // Đóng popup chi tiết lịch nếu đang mở
                     document.getElementById('scheduleDetailsPopup').style.display = 'none';
+
                     window.editingEvent = null;
                     showSuccessToast('Sửa lịch trình thành công');
                 } else {
-                    // Tạo event mới như cũ
+                    // Tạo event mới
                     const event = {
                         id: Date.now(),
                         title,
@@ -1765,7 +1843,7 @@
                         }
                         this.renderEvent(event);
                         this.clearSelection();
-                        showSuccessToast('Thêm lịch trình thành công'); // <-- Thêm dòng này!
+                        showSuccessToast('Thêm lịch trình thành công');
                     }, 400);
                 }
 
@@ -1979,7 +2057,6 @@
 
         let calendarInstance = null;
         let currentScheduleBlock = null;
-        let editingEvent = null; // Biến lưu event đang chỉnh sửa
 
         document.addEventListener('DOMContentLoaded', function () {
             calendarInstance = new CalendarDragDrop();
@@ -2037,10 +2114,16 @@
                 // Xóa class is-invalid khỏi input
                 const invalidInputs = document.querySelectorAll('.is-invalid');
                 invalidInputs.forEach(input => input.classList.remove('is-invalid'));
+
+                // Reset editingEvent khi đóng modal
+                window.editingEvent = null;
             });
             document.getElementById('openScheduleModal').addEventListener('click', function () {
                 const modalElement = document.getElementById('scheduleModal');
                 const modal = new bootstrap.Modal(modalElement);
+
+                // Reset editingEvent khi mở modal để thêm mới
+                window.editingEvent = null;
 
                 if (calendarInstance) {
                     calendarInstance.clearSelection(); // ✅ Xóa preview cũ (nếu có)
@@ -2075,6 +2158,13 @@
                 var confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
                 confirmModal.hide();
                 if (currentScheduleBlock) {
+                    // Xóa khỏi mảng events trước khi xóa DOM element
+                    if (calendarInstance) {
+                        const id = currentScheduleBlock.dataset.id;
+                        calendarInstance.events = calendarInstance.events.filter(ev => ev.id != id);
+                    }
+
+                    // Xóa DOM element
                     currentScheduleBlock.remove();
                     currentScheduleBlock = null;
                     showSuccessToast('Xóa lịch trình thành công');
@@ -2112,8 +2202,8 @@
                         radio.checked = (radio.value === type);
                     });
 
-                    // Lưu thông tin đang sửa
-                    editingEvent = block;
+                    // Lưu thông tin đang sửa - SỬA: Set window.editingEvent thay vì editingEvent
+                    window.editingEvent = block;
 
                     // Hiện modal
                     const modalElement = document.getElementById('scheduleModal');

@@ -61,13 +61,13 @@
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link active" id="tab-chi-tieu" data-bs-toggle="tab" data-bs-target="#chi-tieu"
+                    <a class="nav-link" id="tab-chi-tieu" data-bs-toggle="tab" data-bs-target="#chi-tieu"
                         type="button" role="tab" aria-controls="chi-tieu" aria-selected="false"><strong>Chi
                             tiêu</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
+                    <a class="nav-link active" id="tab-lich-trinh" href="../LichTrinh/Lich.html" type="button" role="tab"
                         aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
                 </li>
 
@@ -556,6 +556,30 @@
                 background-image: none !important;
                 /* Ẩn dấu chấm than đỏ */
             }
+
+            .parent {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: 1fr;
+                /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+                gap: 15px;
+                height: 258px;
+                /* tùy theo bạn muốn card cao tối đa cỡ nào */
+            }
+
+            .parent>div {
+                height: 85%;
+                /* Giúp các div1 - div5 fill chiều cao của hàng */
+            }
+
+            .sales-card {
+                height: 100% !important;
+                /* Ghi đè inline style để fill toàn bộ */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                /* nếu bạn muốn nội dung giãn đều */
+            }
         </style>
 
         <div class="calendar-wrapper">
@@ -574,8 +598,8 @@
                             <i class="bi bi-caret-down-fill ms-2"></i>
                         </button>
                         <ul class="dropdown-menu w-100">
-                            <li><a class="dropdown-item" href="#">Lịch</a></li>
-                            <li><a class="dropdown-item" href="#">Danh sách</a></li>
+                            <li><a class="dropdown-item" href="Lich.html">Lịch</a></li>
+                            <li><a class="dropdown-item" href="DanhSach.html">Danh sách</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2036,6 +2060,17 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             calendarInstance = new CalendarDragDrop();
+
+            // Thêm event listener cho nút tìm kiếm
+            document.getElementById('searchButton').addEventListener('click', handleSearch);
+
+            // Thêm event listener cho input khi nhấn Enter
+            document.getElementById('basicSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+
             // Hàm lấy AM/PM dựa trên giờ
             function getAMPM(hour) {
                 return hour < 12 ? 'AM' : 'PM';
@@ -2203,6 +2238,15 @@
                 return `${h.toString().padStart(2, '0')}:${m}`;
             }
         });
+
+        // Thêm hàm xử lý tìm kiếm
+        function handleSearch() {
+            const searchQuery = document.getElementById('basicSearch').value.trim();
+            if (searchQuery) {
+                // Chuyển sang DanhSach.html với query search
+                window.location.href = `DanhSach.html?search=${encodeURIComponent(searchQuery)}`;
+            }
+        }
 
     </script>
 
