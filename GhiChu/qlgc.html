@@ -216,47 +216,47 @@
         margin-right: 8px;
     }
 </style>
- <style>
-        .parent {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: 1fr;
-            /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
-            gap: 15px;
-            height: 250px;
-            /* tùy theo bạn muốn card cao tối đa cỡ nào */
-        }
+<style>
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: 1fr;
+        /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+        gap: 15px;
+        height: 250px;
+        /* tùy theo bạn muốn card cao tối đa cỡ nào */
+    }
 
-        .parent>div {
-            height: 85%;
-            /* Giúp các div1 - div5 fill chiều cao của hàng */
-        }
+    .parent>div {
+        height: 85%;
+        /* Giúp các div1 - div5 fill chiều cao của hàng */
+    }
 
-        .sales-card {
-            height: 100% !important;
-            /* Ghi đè inline style để fill toàn bộ */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            /* nếu bạn muốn nội dung giãn đều */
-        }
+    .sales-card {
+        height: 100% !important;
+        /* Ghi đè inline style để fill toàn bộ */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* nếu bạn muốn nội dung giãn đều */
+    }
 
-        input.is-invalid {
-            background-image: none !important;
-        }
+    input.is-invalid {
+        background-image: none !important;
+    }
 
-        select.form-select.is-invalid {
-            background-image: none !important;
-        }
+    select.form-select.is-invalid {
+        background-image: none !important;
+    }
 
-        .money-icon {
-            width: 35px;
-            height: 35px;
-            border: 3px solid #000;
-            border-radius: 50%;
-            font-size: 24px;
-        }
-    </style>
+    .money-icon {
+        width: 35px;
+        height: 35px;
+        border: 3px solid #000;
+        border-radius: 50%;
+        font-size: 24px;
+    }
+</style>
 
 <body>
 
@@ -469,118 +469,121 @@
 
     <!-- Modal Thêm Ghi Chú -->
     <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addNoteModalLabel">Thêm ghi chú mới</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="noteForm" class="needs-validation" novalidate>
-                        <!-- Tiêu đề -->
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Tiêu đề</label>
-                            <input type="text" class="form-control" id="title" placeholder="Tiêu đề" required>
-                            <div class="invalid-feedback">
-                                Vui lòng nhập tiêu đề.
-                            </div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="mb-3 fw-bold" id="addNoteModalLabel">Thêm ghi chú</h5>
+
+                    <form id="noteForm" class="d-flex flex-column gap-2 needs-validation" novalidate>
+                        <div class="bg-white p-2 rounded">
+                            <label for="title" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu
+                                đề</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" id="title"
+                                placeholder="Nhập tiêu đề" required>
+                            <div class="invalid-feedback">Vui lòng nhập tiêu đề.</div>
                         </div>
 
-                        <!-- Mô tả -->
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Mô tả</label>
-                            <textarea class="form-control" id="description" rows="4" placeholder="Mô tả"
-                                required></textarea>
-                            <div class="invalid-feedback">
-                                Vui lòng nhập mô tả.
-                            </div>
+                        <div class="bg-white p-2 rounded">
+                            <label for="description" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô
+                                tả</label>
+                            <textarea class="form-control border-0 px-0 py-1" id="description" rows="3"
+                                placeholder="Nhập mô tả" required></textarea>
+                            <div class="invalid-feedback">Vui lòng nhập mô tả.</div>
                         </div>
 
-                        <!-- Thời gian -->
-                        <div class="mb-3">
-                            <label for="time" class="form-label">Thời gian</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-secondary text-white">Hiện tại</span>
-                                <input type="datetime-local" class="form-control bg-secondary" id="time" value="">
-
-                            </div>
+                        <div class="bg-white p-2 rounded">
+                            <label for="time" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời
+                                gian</label>
+                            <input type="datetime-local" class="form-control border-0 px-0 py-1" id="time">
                         </div>
 
-                        <!-- Nút submit -->
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2">Thêm</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2">
+                            <button type="submit" class="btn btn-primary fw-semibold"
+                                style="border-radius: 4px; min-width: 100px;">Thêm</button>
+                            <button type="button" class="btn fw-semibold"
+                                style="border-radius: 4px; min-width: 100px; background: #fff; border: 1px solid #dee2e6;"
+                                data-bs-dismiss="modal">Quay lại</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Modal Chi tiết Ghi chú -->
-    <div class="modal fade" id="noteDetailModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content p-3">
-                <div class="modal-body">
-                    <h5 class="mb-3">Chi tiết ghi chú</h5>
+    <div class="modal fade" id="noteDetailModal" tabindex="-1" aria-labelledby="noteDetailModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="mb-3 fw-bold" id="noteDetailModalLabel">Chi tiết ghi chú</h5>
 
-                    <div class="mb-3">
-                        <label class="form-label">Tiêu đề</label>
-                        <input type="text" class="form-control" value="My first task" readonly>
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
+                        <input type="text" class="form-control border-0 px-0 py-1" readonly>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Mô tả</label>
-                        <textarea class="form-control" rows="4"
-                            readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</textarea>
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
+                        <textarea class="form-control border-0 px-0 py-1" rows="3" readonly></textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Thời gian</label>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-light bg-secondary" disabled>Hiện tại</button>
-                            <div class="bg-secondary text-white px-3 py-2 rounded" style="min-width: 200px;">
-                                Thứ 5, 17 tháng 12 20:49:33
-                            </div>
+                    <div class="bg-white p-2 rounded mb-3">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                        <div class="text-muted px-1 py-1" style="font-size: 0.9rem;" id="noteDetailTime">
+                            <!-- sẽ được thay bằng JS -->
                         </div>
                     </div>
 
-                    <div class="modal-footer border-0 px-0">
-                        <button type="button" class="btn btn-light ms-auto" data-bs-dismiss="modal">Quay lại</button>
+                    <div class="d-flex justify-content-end gap-3 pb-2">
+                        <button type="button" class="btn fw-semibold"
+                            style="border-radius: 4px; min-width: 100px; background: #fff; border: 1px solid #dee2e6;"
+                            data-bs-dismiss="modal">Đóng</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
     <!-- Modal Sửa Ghi Chú -->
-    <div class="modal fade" id="editNoteModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content p-3">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title">Sửa ghi chú</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label">Tiêu đề</label>
-                        <input type="text" class="form-control" value="My first task">
+    <div class="modal fade" id="editNoteModal" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="mb-3 fw-bold" id="editNoteModalLabel">Sửa ghi chú</h5>
+
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
+                        <input type="text" class="form-control border-0 px-0 py-1">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Mô tả</label>
-                        <textarea class="form-control"
-                            rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</textarea>
+
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
+                        <textarea class="form-control border-0 px-0 py-1" rows="3"></textarea>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Thời gian</label>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-light bg-secondary">Hiện tại</button>
-                            <div class=" px-3 py-2 rounded bg-secondary">Thứ 5, 17 tháng 12 20:49:33</div>
-                        </div>
+
+                    <div class="bg-white p-2 rounded mb-3">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                        <input type="datetime-local" class="form-control border-0 px-0 py-1" id="time">
                     </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-primary">Lưu</button>
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Quay lại</button>
+
+                    <div class="d-flex justify-content-end gap-3 pb-2">
+                        <button type="button" class="btn btn-primary fw-semibold"
+                            style="border-radius: 4px; min-width: 100px;">Lưu</button>
+                        <button type="button" class="btn fw-semibold"
+                            style="border-radius: 4px; min-width: 100px; background: #fff; border: 1px solid #dee2e6;"
+                            data-bs-dismiss="modal">Quay lại</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -591,7 +594,8 @@
         <div class="modal-dialog">
             <div class="modal-content p-3 mt-4"> <!-- thêm mt-4 để đẩy modal xuống từ top -->
                 <div class="modal-body d-flex align-items-center">
-                    <span class="me-2 text-warning fs-4">⚠️</span>
+                    <span class="me-2 text-warning fs-4"><i class="bi bi-exclamation-circle text-warning"></i>
+</span>
                     <span>Bạn chắc chắn muốn xoá ghi chú này không?</span>
                 </div>
                 <div class="modal-footer border-0 justify-content-end">
@@ -735,19 +739,23 @@
             $('#addNoteModal').modal('hide');
             renderNotes();
             renderNoteCalendar();
-            showAlert("✅ Thêm ghi chú thành công!", "success");
+            showAlert('<i class="bi bi-check-circle text-success me-1"></i> Thêm ghi chú thành công!', "success");
         });
 
 
         // ================= XEM GHI CHÚ =================
+        
         function viewNote(id) {
             const note = notes.find(n => n.id === id);
             const modal = document.getElementById('noteDetailModal');
             modal.querySelector('input').value = note.title;
             modal.querySelector('textarea').value = note.description;
-            modal.querySelector('.bg-secondary.text-white').textContent = formatTime(note.time);
-        }
 
+            const timeEl = modal.querySelector('#noteDetailTime');
+            if (timeEl && note.time) {
+                timeEl.textContent = formatTime(note.time);
+            }
+        }
         // ================ SỬA GHI CHÚ ==================
         function editNote(id) {
             const note = notes.find(n => n.id === id);
@@ -768,7 +776,7 @@
             renderNotes();
             renderNoteCalendar();
             $('#editNoteModal').modal('hide');
-            showAlert("✅ Sửa ghi chú thành công!", "success"); // Hiển thị thông báo thành công
+            showAlert('<i class="bi bi-check-circle text-success me-1"></i> Sửa ghi chú thành công!', "success"); // Hiển thị thông báo thành công
         });
 
         // ================ XOÁ GHI CHÚ ==================
@@ -782,7 +790,7 @@
             renderNotes();
             renderNoteCalendar();
             $('#deleteNoteModal').modal('hide');
-            showAlert("✅ Xóa ghi chú thành công!", "success"); // Hiển thị thông báo thành công
+            showAlert('<i class="bi bi-check-circle text-success me-1"></i> Xoá ghi chú thành công!', "success"); // Hiển thị thông báo thành công
         });
 
         // ================= KHỞI TẠO ==================
@@ -790,7 +798,8 @@
             const alertBox = document.getElementById("custom-alert");
             const alertText = document.getElementById("custom-alert-text");
 
-            alertText.textContent = message;
+            alertText.innerHTML = message;
+
             alertBox.className = `alert alert-${type} alert-dismissible fade show text-center position-fixed top-0 start-50 translate-middle-x mt-3`;
             alertBox.style.display = "block";
 
