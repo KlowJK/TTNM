@@ -623,6 +623,50 @@
         </div>
     </div>
 
+    <!-- Modal xem chi tiết lịch trình -->
+    <div class="modal fade" id="viewScheduleModal" tabindex="-1" aria-labelledby="viewScheduleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm" style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <!-- Nút đóng -->
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Tiêu đề Modal -->
+                    <h5 class="mb-3 fw-bold" id="viewScheduleModalLabel">Chi tiết lịch trình</h5>
+                    <div class="d-flex flex-column gap-2">
+                        <!-- Tiêu đề -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
+                            <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventTitle"></div>
+                        </div>
+                        <!-- Mô tả -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
+                            <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventDescription"></div>
+                        </div>
+                        <!-- Thời gian -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                            <div class="row g-1 align-items-center" style="margin-left: 0; margin-right: 0;">
+                                <div class="col-12">
+                                    <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventTime"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Loại lịch trình -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Loại lịch trình</label>
+                            <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventType"></div>
+                        </div>
+                        <!-- Footer nút -->
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2" style="padding-left: 2px; padding-right: 2px;">
+                            <button type="button" class="btn btn-primary fw-semibold" style="border-radius: 4px; min-width: 100px; font-size: 1rem;" data-bs-dismiss="modal">Quay lại</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast thông báo thành công -->
     <div id="successToast" class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true" 
         style="position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 20000; min-width: 450px; max-width: 450px; width: 450px; height: 65px; background: #f6fff2; border: 1.5px solid #8de885; box-shadow: 0 2px 18px rgba(0,0,0,0.05); border-radius: 8px; display: none; color: #222;">
@@ -866,10 +910,35 @@
             addRowEventListeners(newRow);
         }
 
+        // Hàm xử lý xem chi tiết
+        function handleViewSchedule(row) {
+            // Lấy dữ liệu từ row
+            const title = row.cells[0].textContent;
+            const description = row.cells[1].textContent;
+            const type = row.cells[2].textContent;
+            const startTime = row.cells[3].textContent;
+            const endTime = row.cells[4].textContent;
+
+            // Điền dữ liệu vào modal xem chi tiết
+            document.getElementById('viewEventTitle').textContent = title;
+            document.getElementById('viewEventDescription').textContent = description;
+            document.getElementById('viewEventType').textContent = type;
+            document.getElementById('viewEventTime').textContent = `${startTime} - ${endTime}`;
+
+            // Hiển thị modal
+            const modal = new bootstrap.Modal(document.getElementById('viewScheduleModal'));
+            modal.show();
+        }
+
         // Hàm thêm event listeners cho row
         function addRowEventListeners(row) {
             row.querySelectorAll('a.action-link').forEach(link => {
-                if (link.textContent === 'Sửa') {
+                if (link.textContent === 'Xem') {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        handleViewSchedule(row);
+                    });
+                } else if (link.textContent === 'Sửa') {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
                         handleEditSchedule(row);
