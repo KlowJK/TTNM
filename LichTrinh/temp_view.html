@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>StudentLife</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../assets/img/students_logo.png" rel="icon">
+    <link href="../assets/img/students_logo.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="../index.html" class="logo d-flex align-items-center">
+                <img src="../assets/img/students_logo.png" alt="">
+            </a>
+        </div><!-- End Logo -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="nav d-flex align-items-center nav-tabs-bordered" style="border-bottom: none !important;">
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link " id="tab-home" href="../index.html" type="button" role="tab"
+                        aria-controls="home" aria-selected="true"><strong>Trang chủ</strong></a>
+                </li>
+
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link active" id="tab-chi-tieu" data-bs-toggle="tab" data-bs-target="#chi-tieu"
+                        type="button" role="tab" aria-controls="chi-tieu" aria-selected="false"><strong>Chi
+                            tiêu</strong></a>
+                </li>
+
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
+                        aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
+                </li>
+
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-ghi-chu" href="../GhiChu/qlgc.html" type="button" role="tab"
+                        aria-controls="ghi-chu" aria-selected="false"><strong>Ghi chú</strong></a>
+                </li>
+
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-tai-lieu" href="../TaiLieu/qltl.html" type="button" role="tab"
+                        aria-controls="tai-lieu" aria-selected="false"><strong>Tài liệu</strong></a>
+                </li>
+
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
+                        aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
+                            biệt</strong></a>
+                </li>
+
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab"
+                        aria-controls="phan-hoi" aria-selected="false"><strong>Phản hồi</strong></a>
+                </li>
+
+
+
+                <li class="nav-item dropdown pe-3">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-2" href="../HoSo/users-profile.html">
+                        <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block  ps-2">Nguyễn Văn A</span>
+                    </a><!-- End Profile Iamge Icon -->
+
+
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+
+
+    <main id="main" class="main">
+
+        <!-- Calendar Week View Snippet -->
+        <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .calendar-wrapper {
+                display: flex;
+                height: calc(100vh - 60px);
+            }
+
+            .calendar-sidebar {
+                width: 300px;
+                padding: 1rem;
+                border-right: 1px solid #e5e5e5;
+            }
+
+            .calendar-main {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+                background-color: #ffffff;
+            }
+
+            .calendar-main .table-responsive {
+                flex: 1;
+                overflow: auto;
+            }
+
+            .calendar-small table th,
+            .calendar-small table td {
+                width: 32px;
+                padding: 0.25rem;
+            }
+
+            header.header,
+            footer.footer,
+            .calendar-sidebar {
+                background-color: #f9fafe !important;
+            }
+
+            .calendar-main table {
+                border-collapse: collapse;
+                border: none !important;
+                border-top: none !important;
+                box-shadow: none !important;
+                table-layout: fixed;
+                /* THÊM DÒNG NÀY */
+                width: 100%;
+                /* THÊM DÒNG NÀY */
+            }
+
+            .calendar-main table thead {
+                border-bottom: none !important;
+            }
+
+            .calendar-main table thead th {
+                border-top: none !important;
+                border-bottom: 1px solid #dee2e6 !important;
+                box-shadow: none !important;
+            }
+
+            .calendar-main table th,
+            .calendar-main table td {
+                border: 1px solid #dee2e6;
+            }
+
+            .calendar-main table tr:first-child th,
+            .calendar-main table tr:first-child td {
+                border-top: none;
+            }
+
+            .calendar-main table tr td:first-child,
+            .calendar-main table tr th:first-child {
+                border-left: none;
+            }
+
+            .calendar-main table tr td:last-child,
+            .calendar-main table tr th:last-child {
+                border-right: none;
+            }
+
+            .calendar-main table,
+            .calendar-main table thead,
+            .calendar-main table thead tr,
+            .calendar-main table thead th {
+                border-top: none !important;
+                border-bottom: 1px solid #dee2e6 !important;
+                box-shadow: none !important;
+            }
+
+            .calendar-time-cell {
+                position: relative;
+                width: 135px;
+                /* hoặc tùy bạn */
+                min-width: 120px;
+                height: 32px;
+                padding: 0;
+                border: none;
+                background: white;
+            }
+
+            .hour-label {
+                position: absolute;
+                left: 0;
+                top: 100%;
+                width: 60px;
+                /* hoặc 75%, tuỳ bạn */
+                height: 24px;
+                background: white;
+                border-radius: 8px;
+                text-align: center;
+                line-height: 24px;
+                font-size: 0.95rem;
+                color: #222;
+                font-weight: bold;
+                z-index: 2;
+                pointer-events: none;
+                transform: translateY(-50%);
+                box-sizing: border-box;
+            }
+
+            .calendar-main .table th,
+            .calendar-main .table td {
+                height: 48px;
+                /* Có thể đổi thành 40px, 56px tùy ý */
+                vertical-align: middle;
+                /* Giữa dòng */
+                padding: 0;
+                /* Loại bỏ padding thừa */
+                box-sizing: border-box;
+                /* Đảm bảo tính toán chiều cao chính xác */
+            }
+
+            /* hover tk nâng cao */
+            .icon-btn {
+                border: none;
+                background: transparent;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.15s;
+                box-shadow: none;
+                outline: none;
+                padding: 0;
+            }
+
+            .icon-btn:focus {
+                outline: none;
+                box-shadow: none;
+            }
+
+            .icon-btn:hover,
+            .icon-btn:active {
+                background: #f1f1f1;
+                /* Nền xám nhạt khi hover */
+            }
+
+            .icon-btn i {
+                font-size: 1.2rem;
+                color: #333;
+                transition: color 0.15s;
+            }
+
+            .btn-add-schedule {
+                background: #fff;
+                color: #222;
+                border: none;
+                border-radius: 999px;
+                /* Bo tròn viên thuốc */
+                box-shadow: 2px 2px 8px 0 #ccc;
+                padding: 10px 24px;
+                font-weight: 500;
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: box-shadow 0.18s, background 0.18s;
+            }
+
+            .btn-add-schedule:hover,
+            .btn-add-schedule:focus {
+                background: #f6f6f6;
+                box-shadow: 2px 4px 16px 0 #bbb;
+                color: #111;
+            }
+
+            .btn-add-schedule i {
+                font-size: 1.6rem;
+                /* To như hình */
+                font-weight: bold;
+                color: #222;
+            }
+
+            /*Chế độ hiển thị */
+            .btn-display-mode {
+                background: #fff !important;
+                color: #222 !important;
+                border: 1px solid #ddd;
+                font-weight: 500;
+                font-size: 1.05rem;
+                box-shadow: none;
+                transition: background 0.18s, box-shadow 0.18s, color 0.18s;
+                padding-left: 22px;
+                padding-right: 22px;
+                height: 42px;
+            }
+
+            .btn-display-mode i {
+                color: #222;
+                font-size: 1.1rem;
+                pointer-events: none;
+            }
+
+            .btn-display-mode:focus,
+            .btn-display-mode:hover {
+                background: #f5f5f5 !important;
+                color: #111 !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            }
+
+            /* Lịch nhỏ */
+            .calendar-other-month {
+                color: #ccc !important;
+            }
+
+            .calendar-today {
+                border: 3.5px solid #1976d2 !important;
+                border-radius: 6px;
+                color: #111 !important;
+                background: #fff !important;
+                font-weight: normal !important;
+            }
+
+            #calendar-table td,
+            #calendar-table th {
+                background: #fff;
+                border: none;
+                padding: 4px 0;
+            }
+
+            /* Thêm vào phần style hiện có */
+            .search-container {
+                position: relative;
+            }
+
+            #advancedSearch {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #fdf2f8;
+                /* Màu hồng nhạt */
+                border: 1px solid #f3e8ff;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
+                margin-top: 4px;
+            }
+
+            #advancedSearch .form-label {
+                font-weight: 500;
+                color: #6b7280;
+                margin-bottom: 4px;
+            }
+
+            #advancedSearch .form-control:focus,
+            #advancedSearch .form-select:focus {
+                box-shadow: none;
+                border-color: transparent;
+            }
+
+            .calendar-day-cell {
+                cursor: crosshair;
+                user-select: none;
+            }
+
+            .calendar-day-cell:hover {
+                background-color: #f8f9fa;
+            }
+
+            .event-block {
+                position: absolute;
+                background-color: #1a73e8;
+                color: white;
+                border-radius: 4px;
+                padding: 4px 8px;
+                font-size: 0.8rem;
+                font-weight: 500;
+                z-index: 5;
+                cursor: pointer;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            /* CSS cho validation messages */
+            .error-message {
+                color: #dc3545;
+                font-size: 0.875rem;
+                margin-top: 4px;
+                display: none;
+            }
+
+            .error-message.show {
+                display: block;
+            }
+
+            .form-control.is-invalid {
+                border-color: #dc3545;
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+            }
+
+            .form-check-input.is-invalid {
+                border-color: #dc3545;
+            }
+
+            .form-check-input.is-invalid~.form-check-label {
+                color: #dc3545;
+            }
+
+            /* Nút không bo góc */
+            .btn-flat {
+                border-radius: 0 !important;
+            }
+
+            .btn-outline-primary {
+                background: #fff !important;
+                color: #1976d2 !important;
+                border: 1.5px solid #1976d2 !important;
+                font-weight: 500;
+            }
+
+            .btn-outline-primary:hover,
+            .btn-outline-primary:focus {
+                background: #e3f0fd !important;
+                color: #1976d2 !important;
+                border-color: #1976d2 !important;
+            }
+
+            /* Nút xanh không bo góc */
+            .btn-primary.btn-flat {
+                border-radius: 0 !important;
+            }
+
+            /* Icon và text cùng hàng cho thông báo xác nhận */
+            .modal-body .d-flex.align-items-center span:first-child {
+                margin-right: 6px;
+            }
+
+            .btn-flat {
+                border-radius: 0 !important;
+            }
+
+            /* Nút bằng nhau */
+            .flex-even {
+                flex: 1 1 0;
+                min-width: 120px;
+            }
+
+            /* Nút "Không xóa" style */
+            .btn-outline-primary {
+                background: #fff !important;
+                color: #1976d2 !important;
+                border: 1.5px solid #1976d2 !important;
+                font-weight: 500;
+            }
+
+            .btn-outline-primary:hover,
+            .btn-outline-primary:focus {
+                background: #e3f0fd !important;
+                color: #1976d2 !important;
+                border-color: #1976d2 !important;
+            }
+
+            /* Nút "Xóa lịch" style */
+            .btn-primary.btn-flat {
+                border-radius: 0 !important;
+            }
+
+            /* Dài modal cho text 1 dòng */
+            .modal-content {
+                min-width: 400px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            /* Modal rộng hơn */
+            #confirmDeleteModal .modal-dialog {
+                min-width: 510px !important;
+                /* Hoặc to hơn nếu bạn thích */
+                max-width: 600px;
+                margin-top: 20px;
+            }
+
+            #confirmDeleteModal .modal-content {
+                border-radius: 8px;
+                min-width: 500px;
+                max-width: 570px;
+            }
+
+            /* Nút căn phải, nhỏ, bằng nhau */
+            .btn-action-modal {
+                min-width: 110px;
+                max-width: 120px;
+                border-radius: 0 !important;
+                padding-left: 0;
+                padding-right: 0;
+                text-align: center;
+                font-weight: 500;
+                font-size: 1rem;
+            }
+
+            .btn-outline-primary.btn-action-modal {
+                background: #fff !important;
+                color: #1976d2 !important;
+                border: 1.5px solid #1976d2 !important;
+            }
+
+            .btn-outline-primary.btn-action-modal:hover,
+            .btn-outline-primary.btn-action-modal:focus {
+                background: #e3f0fd !important;
+                color: #1976d2 !important;
+                border-color: #1976d2 !important;
+            }
+
+            /* Căn phải */
+            #confirmDeleteModal .d-flex.justify-content-end {
+                margin-top: 0.5rem;
+            }
+
+            .form-control.is-invalid {
+                background-image: none !important;
+                /* Ẩn dấu chấm than đỏ */
+            }
+
+            .parent {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: 1fr;
+                /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+                gap: 15px;
+                height: 258px;
+                /* tùy theo bạn muốn card cao tối đa cỡ nào */
+            }
+
+            .parent>div {
+                height: 85%;
+                /* Giúp các div1 - div5 fill chiều cao của hàng */
+            }
+
+            .sales-card {
+                height: 100% !important;
+                /* Ghi đè inline style để fill toàn bộ */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                /* nếu bạn muốn nội dung giãn đều */
+            }
+        </style>
+
+        <div class="calendar-wrapper">
+            <!-- Sidebar with controls and mini-calendar -->
+            <div class="calendar-sidebar">
+                <button id="openScheduleModal" class="btn btn-add-schedule">
+                    <i class="bi bi-plus-lg me-2"></i>
+                    Thêm lịch trình
+                </button>
+                <div class="mb-3 mt-5">
+                    <label class="form-label fw-bold">Chế độ hiển thị</label>
+                    <div class="dropdown">
+                        <button class="btn btn-display-mode w-100 d-flex justify-content-between align-items-center"
+                            type="button" data-bs-toggle="dropdown">
+                            Lịch
+                            <i class="bi bi-caret-down-fill ms-2"></i>
+                        </button>
+                        <ul class="dropdown-menu w-100">
+                            <li><a class="dropdown-item" href="#">Lịch</a></li>
+                            <li><a class="dropdown-item" href="#">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3 mt-3" style="width: 50%; min-width: 130px;">
+                    <select id="calendar-year" class="form-select form-select-sm me-2"
+                        style="width: 80px; min-width: 80px;"></select>
+                    <select id="calendar-month" class="form-select form-select-sm"
+                        style="width: 63px; min-width: 63px;"></select>
+                </div>
+                <div class="calendar-small border rounded p-2 bg-white">
+                    <table class="table table-sm mb-0 text-center" id="calendar-table">
+                        <!-- JS sẽ tự động render phần lịch vào đây -->
+                    </table>
+                </div>
+            </div>
+
+            <!-- Main week-view calendar -->
+            <div class="calendar-main">
+                <div class="search-container mb-3" style="max-width: 400px;">
+                    <div class="input-group border rounded-pill">
+                        <button class="icon-btn" type="button" id="searchButton" tabindex="-1"
+                            style="margin-left: 4px;">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <input type="text" class="form-control border-0" placeholder="Tìm kiếm" id="basicSearch">
+                        <button class="icon-btn" type="button" id="advancedToggle">
+                            <i class="bi bi-caret-down-fill" style="font-size: 0.95rem;"></i>
+                        </button>
+                    </div>
+                    <div id="advancedSearch" style="display: none; max-width: 400px;">
+                        <div class="row align-items-center mb-2">
+                            <div class="col-3">
+                                <small class="text-dark fw-medium">Ngày</small>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control form-control-sm" placeholder="Từ ngày"
+                                    style="background: white;">
+                            </div>
+                            <div class="col-1 text-center">
+                                <small class="text-muted">tới</small>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control form-control-sm" placeholder="Tới ngày"
+                                    style="background: white;">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                            <div class="col-3">
+                                <small class="text-dark fw-medium">Tiêu đề</small>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control form-control-sm"
+                                    placeholder="Các từ khóa có trong tiêu đề" style="background: white;">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-0">
+                            <div class="col-3">
+                                <small class="text-dark fw-medium">Loại lịch trình</small>
+                            </div>
+                            <div class="col-9">
+                                <div class="position-relative">
+                                    <select class="form-select form-select-sm"
+                                        style="background: white; appearance: none; padding-right: 30px;">
+                                        <option>Chọn loại lịch trình</option>
+                                        <option>Học tập</option>
+                                        <option>Cá nhân</option>
+                                        <option>Công việc</option>
+                                    </select>
+                                    <i class="bi bi-chevron-down position-absolute"
+                                        style="right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table mb-0 text-center" id="calendarTable">
+                        <thead class="bg-light">
+                            <tr id="calendar-header-row">
+                                <th style="width:80px;">GMT+07</th>
+                                <!-- JS sẽ render các th ngày trong tuần tại đây -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">1 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">2 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">3 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">4 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">5 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">6 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">7 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">8 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">9 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">10 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">11 AM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">12 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">1 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">2 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">3 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">4 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">5 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">6 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">7 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">8 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">9 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">10 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="calendar-time-row">
+                                <th class="calendar-time-cell">
+                                    <span class="hour-label">11 PM</span>
+                                </th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="scheduleDetailsPopup" class="position-absolute shadow rounded p-3"
+            style="display: none; width: 320px; z-index: 1000; font-size: 1rem; border: 1px solid #ccc; background-color: #e7e6e4;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="fw-bold" id="popupTitle">Tiêu đề</div>
+                <div>
+                    <i class="bi bi-pencil-square me-2" id="popupEditBtn" style="cursor:pointer;"></i>
+                    <i class="bi bi-trash me-2" style="cursor:pointer;" id="popupDeleteBtn"></i>
+                    <i class="bi bi-x-lg" id="closeScheduleDetails" style="cursor:pointer;"></i>
+                </div>
+            </div>
+            <div class="row mb-2 align-items-center">
+                <div class="col-1 text-center"><i class="bi bi-list-task"></i></div>
+                <div class="col-11" id="popupTitleRow"></div>
+            </div>
+            <div class="row mb-2 align-items-center">
+                <div class="col-1 text-center"><i class="bi bi-clock"></i></div>
+                <div class="col-11" id="popupTime"></div>
+            </div>
+            <div class="row mb-2 align-items-center">
+                <div class="col-1 text-center"><i class="bi bi-card-text"></i></div>
+                <div class="col-11" id="popupDescription"></div>
+            </div>
+            <div class="row mb-2 align-items-center">
+                <div class="col-1 text-center"><i class="bi bi-journal"></i></div>
+                <div class="col-11" id="popupType"></div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-1 text-center"><i class="bi bi-geo-alt"></i></div>
+                <div class="col-11" id="popupLocation"></div>
+            </div>
+        </div>
+
+
+    </main><!-- End #main -->
+
+    <!-- Modal thêm -->
+    <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <!-- Nút đóng -->
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Tiêu đề Modal -->
+                    <h5 class="mb-3 fw-bold" id="scheduleModalLabel">Thêm lịch trình mới</h5>
+                    <form id="scheduleForm" autocomplete="off" class="d-flex flex-column gap-2">
+                        <!-- Tiêu đề -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label for="eventTitle" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu
+                                đề</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;"
+                                placeholder="Nhập tiêu đề" id="eventTitle" required>
+                            <div class="error-message" id="titleError">Vui lòng nhập đầy đủ tiêu đề</div>
+                        </div>
+                        <!-- Mô tả -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label for="eventDescription" class="form-label mb-1 fw-semibold"
+                                style="font-size: 1rem;">Mô tả</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;"
+                                placeholder="Nhập mô tả" id="eventDescription">
+                            <div class="error-message" id="descriptionError">Vui lòng nhập đầy đủ mô tả</div>
+                        </div>
+                        <!-- Thời gian -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                            <div class="row g-1 align-items-center" style="margin-left: 0; margin-right: 0;">
+                                <div class="col-auto d-flex align-items-center">
+                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="startTime"
+                                        style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;"
+                                        value="01:30">
+                                    <span class="time-suffix" id="startTimeSuffix"
+                                        style="font-size: 0.75rem; margin-left: 2px; margin-right: 4px;"></span>
+                                </div>
+                                <div class="col-auto d-flex align-items-center">
+                                    <span style="font-size: 0.85rem; margin-right: 2px;">-</span>
+                                </div>
+                                <div class="col-auto d-flex align-items-center">
+                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="endTime"
+                                        style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;"
+                                        value="02:45">
+                                    <span class="time-suffix" id="endTimeSuffix"
+                                        style="font-size: 0.75rem; margin-left: 2px;"></span>
+                                </div>
+                                <div class="col-auto d-flex align-items-center">
+                                    <input type="text" class="form-control border-0 px-0 py-1 date-input" id="eventDate"
+                                        style="width: 120px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-left: 8px;"
+                                        value="Thứ 5, 17 tháng 12" readonly>
+                                </div>
+                            </div>
+                            <div class="error-message" id="timeError">Vui lòng chọn thời gian bắt đầu, kết thúc</div>
+                        </div>
+                        <!-- Địa điểm -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label for="eventLocation" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Địa
+                                điểm</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;"
+                                placeholder="Nhập địa điểm" id="eventLocation">
+                            <div class="error-message" id="locationError">Vui lòng nhập địa điểm</div>
+                        </div>
+                        <!-- Loại lịch trình -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-2 fw-semibold" style="font-size: 1rem;">Loại lịch trình</label>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="radio" name="eventType" id="study" value="study">
+                                <label class="form-check-label" for="study" style="font-size: 0.97rem;">Học tập</label>
+                            </div>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="radio" name="eventType" id="personal"
+                                    value="personal">
+                                <label class="form-check-label" for="personal" style="font-size: 0.97rem;">Cá
+                                    nhân</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="eventType" id="club" value="club">
+                                <label class="form-check-label" for="club" style="font-size: 0.97rem;">Câu lạc
+                                    bộ</label>
+                            </div>
+                            <div class="error-message" id="typeError">Vui lòng chọn loại lịch trình</div>
+                        </div>
+                        <!-- Footer nút -->
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2"
+                            style="padding-left: 2px; padding-right: 2px;">
+                            <button type="button" class="btn btn-primary fw-semibold"
+                                style="border-radius: 4px; min-width: 100px; font-size: 1rem;"
+                                id="saveScheduleBtn">Lưu</button>
+                            <button type="button" class="btn fw-semibold"
+                                style="border-radius: 4px; min-width: 100px; font-size: 1rem; background: #fff; border: 1px solid #dee2e6;"
+                                data-bs-dismiss="modal">Quay lại</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận xóa lịch trình -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" style="
+            position: fixed; 
+            top: 30px; 
+            left: 50%; 
+            transform: translateX(-50%);
+            margin: 0;
+            z-index: 2000;
+            ">
+            <div class="modal-content" style="
+                border-radius: 6px;
+                max-width: 450px;
+                min-width: 450px;
+                width: 100%;
+                box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+                ">
+                <div class="modal-body py-4 px-4">
+                    <div class="d-flex align-items-center mb-4" style="gap: 10px;">
+                        <span style="font-size: 1.5rem; color: #fbbc04;">
+                            <i class="bi bi-exclamation-circle"></i>
+                        </span>
+                        <span style="font-size: 1.13rem; font-weight: 500; color:#222; white-space:nowrap;">
+                            Bạn chắc chắn muốn xóa lịch này không?
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-outline-primary btn-flat btn-action-modal"
+                            id="cancelDeleteBtn" data-bs-dismiss="modal">
+                            Không xóa
+                        </button>
+                        <button type="button" class="btn btn-primary btn-flat btn-action-modal" id="confirmDeleteBtn">
+                            Xóa lịch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TBao thành công -->
+    <div id="successToast" class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 20000; min-width: 450px; max-width: 450px; width: 450px; height: 65px;
+    background: #f6fff2; border: 1.5px solid #8de885; box-shadow: 0 2px 18px rgba(0,0,0,0.05);
+    border-radius: 8px; display: none; color: #222;">
+
+        <div class="d-flex justify-content-center align-items-center h-100" style="gap: 18px; height: 100%;">
+            <span style="font-size: 2rem; color: #42cb39;"><i class="bi bi-check-circle"></i></span>
+            <span class="fw-semibold fs-5" id="successToastMsg" style="color: #222;">Thành công!</span>
+            <button type="button" class="btn-close" aria-label="Close" onclick="hideSuccessToast()"
+                style="font-size: 2.1rem; width: 2.4rem; height: 2.4rem; align-self: center;"></button>
+        </div>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+        <div class="parent mx-5" style="height: 200px ;">
+            <div class="div1">
+                <div class="social-links mt-5 fs-3 "> <!-- fs-3: tăng kích thước icon -->
+                    <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="div2">
+                <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Giới Thiệu</li>
+                    <li class="text-black m-1">Sứ Mệnh</li>
+                    <li class="text-black m-1">Đội Ngũ</li>
+                    <li class="text-black m-1">Liên Hệ</li>
+                    <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+                </ul>
+            </div>
+            <div class="div3">
+                <h5 class="mb-4"><strong>Khám phá</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Góc học tập</li>
+                    <li class="text-black m-1">Kỹ năng mềm</li>
+                    <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+                    <li class="text-black m-1">Học bổng & Cơ hội</li>
+                    <li class="text-black m-1">Hướng nghiệp</li>
+                </ul>
+            </div>
+            <div class="div4">
+                <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Tài liệu học tập</li>
+                    <li class="text-black m-1">Công cụ học tập</li>
+                    <li class="text-black m-1">Gợi ý khóa học</li>
+                    <li class="text-black m-1">Cộng đồng sinh viên</li>
+                    <li class="text-black m-1">Góp ý & báo lỗi</li>
+                </ul>
+            </div>
+            <div class="div5">
+                <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+                    <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+                    <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+                    <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+                    <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+                </ul>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+
+    <script>
+        document.getElementById('advancedToggle').addEventListener('click', function () {
+            const adv = document.getElementById('advancedSearch');
+            adv.style.display = adv.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+
+    <script>
+        function showSuccessToast(message) {
+            const toast = document.getElementById('successToast');
+            const msg = document.getElementById('successToastMsg');
+            if (msg) msg.textContent = message || 'Thành công!';
+            toast.style.display = 'block';
+            // Tự động ẩn sau 2 giây
+            clearTimeout(window.successToastTimer);
+            window.successToastTimer = setTimeout(() => {
+                hideSuccessToast();
+            }, 2000);
+        }
+        function hideSuccessToast() {
+            const toast = document.getElementById('successToast');
+            toast.style.display = 'none';
+        }
+    </script>
+
+    <script>
+        // Tuần, tháng tiếng Việt
+        const vietnameseWeekdays = ['Cn', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+        const vietnameseMonths = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+        // Giá trị năm/tháng hiện tại
+        const today = new Date();
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+
+        // Đổ options năm và tháng vào select
+        function populateSelects() {
+            const yearSelect = document.getElementById('calendar-year');
+            const monthSelect = document.getElementById('calendar-month');
+            yearSelect.innerHTML = '';
+            for (let y = currentYear - 5; y <= currentYear + 5; ++y) {
+                yearSelect.innerHTML += `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`;
+            }
+            monthSelect.innerHTML = '';
+            for (let m = 0; m < 12; ++m) {
+                monthSelect.innerHTML += `<option value="${m}" ${m === currentMonth ? 'selected' : ''}>${vietnameseMonths[m]}</option>`;
+            }
+        }
+
+        // Render lịch vào bảng
+        function renderCalendar(year, month) {
+            const tbl = document.getElementById('calendar-table');
+            // Header
+            let html = '<thead><tr>';
+            for (let i = 0; i < 7; ++i) html += `<th>${vietnameseWeekdays[i]}</th>`;
+            html += '</tr></thead><tbody>';
+
+            // Ngày đầu tiên trong tuần, số ngày/tháng, số ngày tháng trước
+            let firstDay = new Date(year, month, 1).getDay();
+            let daysInMonth = new Date(year, month + 1, 0).getDate();
+            let prevDays = new Date(year, month, 0).getDate();
+
+            let date = 1;
+            let nextMonthDate = 1;
+            for (let row = 0; row < 6; ++row) {
+                html += '<tr>';
+                for (let col = 0; col < 7; ++col) {
+                    if (row === 0 && col < firstDay) {
+                        html += `<td class="calendar-other-month">${prevDays - firstDay + col + 1}</td>`;
+                    } else if (date <= daysInMonth) {
+                        let isToday = (date === today.getDate() && year === today.getFullYear() && month === today.getMonth());
+                        html += `<td${isToday ? ' class="calendar-today"' : ''}>${date}</td>`;
+                        date++;
+                    } else {
+                        html += `<td class="calendar-other-month">${nextMonthDate++}</td>`;
+                    }
+                }
+                html += '</tr>';
+                if (date > daysInMonth) break;
+            }
+            html += '</tbody>';
+            tbl.innerHTML = html;
+
+            let selectedDay = today.getDate(); // Nếu có biến ngày được chọn thì dùng biến đó, mặc định lấy hôm nay
+            let selectedYear = year;
+            let selectedMonth = month;
+            const weekDates = getWeekDates(selectedYear, selectedMonth, selectedDay);
+            renderWeekHeader(weekDates);
+        }
+
+        // Xử lý sự kiện đổi năm/tháng
+        document.addEventListener('DOMContentLoaded', function () {
+            populateSelects();
+            renderCalendar(currentYear, currentMonth);
+            document.getElementById('calendar-year').addEventListener('change', function () {
+                currentYear = parseInt(this.value);
+                renderCalendar(currentYear, currentMonth);
+            });
+            document.getElementById('calendar-month').addEventListener('change', function () {
+                currentMonth = parseInt(this.value);
+                renderCalendar(currentYear, currentMonth);
+            });
+
+            /*Thêm*/
+            const tbody = document.querySelector('#calendarTable tbody');
+            tbody.innerHTML = ''; // Xóa sạch cũ
+
+            const hourLabels = [
+                '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM',
+                '9 AM', '10 AM', '11 AM', '12 PM',
+                '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM',
+                '9 PM', '10 PM', '11 PM'
+            ];
+
+            for (let i = 0; i < hourLabels.length; i++) {
+                const tr = document.createElement('tr');
+                tr.className = 'calendar-time-row';
+
+                const th = document.createElement('th');
+                th.className = 'calendar-time-cell';
+                th.innerHTML = `<span class="hour-label">${hourLabels[i]}</span>`;
+                tr.appendChild(th);
+
+                for (let d = 0; d < 7; d++) {
+                    const td = document.createElement('td');
+                    td.setAttribute('data-day', d);
+                    td.setAttribute('data-hour', i); // <--- giờ thực tế: 0 = 12AM
+                    td.classList.add('calendar-day-cell');
+                    tr.appendChild(td);
+                }
+
+                tbody.appendChild(tr);
+            }
+        });
+
+        // Lấy các ngày trong tuần chứa một ngày nào đó
+        function getWeekDates(year, month, day) {
+            let date = new Date(year, month, day);
+            let weekday = date.getDay(); // 0: CN, 1: T2, ..., 6: T7
+            let startDate = new Date(date);
+            startDate.setDate(date.getDate() - weekday);
+            let weekDates = [];
+            for (let i = 0; i < 7; ++i) {
+                let d = new Date(startDate);
+                d.setDate(startDate.getDate() + i);
+                weekDates.push({
+                    year: d.getFullYear(),
+                    month: d.getMonth(),
+                    date: d.getDate(),
+                    weekday: d.getDay()
+                });
+            }
+            return weekDates;
+        }
+
+        function renderWeekHeader(weekDates) {
+            const headerRow = document.getElementById('calendar-header-row');
+            const weekdaysVN = ['CN', 'Th 2', 'Th 3', 'Th 4', 'Th 5', 'Th 6', 'Th 7'];
+            headerRow.innerHTML = `<th style="width:80px;">GMT+07</th>`;
+            weekDates.forEach((d, idx) => {
+                // Chia đều 7 cột ngày, trừ cột giờ
+                let width = "calc((100% - 80px)/7)";
+                let isToday = (d.year === today.getFullYear() && d.month === today.getMonth() && d.date === today.getDate());
+                let colorClass = isToday ? 'text-primary fw-bold' : '';
+                headerRow.innerHTML += `<th style="width:${width};" class="${colorClass}">${weekdaysVN[d.weekday]}<br><span class="${colorClass}">${d.date}</span></th>`;
+            });
+        }
+
+        // Hàm làm tròn thời gian đến 15 phút gần nhất
+        function roundToNearest15(timeStr) {
+            const [hour, minute] = timeStr.split(':').map(Number);
+            let totalMins = hour * 60 + minute;
+            let rounded = Math.round(totalMins / 15) * 15;
+            let h = Math.floor(rounded / 60);
+            let m = rounded % 60;
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+        }
+
+        /*them lich*/
+        class CalendarDragDrop {
+            constructor() {
+                this.isDragging = false;
+                this.startCell = null;
+                this.endCell = null;
+                this.events = [];
+                this.dragPreview = null; // THÊM: preview block khi drag
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                const tbody = document.querySelector('#calendarTable tbody');
+
+                tbody.addEventListener('mousedown', (e) => this.handleMouseDown(e));
+                document.addEventListener('mousemove', (e) => this.handleMouseMove(e)); // SỬA: bind vào document
+                document.addEventListener('mouseup', (e) => this.handleMouseUp(e)); // SỬA: bind vào document
+                tbody.addEventListener('selectstart', (e) => e.preventDefault());
+
+                document.getElementById('saveScheduleBtn').addEventListener('click', () => this.saveSchedule());
+                // Thêm event listeners để xóa lỗi khi user nhập
+                document.getElementById('eventTitle').addEventListener('input', () => {
+                    this.clearFieldError('eventTitle', 'titleError');
+                });
+
+                document.getElementById('eventDescription').addEventListener('input', () => {
+                    this.clearFieldError('eventDescription', 'descriptionError');
+                });
+
+                document.getElementById('eventLocation').addEventListener('input', () => {
+                    this.clearFieldError('eventLocation', 'locationError');
+                });
+
+                document.querySelectorAll('input[name="eventType"]').forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        this.clearFieldError('study', 'typeError');
+                    });
+                });
+            }
+
+            // Thêm method helper
+            clearFieldError(inputId, errorId) {
+                const input = document.getElementById(inputId);
+                const error = document.getElementById(errorId);
+
+                if (input) {
+                    input.classList.remove('is-invalid');
+                }
+                if (error) {
+                    error.classList.remove('show');
+                }
+            }
+
+            getTimeFromCell(cell, event) {
+                const hour = parseInt(cell.dataset.hour);
+                const rect = cell.getBoundingClientRect();
+                const offsetY = event.clientY - rect.top;
+                const quarter = Math.floor(offsetY / (rect.height / 4));
+                const minutes = quarter * 15;
+                return `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            }
+
+            handleMouseDown(e) {
+                if (e.target.closest('.event-block')) {
+                    return;
+                }
+                const cell = e.target.closest('td');
+                if (!cell || !cell.dataset.day) return;
+
+                this.isDragging = true;
+                this.startCell = cell;
+                this.endCell = cell;
+
+                // THÊM: Tính toán thời gian bắt đầu chính xác
+                const hour = parseInt(cell.dataset.hour);
+                const rect = cell.getBoundingClientRect();
+                const offsetY = e.clientY - rect.top;
+                const ratio = offsetY / rect.height;
+                const minute = Math.floor(ratio * 60);
+                const rawTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                this.startTime = this.roundToNearest15(rawTime);
+                this.endTime = this.startTime; // Khởi tạo endTime = startTime
+
+                // THÊM: Tạo preview block
+                this.createDragPreview(cell, e);
+
+                e.preventDefault();
+            }
+
+            // THÊM: Method tạo preview block
+            createDragPreview(startCell, event) {
+                this.dragPreview = document.createElement('div');
+                this.dragPreview.className = 'event-block';
+                this.dragPreview.style.backgroundColor = '#66cbff';
+                this.dragPreview.style.color = '#000';
+                this.dragPreview.style.opacity = '1';
+                this.dragPreview.style.border = 'none';
+                this.dragPreview.style.textAlign = 'left';
+                this.dragPreview.style.fontSize = '0.8rem';
+
+                // Tạm để thời gian rỗng
+                this.dragPreview.innerHTML = `
+        <div style="text-align:left; font-weight:600;"></div>
+        <div style="text-align:left;">--:-- - --:--</div>
+    `;
+
+                const rect = startCell.getBoundingClientRect();
+                const offsetY = event.clientY - rect.top;
+
+                this.dragPreview.style.position = 'absolute';
+                this.dragPreview.style.left = '2px';
+                this.dragPreview.style.right = '2px';
+                this.dragPreview.style.top = `${offsetY}px`;
+                this.dragPreview.style.height = '2px';
+
+                startCell.style.position = 'relative';
+                startCell.appendChild(this.dragPreview);
+            }
+
+            // SỬA: Cập nhật logic mousemove
+            handleMouseMove(e) {
+                if (!this.isDragging || !this.dragPreview) return;
+
+                const cell = e.target.closest('td');
+                if (!cell || !cell.dataset.day) return;
+
+                const startDay = parseInt(this.startCell.dataset.day);
+                const currentDay = parseInt(cell.dataset.day);
+
+                // Chỉ cho phép drag trong cùng 1 cột
+                if (startDay !== currentDay) return;
+
+                this.endCell = cell;
+
+                // THÊM: Tính toán thời gian kết thúc
+                const hour = parseInt(cell.dataset.hour);
+                const rect = cell.getBoundingClientRect();
+                const offsetY = e.clientY - rect.top;
+                const ratio = offsetY / rect.height;
+                const minute = Math.floor(ratio * 60);
+                const rawTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                this.endTime = this.roundToNearest15(rawTime);
+
+                // THÊM: Cập nhật preview block
+                this.updateDragPreview(e);
+            }
+
+            // THÊM: Method cập nhật preview khi drag
+            updateDragPreview(event) {
+                if (!this.dragPreview || !this.startCell || !this.endCell) return;
+
+                const [startHour, startMin] = this.startTime.split(':').map(Number);
+                const [endHour, endMin] = this.endTime.split(':').map(Number);
+
+                const startTotalMin = startHour * 60 + startMin;
+                const endTotalMin = endHour * 60 + endMin;
+
+                // Đảm bảo endTime >= startTime
+                if (endTotalMin < startTotalMin) {
+                    [this.startTime, this.endTime] = [this.endTime, this.startTime];
+                }
+
+                const finalStartMin = Math.min(startTotalMin, endTotalMin);
+                const finalEndMin = Math.max(startTotalMin, endTotalMin);
+
+                // Tính toán vị trí và kích thước
+                const minuteHeight = 48 / 60; // 48px là chiều cao của 1 cell
+                const startOffset = (finalStartMin % 60) * minuteHeight;
+                const duration = finalEndMin - finalStartMin;
+                const height = Math.max(duration * minuteHeight, 15); // Tối thiểu 15px
+
+                this.dragPreview.style.top = `${startOffset}px`;
+                this.dragPreview.style.height = `${height}px`;
+                this.dragPreview.innerHTML = `
+  <div style="text-align:left; font-weight:600;"></div>
+  <div style="text-align:left;">${this.formatTime(finalStartMin)} - ${this.formatTime(finalEndMin)}</div>
+`;
+            }
+
+            // THÊM: Helper method format thời gian
+            formatTime(totalMinutes) {
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            }
+
+            // SỬA: Cập nhật logic mouseup
+            handleMouseUp(e) {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+
+                // Đảm bảo có thời gian hợp lệ
+                if (!this.startTime || !this.endTime) return;
+
+                const [startHour, startMin] = this.startTime.split(':').map(Number);
+                const [endHour, endMin] = this.endTime.split(':').map(Number);
+
+                const startTotal = startHour * 60 + startMin;
+                const endTotal = endHour * 60 + endMin;
+
+                // Sắp xếp thời gian đúng thứ tự
+                const finalStart = Math.min(startTotal, endTotal);
+                const finalEnd = Math.max(startTotal, endTotal);
+
+                // Nếu kéo quá ngắn (< 15 phút), mặc định 1 tiếng
+                const duration = finalEnd - finalStart;
+                let adjustedEnd = finalEnd;
+                if (duration < 15) {
+                    adjustedEnd = finalStart + 60; // Thêm 1 tiếng
+                }
+
+                this.finalStartTime = this.formatTime(finalStart);
+                this.finalEndTime = this.formatTime(adjustedEnd);
+
+                this.showScheduleModal();
+            }
+
+            // THÊM: Method làm tròn thời gian
+            roundToNearest15(timeStr) {
+                const [hour, minute] = timeStr.split(':').map(Number);
+                let totalMins = hour * 60 + minute;
+                let rounded = Math.round(totalMins / 15) * 15;
+                let h = Math.floor(rounded / 60);
+                let m = rounded % 60;
+                return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            }
+
+            // SỬA: Đơn giản hóa showScheduleModal
+            showScheduleModal() {
+                // Reset form về trạng thái ban đầu
+                document.getElementById('scheduleForm').reset();
+
+                // Chỉ điền thông tin thời gian
+                document.getElementById('startTime').value = this.finalStartTime;
+                document.getElementById('endTime').value = this.finalEndTime;
+                document.getElementById('eventDate').value = 'Thứ 5, 17 tháng 12';
+
+                // Thêm event listeners cho input thời gian
+                document.getElementById('startTime').addEventListener('change', (e) => this.handleTimeChange(e, 'start'));
+                document.getElementById('endTime').addEventListener('change', (e) => this.handleTimeChange(e, 'end'));
+
+                // Đặt lại radio button về mặc định (không chọn gì)
+                const radioButtons = document.querySelectorAll('input[name="eventType"]');
+                radioButtons.forEach(radio => radio.checked = false);
+
+                this.currentSelection = {
+                    startTime: this.finalStartTime,
+                    endTime: this.finalEndTime,
+                    day: this.startCell.dataset.day
+                };
+
+                const modalElement = document.getElementById('scheduleModal');
+                const modal = new bootstrap.Modal(modalElement);
+                modal.show();
+
+                // ✨ THÊM VÀO NGAY DƯỚI:
+                modalElement.addEventListener('hidden.bs.modal', () => {
+                    // Nếu chưa lưu (tức vẫn còn preview block) thì xóa nó
+                    if (this.dragPreview) {
+                        this.dragPreview.remove();
+                        this.dragPreview = null;
+                    }
+                    this.clearSelection();
+                }, { once: true });
+            }
+
+            // Thêm method xử lý thay đổi thời gian
+            handleTimeChange(event, type) {
+                const newTime = event.target.value;
+                if (type === 'start') {
+                    this.currentSelection.startTime = newTime;
+                } else {
+                    this.currentSelection.endTime = newTime;
+                }
+
+                // Cập nhật preview nếu có
+                if (this.dragPreview) {
+                    const [startHour, startMin] = this.currentSelection.startTime.split(':').map(Number);
+                    const [endHour, endMin] = this.currentSelection.endTime.split(':').map(Number);
+
+                    const startTotalMin = startHour * 60 + startMin;
+                    const endTotalMin = endHour * 60 + endMin;
+
+                    // Tính toán vị trí và kích thước mới
+                    const minuteHeight = 48 / 60; // 48px là chiều cao của 1 cell
+                    const startOffset = (startTotalMin % 60) * minuteHeight;
+                    const duration = endTotalMin - startTotalMin;
+                    const height = Math.max(duration * minuteHeight, 15); // Tối thiểu 15px
+
+                    // Cập nhật vị trí và kích thước của preview
+                    this.dragPreview.style.top = `${startOffset}px`;
+                    this.dragPreview.style.height = `${height}px`;
+
+                    // Cập nhật nội dung hiển thị thời gian
+                    const timeDisplay = this.formatTimeDisplay(startHour, startMin, endHour, endMin);
+                    this.dragPreview.innerHTML = `
+                        <div style="text-align:left; font-weight:600;"></div>
+                        <div style="text-align:left;">${timeDisplay}</div>
+                    `;
+                }
+
+                // Cập nhật AM/PM
+                this.updateTimeSuffixes();
+            }
+
+            // Thêm method format thời gian hiển thị
+            formatTimeDisplay(startHour, startMin, endHour, endMin) {
+                const format = (h, m) => {
+                    const sfx = h >= 12 ? 'PM' : 'AM';
+                    const h12 = h % 12 === 0 ? 12 : h % 12;
+                    return `${h12}:${m.toString().padStart(2, '0')} ${sfx}`;
+                };
+
+                const startFormatted = format(startHour, startMin);
+                const endFormatted = format(endHour, endMin);
+                const samePeriod = (startHour >= 12) === (endHour >= 12);
+
+                if (samePeriod) {
+                    return `${startFormatted.split(' ')[0]} - ${endFormatted.split(' ')[0]} ${startFormatted.split(' ')[1]}`;
+                }
+                return `${startFormatted} - ${endFormatted}`;
+            }
+
+            // Thêm method cập nhật AM/PM
+            updateTimeSuffixes() {
+                const startTime = document.getElementById('startTime').value;
+                const endTime = document.getElementById('endTime').value;
+
+                if (startTime) {
+                    const [hour] = startTime.split(':').map(Number);
+                    document.getElementById('startTimeSuffix').textContent = hour < 12 ? 'AM' : 'PM';
+                }
+
+                if (endTime) {
+                    const [hour] = endTime.split(':').map(Number);
+                    document.getElementById('endTimeSuffix').textContent = hour < 12 ? 'AM' : 'PM';
+                }
+            }
+
+            // SỬA: Cập nhật saveSchedule
+            saveSchedule() {
+                console.log('Save button clicked!');
+
+                // Reset tất cả error states
+                this.clearValidationErrors();
+
+                let hasError = false;
+
+                // Validate tiêu đề
+                const title = document.getElementById('eventTitle').value.trim();
+                if (!title) {
+                    this.showError('eventTitle', 'titleError');
+                    hasError = true;
+                }
+
+                // Validate mô tả
+                const description = document.getElementById('eventDescription').value.trim();
+                if (!description) {
+                    this.showError('eventDescription', 'descriptionError');
+                    hasError = true;
+                }
+
+                // Validate thời gian
+                const startTime = document.getElementById('startTime').value;
+                const endTime = document.getElementById('endTime').value;
+                if (!startTime || !endTime) {
+                    this.showError('startTime', 'timeError');
+                    this.showError('endTime', 'timeError');
+                    hasError = true;
+                }
+
+                // Validate địa điểm
+                const location = document.getElementById('eventLocation').value.trim();
+                if (!location) {
+                    this.showError('eventLocation', 'locationError');
+                    hasError = true;
+                }
+
+                // Validate loại lịch trình
+                const eventType = document.querySelector('input[name="eventType"]:checked');
+                if (!eventType) {
+                    this.showError('study', 'typeError');
+                    hasError = true;
+                }
+
+                // Nếu có lỗi thì dừng lại
+                if (hasError) {
+                    return;
+                }
+
+                // Nếu đang sửa một block lịch trình
+                if (window.editingEvent) {
+                    // Cập nhật dữ liệu trong mảng events
+                    const id = window.editingEvent.dataset.id;
+                    const eventObj = this.events.find(ev => ev.id == id);
+                    if (eventObj) {
+                        eventObj.title = title;
+                        eventObj.description = description;
+                        eventObj.location = location;
+                        eventObj.type = eventType.value;
+                        eventObj.startTime = startTime;
+                        eventObj.endTime = endTime;
+                    }
+
+                    // Format lại thời gian cho block
+                    const startH = parseInt(startTime.split(':')[0]), startM = parseInt(startTime.split(':')[1]);
+                    const endH = parseInt(endTime.split(':')[0]), endM = parseInt(endTime.split(':')[1]);
+                    const timeDisplay = this.formatTimeDisplay(startH, startM, endH, endM);
+
+                    // Cập nhật dataset của block
+                    window.editingEvent.dataset.title = title;
+                    window.editingEvent.dataset.description = description;
+                    window.editingEvent.dataset.location = location;
+                    window.editingEvent.dataset.type = eventType.value;
+                    window.editingEvent.dataset.time = timeDisplay;
+
+                    // Update nội dung HTML hiển thị
+                    window.editingEvent.innerHTML = `
+        <div style="text-align:left; font-weight:600;">${title}</div>
+        <div style="text-align:left;">${timeDisplay}</div>
+    `;
+
+                    // Đóng popup chi tiết lịch nếu đang mở
+                    document.getElementById('scheduleDetailsPopup').style.display = 'none';
+
+                    window.editingEvent = null;
+                    showSuccessToast('Sửa lịch trình thành công');
+                } else {
+                    // Tạo event mới
+                    const event = {
+                        id: Date.now(),
+                        title,
+                        description,
+                        location,
+                        startTime: startTime,
+                        endTime: endTime,
+                        type: eventType.value,
+                        day: this.currentSelection.day
+                    };
+
+                    this.events.push(event);
+
+                    setTimeout(() => {
+                        if (this.dragPreview) {
+                            this.dragPreview.remove();
+                            this.dragPreview = null;
+                        }
+                        this.renderEvent(event);
+                        this.clearSelection();
+                        showSuccessToast('Thêm lịch trình thành công');
+                    }, 400);
+                }
+
+                // Ẩn modal TRƯỚC (dù là sửa hay thêm)
+                bootstrap.Modal.getInstance(document.getElementById('scheduleModal')).hide();
+            }
+
+            // Thêm các method helper
+            showError(inputId, errorId) {
+                const input = document.getElementById(inputId);
+                const error = document.getElementById(errorId);
+
+                if (input) {
+                    input.classList.add('is-invalid');
+                }
+                if (error) {
+                    error.classList.add('show');
+                }
+            }
+
+            clearValidationErrors() {
+                // Xóa tất cả class is-invalid
+                const inputs = document.querySelectorAll('.form-control, .form-check-input');
+                inputs.forEach(input => input.classList.remove('is-invalid'));
+
+                // Ẩn tất cả error messages
+                const errors = document.querySelectorAll('.error-message');
+                errors.forEach(error => error.classList.remove('show'));
+            }
+
+            // SỬA: Cập nhật clearSelection
+            clearSelection() {
+                if (this.dragPreview) {
+                    this.dragPreview.remove();
+                    this.dragPreview = null;
+                }
+                this.startCell = null;
+                this.endCell = null;
+                this.startTime = null;
+                this.endTime = null;
+            }
+
+            // Giữ nguyên các method khác...
+            renderEvent(event) {
+                if (!event.day) return;
+
+                const [startHour] = event.startTime.split(':').map(Number);
+                const startCell = document.querySelector(`td[data-day="${event.day}"][data-hour="${startHour}"]`);
+                if (!startCell) return;
+
+                // ----- Định nghĩa timeRange cho popup -----
+                const formatTime12 = (h, m) => {
+                    const suffix = h >= 12 ? 'PM' : 'AM';
+                    const hour12 = h % 12 === 0 ? 12 : h % 12;
+                    return `${hour12}:${m.toString().padStart(2, '0')} ${suffix}`;
+                };
+
+                const [sh, sm] = event.startTime.split(':').map(Number);
+                const [eh, em] = event.endTime.split(':').map(Number);
+                const samePeriod = (sh >= 12) === (eh >= 12);
+                const startStr = formatTime12(sh, sm);
+                const endStr = formatTime12(eh, em);
+                const timeRange = samePeriod
+                    ? `${startStr} - ${endStr.split(' ')[0]} ${endStr.split(' ')[1]}`
+                    : `${startStr} - ${endStr}`;
+
+                // ----- Tạo block -----
+                const eventElement = document.createElement('div');
+                eventElement.className = 'event-block';
+                eventElement.dataset.id = event.id;
+                eventElement.dataset.title = event.title;
+                eventElement.dataset.description = event.description;
+                eventElement.dataset.time = timeRange;
+                eventElement.dataset.type = event.type;
+                eventElement.dataset.location = event.location;
+
+                // ----- Sự kiện click: hiện popup -----
+                eventElement.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.showSchedulePopup(eventElement, e);
+                });
+
+                eventElement.innerHTML = `
+        <div style="text-align:left; font-weight:600;">${event.title}</div>
+        <div style="text-align:left;">${timeRange}</div>
+    `;
+
+                // Tính toán vị trí, chiều cao
+                const [startH, startM] = event.startTime.split(':').map(Number);
+                const [endH, endM] = event.endTime.split(':').map(Number);
+                const startTotal = startH * 60 + startM;
+                const endTotal = endH * 60 + endM;
+                const duration = endTotal - startTotal;
+
+                const minuteHeight = 48 / 60;
+                const height = duration * minuteHeight;
+                const topOffset = startM * minuteHeight;
+
+                eventElement.style.left = '2px';
+                eventElement.style.right = '2px';
+                eventElement.style.top = `${topOffset}px`;
+                eventElement.style.height = `${height}px`;
+
+                eventElement.style.backgroundColor = '#66cbff'; // giống preview khi drag
+                eventElement.style.color = '#000'; // chữ đen, giống khi drag
+                eventElement.style.border = 'none';
+                startCell.style.position = 'relative';
+                startCell.appendChild(eventElement);
+            }
+
+            // Thêm method mới để tạo preview ban đầu
+            createInitialPreview() {
+                // Tìm cell đầu tiên của ngày hiện tại
+                const today = new Date();
+                const currentDay = today.getDay();
+                const currentHour = today.getHours();
+
+                const startCell = document.querySelector(`td[data-day="${currentDay}"][data-hour="${currentHour}"]`);
+                if (!startCell) return;
+
+                // Tạo preview block
+                this.dragPreview = document.createElement('div');
+                this.dragPreview.className = 'event-block';
+                this.dragPreview.style.backgroundColor = '#66cbff';
+                this.dragPreview.style.color = '#000';
+                this.dragPreview.style.opacity = '1';
+                this.dragPreview.style.border = 'none';
+                this.dragPreview.style.textAlign = 'left';
+                this.dragPreview.style.fontSize = '0.8rem';
+
+                // Đặt thời gian mặc định (1 tiếng)
+                const startTime = `${currentHour.toString().padStart(2, '0')}:00`;
+                const endTime = `${(currentHour + 1).toString().padStart(2, '0')}:00`;
+
+                this.currentSelection = {
+                    startTime: startTime,
+                    endTime: endTime,
+                    day: currentDay.toString()
+                };
+
+                // Cập nhật input trong modal
+                document.getElementById('startTime').value = startTime;
+                document.getElementById('endTime').value = endTime;
+
+                // Tính toán vị trí và kích thước
+                const minuteHeight = 48 / 60;
+                const height = 60 * minuteHeight; // 1 tiếng
+
+                this.dragPreview.style.position = 'absolute';
+                this.dragPreview.style.left = '2px';
+                this.dragPreview.style.right = '2px';
+                this.dragPreview.style.top = '0px';
+                this.dragPreview.style.height = `${height}px`;
+
+                // Hiển thị thời gian
+                const timeDisplay = this.formatTimeDisplay(
+                    parseInt(startTime.split(':')[0]),
+                    parseInt(startTime.split(':')[1]),
+                    parseInt(endTime.split(':')[0]),
+                    parseInt(endTime.split(':')[1])
+                );
+
+                this.dragPreview.innerHTML = `
+                    <div style="text-align:left; font-weight:600;"></div>
+                    <div style="text-align:left;">${timeDisplay}</div>
+                `;
+
+                startCell.style.position = 'relative';
+                startCell.appendChild(this.dragPreview);
+
+                // Thêm event listeners cho input thời gian
+                document.getElementById('startTime').addEventListener('change', (e) => this.handleTimeChange(e, 'start'));
+                document.getElementById('endTime').addEventListener('change', (e) => this.handleTimeChange(e, 'end'));
+
+                // Cập nhật AM/PM
+                this.updateTimeSuffixes();
+            }
+
+            showSchedulePopup(element, event) {
+                const popup = document.getElementById('scheduleDetailsPopup');
+                // Dòng đầu tiêu đề lớn
+                document.getElementById('popupTitle').textContent = element.dataset.title;
+                // Dòng đầu tiên trong danh sách
+                document.getElementById('popupTitleRow').textContent = element.dataset.title;
+                // Thời gian
+                document.getElementById('popupTime').textContent = element.dataset.time;
+                // Mô tả
+                document.getElementById('popupDescription').textContent = element.dataset.description;
+                // Loại lịch trình
+                document.getElementById('popupType').textContent = this.getTypeText(element.dataset.type);
+                // Địa điểm
+                document.getElementById('popupLocation').textContent = element.dataset.location;
+
+                // Tính vị trí popup
+                const rect = element.getBoundingClientRect();
+                popup.style.top = `${window.scrollY + rect.top}px`;
+                popup.style.left = `${window.scrollX + rect.right + 10}px`;
+                popup.style.display = 'block';
+                currentScheduleBlock = element;
+
+            }
+
+            // Helper đổi code type → text
+            getTypeText(type) {
+                if (type === 'study') return 'Học tập';
+                if (type === 'personal') return 'Cá nhân';
+                if (type === 'club') return 'Câu lạc bộ';
+                return type;
+            }
+        }
+
+        let calendarInstance = null;
+        let currentScheduleBlock = null;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            calendarInstance = new CalendarDragDrop();
+            // Hàm lấy AM/PM dựa trên giờ
+            function getAMPM(hour) {
+                return hour < 12 ? 'AM' : 'PM';
+            }
+
+            // Hàm cập nhật AM/PM cho các ô thời gian dựa trên giá trị của startTime và endTime
+            function updateTimeSuffixes() {
+                const startTime = document.getElementById('startTime').value;
+                const endTime = document.getElementById('endTime').value;
+
+                // Tính AM/PM cho startTime
+                if (startTime) {
+                    const [startHour] = startTime.split(':').map(Number);
+                    const startAMPM = getAMPM(startHour);
+                    document.getElementById('startTimeSuffix').textContent = startAMPM;
+                }
+
+                // Tính AM/PM cho endTime
+                if (endTime) {
+                    const [endHour] = endTime.split(':').map(Number);
+                    const endAMPM = getAMPM(endHour);
+                    document.getElementById('endTimeSuffix').textContent = endAMPM;
+                }
+
+                // Cập nhật ngày hiện tại
+                const now = new Date();
+                const days = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+                const dayName = days[now.getDay()];
+                const day = now.getDate();
+                const month = now.getMonth() + 1; // Tháng bắt đầu từ 0
+                document.getElementById('eventDate').value = `${dayName}, ${day} tháng ${month}`;
+            }
+
+            // Gọi hàm khi trang tải và khi modal được hiển thị
+            updateTimeSuffixes();
+
+            // Cập nhật khi modal được mở (sau khi drag & drop hoặc chỉnh sửa)
+            const scheduleModal = document.getElementById('scheduleModal');
+            scheduleModal.addEventListener('shown.bs.modal', updateTimeSuffixes);
+
+            // Tùy chọn: Cập nhật mỗi phút (nếu cần)
+            setInterval(updateTimeSuffixes, 60000); // Cập nhật mỗi 60 giây
+
+            scheduleModal.addEventListener('hidden.bs.modal', function () {
+                // Reset input fields
+                document.getElementById('scheduleForm').reset();
+
+                // Xóa các lỗi validate hiển thị
+                const errorMessages = document.querySelectorAll('.error-message');
+                errorMessages.forEach(err => err.classList.remove('show'));
+
+                // Xóa class is-invalid khỏi input
+                const invalidInputs = document.querySelectorAll('.is-invalid');
+                invalidInputs.forEach(input => input.classList.remove('is-invalid'));
+
+                // Reset editingEvent khi đóng modal
+                window.editingEvent = null;
+            });
+            document.getElementById('openScheduleModal').addEventListener('click', function () {
+                const modalElement = document.getElementById('scheduleModal');
+                const modal = new bootstrap.Modal(modalElement);
+
+                // Reset editingEvent khi mở modal để thêm mới
+                window.editingEvent = null;
+
+                if (calendarInstance) {
+                    calendarInstance.clearSelection(); // ✅ Xóa preview cũ (nếu có)
+                    calendarInstance.createInitialPreview(); // ✅ Tạo preview mới
+                }
+
+                modal.show();
+            });
+            document.addEventListener('click', function () {
+                document.getElementById('scheduleDetailsPopup').style.display = 'none';
+            });
+            if (document.getElementById('closeScheduleDetails')) {
+                document.getElementById('closeScheduleDetails').addEventListener('click', function (e) {
+                    document.getElementById('scheduleDetailsPopup').style.display = 'none';
+                    e.stopPropagation();
+                });
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var deleteBtn = document.getElementById('popupDeleteBtn');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+                    confirmModal.show();
+                });
+            }
+
+            // XỬ LÝ XÓA BLOCK LỊCH KHI XÁC NHẬN
+            document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
+                document.getElementById('scheduleDetailsPopup').style.display = 'none';
+                var confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
+                confirmModal.hide();
+                if (currentScheduleBlock) {
+                    // Xóa khỏi mảng events trước khi xóa DOM element
+                    if (calendarInstance) {
+                        const id = currentScheduleBlock.dataset.id;
+                        calendarInstance.events = calendarInstance.events.filter(ev => ev.id != id);
+                    }
+
+                    // Xóa DOM element
+                    currentScheduleBlock.remove();
+                    currentScheduleBlock = null;
+                    showSuccessToast('Xóa lịch trình thành công');
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var editBtn = document.getElementById('popupEditBtn');
+            if (editBtn) {
+                editBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (!currentScheduleBlock) return;
+
+                    // Tìm event cần sửa
+                    const block = currentScheduleBlock;
+                    const title = block.dataset.title;
+                    const description = block.dataset.description;
+                    const location = block.dataset.location;
+                    const type = block.dataset.type;
+                    // tách startTime, endTime từ block.dataset.time
+                    let times = block.dataset.time.split('-');
+                    let startTime = times[0].trim().split(' ')[0];
+                    let endTime = times[1].trim().split(' ')[0];
+
+                    // Đổ dữ liệu cũ vào form modal
+                    document.getElementById('eventTitle').value = title;
+                    document.getElementById('eventDescription').value = description;
+                    document.getElementById('eventLocation').value = location;
+
+                    document.getElementById('startTime').value = convertTo24h(startTime, block.dataset.time);
+                    document.getElementById('endTime').value = convertTo24h(endTime, block.dataset.time);
+
+                    // Chọn loại lịch trình
+                    document.querySelectorAll('input[name="eventType"]').forEach(radio => {
+                        radio.checked = (radio.value === type);
+                    });
+
+                    // Lưu thông tin đang sửa - SỬA: Set window.editingEvent thay vì editingEvent
+                    window.editingEvent = block;
+
+                    // Hiện modal
+                    const modalElement = document.getElementById('scheduleModal');
+                    const modal = new bootstrap.Modal(modalElement);
+                    modal.show();
+                });
+            }
+
+            // Chuyển 12h AM/PM về 24h cho input
+            function convertTo24h(str, full) {
+                if (str.indexOf(':') === -1) return str;
+                let match = full.match(/(\d{1,2}):(\d{2})\s?(AM|PM)/gi);
+                if (!match || match.length < 2) return str;
+                let [s, e] = match;
+                let parts = (str === s.split(' ')[0]) ? s : e;
+                let [h, m] = parts.split(' ')[0].split(':');
+                let ampm = parts.split(' ')[1];
+                h = parseInt(h);
+                if (ampm.toUpperCase() === 'PM' && h < 12) h += 12;
+                if (ampm.toUpperCase() === 'AM' && h === 12) h = 0;
+                return `${h.toString().padStart(2, '0')}:${m}`;
+            }
+        });
+
+    </script>
+
+
+
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../assets/vendor/quill/quill.js"></script>
+    <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- jQuery (bắt buộc) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+
+
+</body>
+
+</html>

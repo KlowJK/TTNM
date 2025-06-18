@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>StudentLife - Danh sách lịch trình</title>
+    <!-- Favicons & Fonts -->
+    <link href="../assets/img/students_logo.png" rel="icon">
+    <link href="../assets/img/students_logo.png" rel="apple-touch-icon">
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #f9fafe;
+        }
+
+        .calendar-wrapper {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        .calendar-sidebar {
+            width: 300px;
+            padding: 1rem;
+            border-right: 1px solid #e5e5e5;
+            background-color: #f9fafe !important;
+        }
+
+        .calendar-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .btn-add-schedule {
+            background: #1976d2;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 18px;
+        }
+
+        .btn-add-schedule:hover {
+            background: #145ea8;
+        }
+
+        .crud-title {
+            font-size: 1.13rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .table thead th {
+            background: #f6f8fa;
+            font-weight: 600;
+            border-bottom: 2px solid #e5e5e5;
+            color: #222;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+            font-size: 1rem;
+            color: #222;
+        }
+
+        .action-link {
+            color: #1976d2;
+            cursor: pointer;
+            margin-right: 10px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .action-link:last-child {
+            margin-right: 0;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .pagination .page-link {
+            color: #1976d2;
+            border-radius: 8px;
+        }
+
+        .pagination .active .page-link {
+            background: #1976d2;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-display-mode {
+            background: #fff !important;
+            color: #222 !important;
+            border: 1px solid #ddd;
+            font-weight: 500;
+            font-size: 1.05rem;
+            box-shadow: none;
+            transition: background 0.18s, box-shadow 0.18s, color 0.18s;
+            padding-left: 22px;
+            padding-right: 22px;
+            height: 42px;
+        }
+
+        .btn-display-mode i {
+            color: #222;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .btn-display-mode:focus,
+        .btn-display-mode:hover {
+            background: #f5f5f5 !important;
+            color: #111 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            margin-bottom: 18px;
+        }
+
+        .input-group.border.rounded-pill {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .icon-btn {
+            border: none;
+            background: transparent;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+            box-shadow: none;
+            outline: none;
+            padding: 0;
+        }
+
+        .icon-btn:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .icon-btn:hover,
+        .icon-btn:active {
+            background: #f1f1f1;
+        }
+
+        .icon-btn i {
+            font-size: 1.2rem;
+            color: #333;
+            transition: color 0.15s;
+        }
+
+        .search-container input.form-control {
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            font-size: 1rem;
+        }
+
+        .search-container input.form-control:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .search-container .icon-btn:last-child {
+            margin-right: 4px;
+        }
+
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: 1fr;
+            /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+            gap: 15px;
+            height: 258px;
+            /* tùy theo bạn muốn card cao tối đa cỡ nào */
+        }
+
+        .parent>div {
+            height: 85%;
+            /* Giúp các div1 - div5 fill chiều cao của hàng */
+        }
+
+        .sales-card {
+            height: 100% !important;
+            /* Ghi đè inline style để fill toàn bộ */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* nếu bạn muốn nội dung giãn đều */
+        }
+
+        /* Validation styles */
+        .error-message {
+            display: none;
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-control.is-invalid,
+        .form-check-input.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .form-control.is-invalid:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+
+        .form-check-input.is-invalid ~ .form-check-label {
+            color: #dc3545;
+        }
+
+        .form-check-input:checked {
+            background-color: #1976d2;
+            border-color: #1976d2;
+        }
+
+        /* Modal styles */
+        .modal .form-control {
+            background-color: transparent;
+        }
+
+        .modal .form-control:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.25);
+        }
+
+        .modal .btn-primary {
+            background: #1976d2;
+            border-color: #1976d2;
+        }
+
+        .modal .btn-primary:hover {
+            background: #145ea8;
+            border-color: #145ea8;
+        }
+
+        .modal .btn-light {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+
+        .modal .btn-light:hover {
+            background: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .modal .btn-danger {
+            background: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .modal .btn-danger:hover {
+            background: #bb2d3b;
+            border-color: #bb2d3b;
+        }
+
+        /* Toast styles */
+        .toast {
+            font-size: 0.95rem;
+        }
+
+        .toast .toast-body {
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+        }
+
+        .toast .bi {
+            font-size: 1.25rem;
+        }
+
+        /* Delete confirmation modal styles */
+        .btn-action-modal {
+            min-width: 100px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        .btn-outline-primary.btn-flat {
+            color: #1976d2;
+            border-color: #1976d2;
+            background: transparent;
+        }
+
+        .btn-outline-primary.btn-flat:hover {
+            background: #f5f9ff;
+        }
+
+        .btn-primary.btn-flat {
+            background: #1976d2;
+            border-color: #1976d2;
+            color: #fff;
+        }
+
+        .btn-primary.btn-flat:hover {
+            background: #145ea8;
+            border-color: #145ea8;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="../index.html" class="logo d-flex align-items-center">
+                <img src="../assets/img/students_logo.png" alt="">
+            </a>
+        </div>
+        <nav class="header-nav ms-auto">
+            <ul class="nav d-flex align-items-center nav-tabs-bordered" style="border-bottom: none !important;">
+                <li class="nav-item pe-3"><a class="nav-link " href="../index.html"><strong>Trang chủ</strong></a></li>
+                <li class="nav-item pe-3"><a class="nav-link" href="../ChiTieu/qlct.html"><strong>Chi tiêu</strong></a>
+                </li>
+                <li class="nav-item pe-3"><a class="nav-link active" href="../LichTrinh/DanhSach.html"><strong>Lịch
+                            trình</strong></a></li>
+                <li class="nav-item pe-3"><a class="nav-link" href="../GhiChu/qlgc.html"><strong>Ghi chú</strong></a>
+                </li>
+                <li class="nav-item pe-3"><a class="nav-link" href="../TaiLieu/qltl.html"><strong>Tài liệu</strong></a>
+                </li>
+                <li class="nav-item pe-3"><a class="nav-link" href="../index.html"><strong>Điểm khác biệt</strong></a>
+                </li>
+                <li class="nav-item pe-3"><a class="nav-link" href="../index.html"><strong>Phản hồi</strong></a></li>
+                <li class="nav-item dropdown pe-3">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-2" href="../HoSo/users-profile.html">
+                        <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block  ps-2">Nguyễn Văn A</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main" class="main">
+        <div class="calendar-wrapper">
+            <!-- Sidebar with controls and mini-calendar -->
+            <div class="calendar-sidebar">
+                <div class="mb-3 mt-5">
+                    <label class="form-label fw-bold">Chế độ hiển thị</label>
+                    <div class="dropdown">
+                        <button class="btn btn-display-mode w-100 d-flex justify-content-between align-items-center"
+                            type="button" data-bs-toggle="dropdown">
+                            Danh sách
+                            <i class="bi bi-caret-down-fill ms-2"></i>
+                        </button>
+                        <ul class="dropdown-menu w-100">
+                            <li><a class="dropdown-item" href="Lich.html">Lịch</a></li>
+                            <li><a class="dropdown-item active" href="DanhSach.html">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Main CRUD Table -->
+            <div class="calendar-main">
+                <div class="search-container mb-3" style="max-width: 400px;">
+                    <div class="input-group border rounded-pill">
+                        <button class="icon-btn" type="button" id="searchButton" tabindex="-1" style="margin-left: 4px;">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <input type="text" class="form-control border-0" placeholder="Tìm kiếm" id="basicSearch">
+                        <button class="icon-btn" type="button" id="advancedToggle">
+                            <i class="bi bi-caret-down-fill" style="font-size: 0.95rem;"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Hàng nút Thêm lịch trình và 4 icon, đối diện với tiêu đề -->
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="crud-title mb-0">Kế hoạch sinh viên</div>
+                    <div class="d-flex align-items-center" style="gap: 10px;">
+                        <button class="btn btn-primary btn-add-schedule d-flex align-items-center" type="button" style="min-width: 150px; font-weight: 500;">
+                            <i class="bi bi-plus-lg me-2"></i> Thêm lịch trình
+                        </button>
+                        <button class="icon-btn" title="Làm mới" type="button"><i class="bi bi-arrow-clockwise"></i></button>
+                        <button class="icon-btn" title="Cài đặt" type="button"><i class="bi bi-gear"></i></button>
+                        <button class="icon-btn" title="Bộ lọc" type="button"><i class="bi bi-funnel"></i></button>
+                        <button class="icon-btn" title="Toàn màn hình" type="button"><i class="bi bi-arrows-fullscreen"></i></button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th style="min-width: 140px;">Tên tiêu đề</th>
+                                <th style="min-width: 180px;">Mô tả</th>
+                                <th style="min-width: 120px;">Loại lịch trình</th>
+                                <th style="min-width: 150px;">Thời gian bắt đầu</th>
+                                <th style="min-width: 150px;">Thời gian kết thúc</th>
+                                <th style="min-width: 110px;">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Chạy deadline</td>
+                                <td>shibaaaa</td>
+                                <td>Học tập</td>
+                                <td>06:00:00 2025-12-16</td>
+                                <td>07:00:00 2025-12-16</td>
+                                <td>
+                                    <a class="action-link" href="#">Xem</a>
+                                    <a class="action-link" href="#">Sửa</a>
+                                    <a class="action-link" href="#">Xóa</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Đom đóm</td>
+                                <td>ds.</td>
+                                <td>Học tập</td>
+                                <td>19:49:33 2021-02-03</td>
+                                <td>20:49:33 2021-02-03</td>
+                                <td>
+                                    <a class="action-link" href="#">Xem</a>
+                                    <a class="action-link" href="#">Sửa</a>
+                                    <a class="action-link" href="#">Xóa</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination trong khối trắng, căn giữa, đặt sát đáy -->
+                <div style="flex:1 1 auto"></div>
+                <nav class="mt-4 d-flex justify-content-center" style="margin-bottom: 0;">
+                    <ul class="pagination mb-0">
+                        <li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">50</a></li>
+                        <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+        <div class="parent mx-5" style="height: 200px ;">
+            <div class="div1">
+                <div class="social-links mt-5 fs-3 ">
+                    <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="div2">
+                <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Giới Thiệu</li>
+                    <li class="text-black m-1">Sứ Mệnh</li>
+                    <li class="text-black m-1">Đội Ngũ</li>
+                    <li class="text-black m-1">Liên Hệ</li>
+                    <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+                </ul>
+            </div>
+            <div class="div3">
+                <h5 class="mb-4"><strong>Khám phá</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Góc học tập</li>
+                    <li class="text-black m-1">Kỹ năng mềm</li>
+                    <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+                    <li class="text-black m-1">Học bổng & Cơ hội</li>
+                    <li class="text-black m-1">Hướng nghiệp</li>
+                </ul>
+            </div>
+            <div class="div4">
+                <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Tài liệu học tập</li>
+                    <li class="text-black m-1">Công cụ học tập</li>
+                    <li class="text-black m-1">Gợi ý khóa học</li>
+                    <li class="text-black m-1">Cộng đồng sinh viên</li>
+                    <li class="text-black m-1">Góp ý & báo lỗi</li>
+                </ul>
+            </div>
+            <div class="div5">
+                <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+                    <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+                    <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+                    <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+                    <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Modal thêm/sửa lịch trình -->
+    <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm" style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <!-- Nút đóng -->
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Tiêu đề Modal -->
+                    <h5 class="mb-3 fw-bold" id="scheduleModalLabel">Thêm lịch trình mới</h5>
+                    <form id="scheduleForm" autocomplete="off" class="d-flex flex-column gap-2">
+                        <!-- Tiêu đề -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label for="eventTitle" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;" placeholder="Nhập tiêu đề" id="eventTitle" required>
+                            <div class="error-message" id="titleError">Vui lòng nhập đầy đủ tiêu đề</div>
+                        </div>
+                        <!-- Mô tả -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label for="eventDescription" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;" placeholder="Nhập mô tả" id="eventDescription">
+                            <div class="error-message" id="descriptionError">Vui lòng nhập đầy đủ mô tả</div>
+                        </div>
+                        <!-- Thời gian -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                            <div class="row g-1 align-items-center" style="margin-left: 0; margin-right: 0;">
+                                <div class="col-auto d-flex align-items-center">
+                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="startTime" style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;" value="01:30">
+                                    <span class="time-suffix" id="startTimeSuffix" style="font-size: 0.75rem; margin-left: 2px; margin-right: 4px;"></span>
+                                </div>
+                                <div class="col-auto d-flex align-items-center">
+                                    <span style="font-size: 0.85rem; margin-right: 2px;">-</span>
+                                </div>
+                                <div class="col-auto d-flex align-items-center">
+                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="endTime" style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;" value="02:45">
+                                    <span class="time-suffix" id="endTimeSuffix" style="font-size: 0.75rem; margin-left: 2px;"></span>
+                                </div>
+                                <div class="col-auto d-flex align-items-center">
+                                    <input type="text" class="form-control border-0 px-0 py-1 date-input" id="eventDate" style="width: 120px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-left: 8px;" value="Thứ 5, 17 tháng 12" readonly>
+                                </div>
+                            </div>
+                            <div class="error-message" id="timeError">Vui lòng chọn thời gian bắt đầu, kết thúc</div>
+                        </div>
+                        <!-- Loại lịch trình -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-2 fw-semibold" style="font-size: 1rem;">Loại lịch trình</label>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="radio" name="eventType" id="study" value="study">
+                                <label class="form-check-label" for="study" style="font-size: 0.97rem;">Học tập</label>
+                            </div>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="radio" name="eventType" id="personal" value="personal">
+                                <label class="form-check-label" for="personal" style="font-size: 0.97rem;">Cá nhân</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="eventType" id="club" value="club">
+                                <label class="form-check-label" for="club" style="font-size: 0.97rem;">Câu lạc bộ</label>
+                            </div>
+                            <div class="error-message" id="typeError">Vui lòng chọn loại lịch trình</div>
+                        </div>
+                        <!-- Footer nút -->
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2" style="padding-left: 2px; padding-right: 2px;">
+                            <button type="button" class="btn btn-primary fw-semibold" style="border-radius: 4px; min-width: 100px; font-size: 1rem;" id="saveScheduleBtn">Lưu</button>
+                            <button type="button" class="btn fw-semibold" style="border-radius: 4px; min-width: 100px; font-size: 1rem; background: #fff; border: 1px solid #dee2e6;" data-bs-dismiss="modal">Quay lại</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận xóa -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="position: fixed; top: 30px; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2000;">
+            <div class="modal-content" style="border-radius: 6px; max-width: 450px; min-width: 450px; width: 100%; box-shadow: 0 4px 18px rgba(0,0,0,0.07);">
+                <div class="modal-body py-4 px-4">
+                    <div class="d-flex align-items-center mb-4" style="gap: 10px;">
+                        <span style="font-size: 1.5rem; color: #fbbc04;">
+                            <i class="bi bi-exclamation-circle"></i>
+                        </span>
+                        <span style="font-size: 1.13rem; font-weight: 500; color:#222; white-space:nowrap;">
+                            Bạn chắc chắn muốn xóa lịch này không?
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-outline-primary btn-flat btn-action-modal" id="cancelDeleteBtn" data-bs-dismiss="modal">
+                            Không xóa
+                        </button>
+                        <button type="button" class="btn btn-primary btn-flat btn-action-modal" id="confirmDeleteBtn">
+                            Xóa lịch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xem chi tiết lịch trình -->
+    <div class="modal fade" id="viewScheduleModal" tabindex="-1" aria-labelledby="viewScheduleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm" style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <!-- Nút đóng -->
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Tiêu đề Modal -->
+                    <h5 class="mb-3 fw-bold" id="viewScheduleModalLabel">Chi tiết lịch trình</h5>
+                    <div class="d-flex flex-column gap-2">
+                        <!-- Tiêu đề -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
+                            <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventTitle"></div>
+                        </div>
+                        <!-- Mô tả -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
+                            <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventDescription"></div>
+                        </div>
+                        <!-- Thời gian -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                            <div class="row g-1 align-items-center" style="margin-left: 0; margin-right: 0;">
+                                <div class="col-12">
+                                    <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventTime"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Loại lịch trình -->
+                        <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
+                            <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Loại lịch trình</label>
+                            <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventType"></div>
+                        </div>
+                        <!-- Footer nút -->
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2" style="padding-left: 2px; padding-right: 2px;">
+                            <button type="button" class="btn btn-primary fw-semibold" style="border-radius: 4px; min-width: 100px; font-size: 1rem;" data-bs-dismiss="modal">Quay lại</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast thông báo thành công -->
+    <div id="successToast" class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true" 
+        style="position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 20000; min-width: 450px; max-width: 450px; width: 450px; height: 65px; background: #f6fff2; border: 1.5px solid #8de885; box-shadow: 0 2px 18px rgba(0,0,0,0.05); border-radius: 8px; display: none; color: #222;">
+        <div class="d-flex justify-content-center align-items-center h-100" style="gap: 18px; height: 100%;">
+            <span style="font-size: 2rem; color: #42cb39;"><i class="bi bi-check-circle"></i></span>
+            <span class="fw-semibold fs-5" id="successToastMsg" style="color: #222;">Thành công!</span>
+            <button type="button" class="btn-close" aria-label="Close" onclick="hideSuccessToast()" style="font-size: 2.1rem; width: 2.4rem; height: 2.4rem; align-self: center;"></button>
+        </div>
+    </div>
+
+    <script>
+        // Thêm hàm xử lý tìm kiếm
+        function handleSearch() {
+            const searchQuery = document.getElementById('basicSearch').value.trim();
+            if (searchQuery) {
+                // Nếu đang ở view.html, chuyển sang DanhSach.html với query search
+                if (window.location.pathname.includes('view.html')) {
+                    window.location.href = `DanhSach.html?search=${encodeURIComponent(searchQuery)}`;
+                } else {
+                    // Nếu đã ở DanhSach.html, thực hiện tìm kiếm
+                    performSearch(searchQuery);
+                }
+            }
+        }
+
+        // Hàm thực hiện tìm kiếm
+        function performSearch(query) {
+            query = query.toLowerCase();
+            const tbody = document.querySelector('table tbody');
+            const rows = tbody.getElementsByTagName('tr');
+
+            for (let row of rows) {
+                const title = row.cells[0].textContent.toLowerCase();
+                const description = row.cells[1].textContent.toLowerCase();
+                const type = row.cells[2].textContent.toLowerCase();
+                const startTime = row.cells[3].textContent.toLowerCase();
+                const endTime = row.cells[4].textContent.toLowerCase();
+
+                if (title.includes(query) || 
+                    description.includes(query) || 
+                    type.includes(query) || 
+                    startTime.includes(query) || 
+                    endTime.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+
+        // Hàm hiển thị toast thành công
+        function showSuccessToast(message) {
+            const toast = document.getElementById('successToast');
+            const msg = document.getElementById('successToastMsg');
+            if (msg) msg.textContent = message || 'Thành công!';
+            toast.style.display = 'block';
+            clearTimeout(window.successToastTimer);
+            window.successToastTimer = setTimeout(() => {
+                hideSuccessToast();
+            }, 2000);
+        }
+
+        function hideSuccessToast() {
+            const toast = document.getElementById('successToast');
+            toast.style.display = 'none';
+        }
+
+        // Biến toàn cục để lưu trữ dữ liệu đang chỉnh sửa
+        let editingRow = null;
+        let editingEvent = null;
+
+        // Hàm xử lý form thêm mới
+        function handleAddSchedule() {
+            resetForm();
+            document.getElementById('scheduleModalLabel').textContent = 'Thêm lịch trình mới';
+            editingRow = null;
+            editingEvent = null;
+            const modal = new bootstrap.Modal(document.getElementById('scheduleModal'));
+            modal.show();
+        }
+
+        // Hàm xử lý form sửa
+        function handleEditSchedule(row) {
+            resetForm();
+            editingRow = row;
+            
+            // Lấy dữ liệu từ row
+            const title = row.cells[0].textContent;
+            const description = row.cells[1].textContent;
+            const type = row.cells[2].textContent;
+            const startTime = row.cells[3].textContent.split(' ')[0];
+            const endTime = row.cells[4].textContent.split(' ')[0];
+
+            // Điền dữ liệu vào form
+            document.getElementById('eventTitle').value = title;
+            document.getElementById('eventDescription').value = description;
+            document.getElementById('startTime').value = startTime;
+            document.getElementById('endTime').value = endTime;
+
+            // Chọn loại lịch trình
+            document.querySelectorAll('input[name="eventType"]').forEach(radio => {
+                if (radio.nextElementSibling.textContent === type) {
+                    radio.checked = true;
+                }
+            });
+
+            document.getElementById('scheduleModalLabel').textContent = 'Sửa lịch trình';
+            const modal = new bootstrap.Modal(document.getElementById('scheduleModal'));
+            modal.show();
+        }
+
+        // Hàm xử lý xóa
+        function handleDeleteSchedule(row) {
+            editingRow = row;
+            const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            modal.show();
+        }
+
+        // Hàm validate form
+        function validateScheduleForm() {
+            let isValid = true;
+            const errors = {
+                title: false,
+                description: false,
+                type: false
+            };
+
+            // Reset error states
+            hideAllErrors();
+
+            // Validate tiêu đề
+            if (!document.getElementById('eventTitle').value.trim()) {
+                errors.title = true;
+                isValid = false;
+            }
+
+            // Validate mô tả
+            if (!document.getElementById('eventDescription').value.trim()) {
+                errors.description = true;
+                isValid = false;
+            }
+
+            // Validate loại lịch trình
+            if (!document.querySelector('input[name="eventType"]:checked')) {
+                errors.type = true;
+                isValid = false;
+            }
+
+            // Hiển thị lỗi nếu có
+            if (!isValid) {
+                showErrors(errors);
+            }
+
+            return isValid;
+        }
+
+        // Hàm ẩn tất cả thông báo lỗi
+        function hideAllErrors() {
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.classList.remove('show');
+            });
+            document.querySelectorAll('.form-control, .form-check-input').forEach(input => {
+                input.classList.remove('is-invalid');
+            });
+        }
+
+        // Hàm hiển thị lỗi
+        function showErrors(errors) {
+            if (errors.title) {
+                document.getElementById('titleError').classList.add('show');
+                document.getElementById('eventTitle').classList.add('is-invalid');
+            }
+            if (errors.description) {
+                document.getElementById('descriptionError').classList.add('show');
+                document.getElementById('eventDescription').classList.add('is-invalid');
+            }
+            if (errors.type) {
+                document.getElementById('typeError').classList.add('show');
+                document.querySelectorAll('input[name="eventType"]').forEach(radio => {
+                    radio.classList.add('is-invalid');
+                });
+            }
+        }
+
+        // Hàm reset form
+        function resetForm() {
+            document.getElementById('scheduleForm').reset();
+            hideAllErrors();
+        }
+
+        // Hàm lưu dữ liệu
+        function saveSchedule() {
+            if (!validateScheduleForm()) return;
+
+            const formData = {
+                title: document.getElementById('eventTitle').value,
+                description: document.getElementById('eventDescription').value,
+                type: document.querySelector('input[name="eventType"]:checked').nextElementSibling.textContent,
+                startTime: document.getElementById('startTime').value,
+                endTime: document.getElementById('endTime').value
+            };
+
+            if (editingRow) {
+                // Cập nhật row hiện có
+                updateExistingRow(editingRow, formData);
+                showSuccessToast('Sửa lịch trình thành công');
+            } else {
+                // Thêm row mới
+                addNewRow(formData);
+                showSuccessToast('Thêm lịch trình thành công');
+            }
+
+            bootstrap.Modal.getInstance(document.getElementById('scheduleModal')).hide();
+        }
+
+        // Hàm cập nhật row hiện có
+        function updateExistingRow(row, data) {
+            row.cells[0].textContent = data.title;
+            row.cells[1].textContent = data.description;
+            row.cells[2].textContent = data.type;
+            row.cells[3].textContent = data.startTime;
+            row.cells[4].textContent = data.endTime;
+        }
+
+        // Hàm thêm row mới
+        function addNewRow(data) {
+            const newRow = document.querySelector('table tbody').insertRow();
+            newRow.innerHTML = `
+                <td>${data.title}</td>
+                <td>${data.description}</td>
+                <td>${data.type}</td>
+                <td>${data.startTime}</td>
+                <td>${data.endTime}</td>
+                <td>
+                    <a class="action-link" href="#">Xem</a>
+                    <a class="action-link" href="#">Sửa</a>
+                    <a class="action-link" href="#">Xóa</a>
+                </td>
+            `;
+            // Thêm event listeners cho các nút mới
+            addRowEventListeners(newRow);
+        }
+
+        // Hàm xử lý xem chi tiết
+        function handleViewSchedule(row) {
+            // Lấy dữ liệu từ row
+            const title = row.cells[0].textContent;
+            const description = row.cells[1].textContent;
+            const type = row.cells[2].textContent;
+            const startTime = row.cells[3].textContent;
+            const endTime = row.cells[4].textContent;
+
+            // Điền dữ liệu vào modal xem chi tiết
+            document.getElementById('viewEventTitle').textContent = title;
+            document.getElementById('viewEventDescription').textContent = description;
+            document.getElementById('viewEventType').textContent = type;
+            document.getElementById('viewEventTime').textContent = `${startTime} - ${endTime}`;
+
+            // Hiển thị modal
+            const modal = new bootstrap.Modal(document.getElementById('viewScheduleModal'));
+            modal.show();
+        }
+
+        // Hàm thêm event listeners cho row
+        function addRowEventListeners(row) {
+            row.querySelectorAll('a.action-link').forEach(link => {
+                if (link.textContent === 'Xem') {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        handleViewSchedule(row);
+                    });
+                } else if (link.textContent === 'Sửa') {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        handleEditSchedule(row);
+                    });
+                } else if (link.textContent === 'Xóa') {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        handleDeleteSchedule(row);
+                    });
+                }
+            });
+        }
+
+        // Hàm lấy AM/PM dựa trên giờ
+        function getAMPM(hour) {
+            return hour < 12 ? 'AM' : 'PM';
+        }
+
+        // Hàm cập nhật AM/PM cho các ô thời gian
+        function updateTimeSuffixes() {
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+
+            // Tính AM/PM cho startTime
+            if (startTime) {
+                const [startHour] = startTime.split(':').map(Number);
+                const startAMPM = getAMPM(startHour);
+                document.getElementById('startTimeSuffix').textContent = startAMPM;
+            }
+
+            // Tính AM/PM cho endTime
+            if (endTime) {
+                const [endHour] = endTime.split(':').map(Number);
+                const endAMPM = getAMPM(endHour);
+                document.getElementById('endTimeSuffix').textContent = endAMPM;
+            }
+
+            // Cập nhật ngày hiện tại
+            const now = new Date();
+            const days = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const month = now.getMonth() + 1;
+            document.getElementById('eventDate').value = `${dayName}, ${day} tháng ${month}`;
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Xử lý tìm kiếm khi trang load
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            if (searchQuery) {
+                document.getElementById('basicSearch').value = searchQuery;
+                performSearch(searchQuery);
+            }
+
+            // Thêm event listener cho nút tìm kiếm
+            document.getElementById('searchButton').addEventListener('click', handleSearch);
+
+            // Thêm event listener cho input khi nhấn Enter
+            document.getElementById('basicSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+
+            // Nút thêm lịch trình
+            document.querySelector('.btn-add-schedule').addEventListener('click', handleAddSchedule);
+
+            // Các nút trong bảng hiện có
+            document.querySelectorAll('tr').forEach(addRowEventListeners);
+
+            // Nút lưu trong modal
+            document.getElementById('saveScheduleBtn').addEventListener('click', saveSchedule);
+
+            // Nút xóa trong modal xác nhận
+            document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+                if (editingRow) {
+                    editingRow.remove();
+                    showSuccessToast('Xóa lịch trình thành công');
+                }
+                bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal')).hide();
+            });
+
+            // Clear validation errors khi nhập liệu
+            document.getElementById('eventTitle').addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+                document.getElementById('titleError').classList.remove('show');
+            });
+
+            document.getElementById('eventDescription').addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+                document.getElementById('descriptionError').classList.remove('show');
+            });
+
+            document.querySelectorAll('input[name="eventType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    document.querySelectorAll('input[name="eventType"]').forEach(r => r.classList.remove('is-invalid'));
+                    document.getElementById('typeError').classList.remove('show');
+                });
+            });
+
+            // Reset form khi đóng modal
+            document.getElementById('scheduleModal').addEventListener('hidden.bs.modal', resetForm);
+
+            // Cập nhật AM/PM và ngày khi mở modal
+            document.getElementById('scheduleModal').addEventListener('shown.bs.modal', updateTimeSuffixes);
+
+            // Cập nhật AM/PM mỗi phút
+            setInterval(updateTimeSuffixes, 60000);
+        });
+    </script>
+</body>
+
+</html>
