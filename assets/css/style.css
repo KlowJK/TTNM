@@ -1300,3 +1300,40 @@ h6 {
   padding: 6px 12px; /* Căn chỉnh lề trong */
   text-align: center; /* Căn giữa chữ */
 }
+
+.social-links a {
+  color: black !important;
+  margin-right: 5px;
+  font-size: 1.5rem;
+}
+
+.social-links a:last-child {
+  margin-right: 0;
+}
+
+.hero-section {
+  background: #f1f9f9;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: teal;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #6bc6bc;
+}
+
+.custom-box {
+  width: 340px;
+  height: 180px;
+  overflow: hidden;
+  padding: 15px;
+}
