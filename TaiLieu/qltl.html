@@ -56,6 +56,48 @@
         #addDocumentModal .form-control {
             border-radius: 8px;
         }
+        .custom-alert-modal {
+            max-width: 400px;
+            margin: 2.5rem auto 0 auto;
+        }
+        #deleteConfirmModal .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            border: 1px solid #F2F2F2;
+        }
+        #deleteConfirmModal .modal-body {
+            padding: 24px 24px 0 24px;
+        }
+        #deleteConfirmModal .modal-footer {
+            border-top: none;
+            padding-right: 20px;
+            padding-bottom: 14px;
+            background: none;
+        }
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: 1fr;
+            /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+            gap: 15px;
+            height: 258px;
+            /* tùy theo bạn muốn card cao tối đa cỡ nào */
+        }
+
+        .parent>div {
+            height: 85%;
+            /* Giúp các div1 - div5 fill chiều cao của hàng */
+        }
+
+        .sales-card {
+            height: 100% !important;
+            /* Ghi đè inline style để fill toàn bộ */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* nếu bạn muốn nội dung giãn đều */
+        }
+
 
     </style>
 
@@ -253,17 +295,61 @@
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
-    <div class="copyright">
-        © Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer" style="background-color: #F9FAFE;">
+    <div class="parent mx-5" style="height: 200px ;">
+        <div class="div1">
+            <div class="social-links mt-5 fs-3 ">
+                <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="div2">
+            <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+            <ul class="list-unstyled">
+                <li class="text-black m-1">Giới Thiệu</li>
+                <li class="text-black m-1">Sứ Mệnh</li>
+                <li class="text-black m-1">Đội Ngũ</li>
+                <li class="text-black m-1">Liên Hệ</li>
+                <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+            </ul>
+        </div>
+        <div class="div3">
+            <h5 class="mb-4"><strong>Khám phá</strong></h5>
+            <ul class="list-unstyled">
+                <li class="text-black m-1">Góc học tập</li>
+                <li class="text-black m-1">Kỹ năng mềm</li>
+                <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+                <li class="text-black m-1">Học bổng & Cơ hội</li>
+                <li class="text-black m-1">Hướng nghiệp</li>
+            </ul>
+        </div>
+        <div class="div4">
+            <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+            <ul class="list-unstyled">
+                <li class="text-black m-1">Tài liệu học tập</li>
+                <li class="text-black m-1">Công cụ học tập</li>
+                <li class="text-black m-1">Gợi ý khóa học</li>
+                <li class="text-black m-1">Cộng đồng sinh viên</li>
+                <li class="text-black m-1">Góp ý & báo lỗi</li>
+            </ul>
+        </div>
+        <div class="div5">
+            <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+            <ul class="list-unstyled">
+                <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+                <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+                <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+                <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+                <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+            </ul>
+        </div>
     </div>
 </footer><!-- End Footer -->
 <script>
     // Lấy các phần tử
-    const saveBtn = document.querySelector('#addDocumentModal .btn-primary');
     const docTitle = document.getElementById('doc-title');
     const docDesc = document.getElementById('doc-desc');
     const docFile = document.getElementById('doc-file');
@@ -395,15 +481,19 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                <button type="button" class="btn btn-primary">Lưu</button>
+                <button type="button" class="btn btn-primary" id="saveDocBtn">Lưu</button>
             </div>
         </div>
     </div>
 </div>
 <script>
     const PAGE_SIZE = 5;
+    let currentPage = 1;
+    let documentData = getTableData();
+    let editingIndex = null;
+    let deletingIndex = null;
 
-    // 1. Đọc dữ liệu hiện tại từ bảng HTML
+    // Lấy dữ liệu ban đầu từ bảng (chỉ dùng khi tải trang)
     function getTableData() {
         const data = [];
         document.querySelectorAll('.document-table tbody tr').forEach(tr => {
@@ -413,27 +503,20 @@
                 desc: tds[1].textContent,
                 date: tds[2].textContent,
                 size: tds[3].textContent,
-                type: tds[4].textContent,
-                action: tds[5].innerHTML
+                type: tds[4].textContent
             });
         });
         return data;
     }
 
-    // 2. Quản lý dữ liệu động
-    let documentData = getTableData();
-    let currentPage = 1;
-
-    // 3. Render bảng tài liệu theo trang
+    // Render lại bảng theo trang
     function renderTable(page=1) {
         currentPage = page;
         const tbody = document.querySelector('.document-table tbody');
         tbody.innerHTML = '';
-        // Phân trang
         const start = (page-1)*PAGE_SIZE;
-        const pageData = documentData.slice(start, start + PAGE_SIZE);
-
-        for (const row of pageData) {
+        const pageData = documentData.slice(start, start+PAGE_SIZE);
+        pageData.forEach((row, idx) => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td>${row.title}</td>
@@ -441,38 +524,37 @@
             <td>${row.date}</td>
             <td>${row.size}</td>
             <td>${row.type}</td>
-            <td class="action-cell">${row.action}</td>
+            <td class="action-cell">
+                <span class="view-edit btn-view" data-index="${start+idx}" style="cursor:pointer">Xem chi tiết</span>
+                <span class="view-edit btn-edit" data-index="${start+idx}" style="cursor:pointer">Sửa</span>
+                <span class="delete btn-delete" data-index="${start+idx}" style="cursor:pointer">Xóa</span>
+            </td>
         `;
             tbody.appendChild(tr);
-        }
+        });
         renderPagination();
+        attachRowEvents();
     }
 
-    // 4. Render thanh phân trang động
+    // Phân trang động
     function renderPagination() {
         const totalPages = Math.ceil(documentData.length / PAGE_SIZE);
         const pag = document.getElementById('document-pagination');
         pag.innerHTML = '';
-
-        // Previous
         pag.innerHTML += `<li class="page-item${currentPage===1?' disabled':''}">
         <a class="page-link" href="#" data-page="${currentPage-1}">Trước</a></li>`;
 
-        // Số trang (hiển thị tối đa 5 số gần trang hiện tại)
         let pageStart = Math.max(1, currentPage-2);
         let pageEnd = Math.min(totalPages, currentPage+2);
-        if (currentPage <= 3) pageEnd = Math.min(5, totalPages);
-        if (currentPage >= totalPages-2) pageStart = Math.max(1, totalPages-4);
+        if(currentPage <= 3) pageEnd = Math.min(5, totalPages);
+        if(currentPage >= totalPages-2) pageStart = Math.max(1, totalPages-4);
 
         for(let i=pageStart; i<=pageEnd; i++) {
             pag.innerHTML += `<li class="page-item${i===currentPage?' active':''}">
             <a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
         }
-        // Next
         pag.innerHTML += `<li class="page-item${currentPage===totalPages||totalPages===0?' disabled':''}">
         <a class="page-link" href="#" data-page="${currentPage+1}">Sau</a></li>`;
-
-        // Sự kiện chuyển trang
         document.querySelectorAll('#document-pagination .page-link').forEach(link => {
             link.onclick = function(e) {
                 e.preventDefault();
@@ -482,7 +564,7 @@
         });
     }
 
-    // 5. Xử lý Thêm tài liệu mới
+    // Thêm mới tài liệu
     document.getElementById('saveDocBtn').addEventListener('click', function() {
         const title = document.getElementById('doc-title').value || 'Không có tiêu đề';
         const desc = document.getElementById('doc-desc').value || '';
@@ -490,32 +572,178 @@
         const uploadedDate = now.toLocaleTimeString('vi-VN') + ' ' + now.toLocaleDateString('vi-VN');
         let fileSize = '', fileType = '';
         const docFile = document.getElementById('doc-file');
-        if (docFile.files.length > 0) {
+        if (docFile && docFile.files.length > 0) {
             fileSize = (docFile.files[0].size/1024).toFixed(1) + ' KB';
             fileType = docFile.files[0].name.split('.').pop();
         }
-
         documentData.unshift({
             title,
             desc,
             date: uploadedDate,
             size: fileSize,
-            type: fileType,
-            action: `<span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span>`
+            type: fileType
         });
-
-        // Sau khi thêm, luôn về trang đầu tiên
         renderTable(1);
-
-        // Reset form & đóng modal
-        document.getElementById('addDocumentForm').reset();
+        document.getElementById('addDocumentForm')?.reset();
         const modal = bootstrap.Modal.getInstance(document.getElementById('addDocumentModal'));
         modal.hide();
     });
 
-    // 6. Render ban đầu
+    // Sửa tài liệu
+    document.getElementById('updateDocBtn').onclick = function() {
+        if(editingIndex !== null) {
+            documentData[editingIndex].title = document.getElementById('edit-doc-title').value;
+            documentData[editingIndex].desc = document.getElementById('edit-doc-desc').value;
+            renderTable(currentPage);
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editDocumentModal'));
+            modal.hide();
+        }
+    };
+
+    // Xóa tài liệu
+    document.getElementById('confirmDeleteBtn').onclick = function() {
+        if(deletingIndex !== null) {
+            documentData.splice(deletingIndex, 1);
+            const totalPages = Math.ceil(documentData.length / PAGE_SIZE);
+            if (currentPage > totalPages) currentPage = totalPages;
+            renderTable(currentPage > 0 ? currentPage : 1);
+            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+            modal.hide();
+        }
+    };
+
+    // Gán lại sự kiện cho các nút mỗi khi render
+    function attachRowEvents() {
+        // Xem chi tiết (nếu cần)
+        document.querySelectorAll('.btn-view').forEach(btn => {
+            btn.onclick = function() {
+                const idx = +this.dataset.index;
+                const doc = documentData[idx];
+                document.getElementById('view-title').innerText = doc.title;
+                document.getElementById('view-desc').innerText = doc.desc;
+                document.getElementById('view-date').innerText = doc.date;
+                document.getElementById('view-size').innerText = doc.size;
+                document.getElementById('view-type').innerText = doc.type;
+                new bootstrap.Modal(document.getElementById('viewDocumentModal')).show();
+            }
+        });
+        // Sửa
+        document.querySelectorAll('.btn-edit').forEach(btn => {
+            btn.onclick = function() {
+                editingIndex = +this.dataset.index;
+                const doc = documentData[editingIndex];
+                document.getElementById('edit-doc-title').value = doc.title;
+                document.getElementById('edit-doc-desc').value = doc.desc;
+                document.getElementById('edit-doc-date').value = doc.date;
+                document.getElementById('edit-doc-size').value = doc.size;
+                document.getElementById('edit-doc-type').value = doc.type;
+                new bootstrap.Modal(document.getElementById('editDocumentModal')).show();
+            }
+        });
+        // Xóa
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.onclick = function() {
+                deletingIndex = +this.dataset.index;
+                new bootstrap.Modal(document.getElementById('deleteConfirmModal')).show();
+            }
+        });
+    }
+
+    // Khởi tạo bảng ban đầu
     renderTable(1);
 </script>
+<!-- Modal Xem chi tiết tài liệu -->
+<div class="modal fade" id="viewDocumentModal" tabindex="-1" aria-labelledby="viewDocumentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewDocumentModalLabel">Chi tiết tài liệu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-3">Tiêu đề:</dt>
+                    <dd class="col-sm-9" id="view-title"></dd>
+                    <dt class="col-sm-3">Mô tả:</dt>
+                    <dd class="col-sm-9" id="view-desc"></dd>
+                    <dt class="col-sm-3">Ngày tải lên:</dt>
+                    <dd class="col-sm-9" id="view-date"></dd>
+                    <dt class="col-sm-3">Kích thước:</dt>
+                    <dd class="col-sm-9" id="view-size"></dd>
+                    <dt class="col-sm-3">Loại:</dt>
+                    <dd class="col-sm-9" id="view-type"></dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Sửa tài liệu -->
+<div class="modal fade" id="editDocumentModal" tabindex="-1" aria-labelledby="editDocumentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDocumentModalLabel">Sửa tài liệu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editDocumentForm" onsubmit="return false;">
+                    <div class="mb-3">
+                        <label for="edit-doc-title" class="form-label">Tiêu đề</label>
+                        <input type="text" class="form-control" id="edit-doc-title" placeholder="Nhập tiêu đề">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-doc-desc" class="form-label">Mô tả</label>
+                        <textarea class="form-control" id="edit-doc-desc" rows="2" placeholder="Nhập mô tả"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ngày tải lên</label>
+                        <input type="text" class="form-control" id="edit-doc-date" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kích thước</label>
+                        <input type="text" class="form-control" id="edit-doc-size" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Loại</label>
+                        <input type="text" class="form-control" id="edit-doc-type" disabled>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
+                <button type="button" class="btn btn-primary" id="updateDocBtn">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal xác nhận xóa -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm custom-alert-modal">
+        <div class="modal-content">
+            <div class="modal-body pb-0">
+                <div class="mb-3">
+                    <i class="bi bi-exclamation-circle" style="color:#ffae42;font-size:2rem;"></i>
+                </div>
+                <div class="mb-3 fw-semibold">
+                    Bạn chắc chắn muốn xóa tài liệu này không?
+                </div>
+            </div>
+            <div class="modal-footer justify-content-end pt-0 pb-3 pr-3">
+                <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="confirmDeleteBtn">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 
 
 
