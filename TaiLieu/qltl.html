@@ -542,7 +542,7 @@
         const pag = document.getElementById('document-pagination');
         pag.innerHTML = '';
         pag.innerHTML += `<li class="page-item${currentPage===1?' disabled':''}">
-        <a class="page-link" href="#" data-page="${currentPage-1}">Trước</a></li>`;
+        <a class="page-link" href="#" data-page="${currentPage-1}"><<</a></li>`;
 
         let pageStart = Math.max(1, currentPage-2);
         let pageEnd = Math.min(totalPages, currentPage+2);
@@ -554,7 +554,7 @@
             <a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
         }
         pag.innerHTML += `<li class="page-item${currentPage===totalPages||totalPages===0?' disabled':''}">
-        <a class="page-link" href="#" data-page="${currentPage+1}">Sau</a></li>`;
+        <a class="page-link" href="#" data-page="${currentPage+1}">>></a></li>`;
         document.querySelectorAll('#document-pagination .page-link').forEach(link => {
             link.onclick = function(e) {
                 e.preventDefault();
