@@ -61,14 +61,14 @@
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-chi-tieu" data-bs-toggle="tab" data-bs-target="#chi-tieu"
-                        type="button" role="tab" aria-controls="chi-tieu" aria-selected="false"><strong>Chi
+                    <a class="nav-link" id="tab-chi-tieu" href="../ChiTieu/qlct.html" type="button" role="tab"
+                        aria-controls="chi-tieu" aria-selected="false"><strong>Chi
                             tiêu</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link active" id="tab-lich-trinh" href="../LichTrinh/Lich.html" type="button" role="tab"
-                        aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
+                    <a class="nav-link active" id="tab-lich-trinh" href="../LichTrinh/Lich.html" type="button"
+                        role="tab" aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
@@ -82,13 +82,13 @@
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
-                        aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
+                    <a class="nav-link" id="tab-diem-khac-biet" href="../index.html#diemkhacbiet" type="button"
+                        role="tab" aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
                             biệt</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab"
+                    <a class="nav-link" id="tab-phan-hoi" href="../index.html#phanhoi" type="button" role="tab"
                         aria-controls="phan-hoi" aria-selected="false"><strong>Phản hồi</strong></a>
                 </li>
 
@@ -2065,7 +2065,7 @@
             document.getElementById('searchButton').addEventListener('click', handleSearch);
 
             // Thêm event listener cho input khi nhấn Enter
-            document.getElementById('basicSearch').addEventListener('keypress', function(e) {
+            document.getElementById('basicSearch').addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     handleSearch();
                 }

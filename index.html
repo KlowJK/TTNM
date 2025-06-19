@@ -1,48 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>StudentLife</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <!-- Favicons -->
-    <link href="assets/img/students_logo.png" rel="icon" />
-    <link href="assets/img/students_logo.png" rel="apple-touch-icon" />
+  <title>StudentLife</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
+  <!-- Favicons -->
+  <link href="assets/img/students_logo.png" rel="icon" />
+  <link href="assets/img/students_logo.png" rel="apple-touch-icon" />
 
-    <!-- Vendor CSS Files -->
-    <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet" />
 
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet" />
 
-      <style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+
+  <style>
     .parent {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -57,416 +48,315 @@
       height: 85%;
       /* Giúp các div1 - div5 fill chiều cao của hàng */
     }
-        </style>
-  </head>
+  </style>
+</head>
 
-  <body>
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-      <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <img src="../assets/img/students_logo.png" alt="" />
-        </a>
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="../assets/img/students_logo.png" alt="" />
+      </a>
+    </div>
+    <!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="nav d-flex align-items-center nav-tabs-bordered" style="border-bottom: none !important">
+        <li class="nav-item pe-3" role="presentation">
+          <a class="nav-link active" id="tab-home" href="index.html" type="button" role="tab" aria-controls="home"
+            aria-selected="true"><strong>Trang chủ</strong></a>
+        </li>
+
+        <li class="nav-item pe-3" role="presentation">
+          <a class="nav-link" id="tab-chi-tieu" href="ChiTieu/qlct.html" type="button" role="tab"
+            aria-controls="chi-tieu" aria-selected="false"><strong>Chi tiêu</strong></a>
+        </li>
+
+        <li class="nav-item pe-3" role="presentation">
+          <a class="nav-link" id="tab-lich-trinh" href="LichTrinh/Lich.html" type="button" role="tab"
+            aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
+        </li>
+
+        <li class="nav-item pe-3" role="presentation">
+          <a class="nav-link" id="tab-ghi-chu" href="GhiChu/qlgc.html" type="button" role="tab" aria-controls="ghi-chu"
+            aria-selected="false"><strong>Ghi chú</strong></a>
+        </li>
+
+        <li class="nav-item pe-3" role="presentation">
+          <a class="nav-link" id="tab-tai-lieu" href="TaiLieu/qltl.html" type="button" role="tab"
+            aria-controls="tai-lieu" aria-selected="false"><strong>Tài liệu</strong></a>
+        </li>
+
+        <li class="nav-item pe-3" role="presentation">
+          <a class="nav-link" id="tab-diem-khac-biet" href="#diemkhacbiet" type="button" role="tab"
+            aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác biệt</strong></a>
+        </li>
+
+        <li class="nav-item pe-3" role="presentation">
+          <a class="nav-link" id="tab-phan-hoi" href="#phanhoi" type="button" role="tab" aria-controls="phan-hoi"
+            aria-selected="false"><strong>Phản hồi</strong></a>
+        </li>
+
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-2" href="HoSo/users-profile.html">
+            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle" />
+            <span class="d-none d-md-block ps-2">Nguyễn Văn A</span> </a><!-- End Profile Iamge Icon -->
+        </li>
+        <!-- End Profile Nav -->
+      </ul>
+    </nav>
+    <!-- End Icons Navigation -->
+  </header>
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+
+  <main id="main" class="main">
+    <!-- End Page Title -->
+    <div class="hero-section">
+      <div>
+        <div class="hero-title">StudentsLife</div>
+        <div class="hero-subtitle">
+          Hành trang vững chắc cho cuộc sống sinh viên
+        </div>
       </div>
-      <!-- End Logo -->
+    </div>
 
-      <nav class="header-nav ms-auto">
-        <ul
-          class="nav d-flex align-items-center nav-tabs-bordered"
-          style="border-bottom: none !important"
-        >
-          <li class="nav-item pe-3" role="presentation">
-            <a
-              class="nav-link active"
-              id="tab-home"
-              href="index.html"
-              type="button"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-              ><strong>Trang chủ</strong></a
-            >
-          </li>
-
-          <li class="nav-item pe-3" role="presentation">
-            <a
-              class="nav-link"
-              id="tab-chi-tieu"
-              href="ChiTieu/qlct.html"
-              type="button"
-              role="tab"
-              aria-controls="chi-tieu"
-              aria-selected="false"
-              ><strong>Chi tiêu</strong></a
-            >
-          </li>
-
-          <li class="nav-item pe-3" role="presentation">
-            <a
-              class="nav-link"
-              id="tab-lich-trinh"
-              href="LichTrinh/qltg.html"
-              type="button"
-              role="tab"
-              aria-controls="lich-trinh"
-              aria-selected="false"
-              ><strong>Lịch trình</strong></a
-            >
-          </li>
-
-          <li class="nav-item pe-3" role="presentation">
-            <a
-              class="nav-link"
-              id="tab-ghi-chu"
-              href="GhiChu/qlgc.html"
-              type="button"
-              role="tab"
-              aria-controls="ghi-chu"
-              aria-selected="false"
-              ><strong>Ghi chú</strong></a
-            >
-          </li>
-
-          <li class="nav-item pe-3" role="presentation">
-            <a
-              class="nav-link"
-              id="tab-tai-lieu"
-              href="TaiLieu/qltl.html"
-              type="button"
-              role="tab"
-              aria-controls="tai-lieu"
-              aria-selected="false"
-              ><strong>Tài liệu</strong></a
-            >
-          </li>
-
-          <li class="nav-item pe-3" role="presentation">
-            <a
-              class="nav-link"
-              id="tab-diem-khac-biet"
-              href="#diemkhacbiet"
-              type="button"
-              role="tab"
-              aria-controls="diem-khac-biet"
-              aria-selected="false"
-              ><strong>Điểm khác biệt</strong></a
-            >
-          </li>
-
-          <li class="nav-item pe-3" role="presentation">
-            <a
-              class="nav-link"
-              id="tab-phan-hoi"
-              href="#phanhoi"
-              type="button"
-              role="tab"
-              aria-controls="phan-hoi"
-              aria-selected="false"
-              ><strong>Phản hồi</strong></a
-            >
-          </li>
-
-          <li class="nav-item dropdown pe-3">
-            <a
-              class="nav-link nav-profile d-flex align-items-center pe-2"
-              href="HoSo/users-profile.html"
-            >
-              <img
-                src="../assets/img/profile-img.jpg"
-                alt="Profile"
-                class="rounded-circle"
-              />
-              <span class="d-none d-md-block ps-2">Điền Bá Quang</span> </a
-            ><!-- End Profile Iamge Icon -->
-          </li>
-          <!-- End Profile Nav -->
-        </ul>
-      </nav>
-      <!-- End Icons Navigation -->
-    </header>
-    <!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
-
-    <main id="main" class="main">
-      <!-- End Page Title -->
-      <div class="hero-section">
-        <div>
-          <div class="hero-title">StudentsLife</div>
-          <div class="hero-subtitle">
-            Hành trang vững chắc cho cuộc sống sinh viên
+    <div class="container my-5">
+      <h4><strong>Chức năng của hệ thống</strong></h4>
+      <div class="mb-4">Mô tả các chức năng của hệ thống</div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2">
+              <strong>Quản lý chi tiêu cá nhân</strong>
+            </div>
+            <p>
+              Ghi lại thu - chi hằng ngày, tạo ngân sách cho từng mục đích (ăn
+              uống, học phí, giải trí...), giúp bạn kiểm soát tài chính thông
+              minh hơn
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2"><strong>Quản lý thời gian</strong></div>
+            <p>
+              Tạo lịch biểu, phân chia thời gian học – chơi hợp lý, đặt nhắc
+              nhở việc quan trọng để tối ưu hiệu suất mà không quá tải
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2"><strong>Quản lý ghi chú</strong></div>
+            <p>
+              Lưu lại ý tưởng, nội dung học, trích dẫn hay hoặc nhật ký hằng
+              ngày – mọi thứ bạn cần đều được sắp xếp khoa học, dễ tìm kiếm
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2"><strong>Quản lý tài liệu</strong></div>
+            <p>
+              Tổ chức và lưu trữ tất cả tài liệu học tập của bạn theo môn học,
+              loại tài liệu hoặc học kỳ. Dễ dàng tải lên, phân loại và tìm
+              kiếm khi cần
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2"><strong>Quản lý thông tin cá nhân</strong></div>
+            <p>
+              Cập nhật và bảo mật các thông tin cá nhân như hồ sơ sinh viên,
+              thông tin liên lạc, mục tiêu học tập – tất cả đều được lưu trữ
+              an toàn và riêng tư
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="container my-5">
-        <h4><strong>Chức năng của hệ thống</strong></h4>
-        <div class="mb-4">Mô tả các chức năng của hệ thống</div>
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2">
-                <strong>Quản lý chi tiêu cá nhân</strong>
-              </div>
-              <p>
-                Ghi lại thu - chi hằng ngày, tạo ngân sách cho từng mục đích (ăn
-                uống, học phí, giải trí...), giúp bạn kiểm soát tài chính thông
-                minh hơn
-              </p>
+    <!-- Điểm khác biệt -->
+    <div class="container my-5" id="diemkhacbiet">
+      <h4><strong>Điểm khác biệt của hệ thống</strong></h4>
+      <div class="mb-4">
+        Tích hợp tất cả các chức năng của một hệ thống quản lý đời sống sinh
+        viên
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2">
+              <strong>Tập trung cho đời sống sinh viên</strong>
             </div>
+            <p>
+              Không chỉ là một nền tảng học tập, StudentsLife còn hỗ trợ sinh
+              viên trong cả quản lý tài chính, thời gian, mục tiêu và phát
+              triển bản thân – tất cả trong một.
+            </p>
           </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2"><strong>Quản lý thời gian</strong></div>
-              <p>
-                Tạo lịch biểu, phân chia thời gian học – chơi hợp lý, đặt nhắc
-                nhở việc quan trọng để tối ưu hiệu suất mà không quá tải
-              </p>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2">
+              <strong>Cá nhân hóa theo nhu cầu sinh viên</strong>
             </div>
+            <p>
+              Hệ thống tự động đề xuất nội dung, công cụ và lời nhắc phù hợp
+              với hành vi và mục tiêu học tập cá nhân của từng người dùng
+            </p>
           </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2"><strong>Quản lý ghi chú</strong></div>
-              <p>
-                Lưu lại ý tưởng, nội dung học, trích dẫn hay hoặc nhật ký hằng
-                ngày – mọi thứ bạn cần đều được sắp xếp khoa học, dễ tìm kiếm
-              </p>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2">
+              <strong>Tích hợp và đồng bộ thông minh</strong>
             </div>
+            <p>
+              Lịch học, ghi chú, mục tiêu, chi tiêu – tất cả được đồng bộ và
+              hiển thị trực quan trên một giao diện duy nhất, giúp sinh viên
+              quản lý dễ dàng hơn
+            </p>
           </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2"><strong>Quản lý tài liệu</strong></div>
-              <p>
-                Tổ chức và lưu trữ tất cả tài liệu học tập của bạn theo môn học,
-                loại tài liệu hoặc học kỳ. Dễ dàng tải lên, phân loại và tìm
-                kiếm khi cần
-              </p>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2">
+              <strong>Cộng đồng sinh viên tích cực và hỗ trợ lẫn nhau</strong>
             </div>
+            <p>
+              Không chỉ là công cụ cá nhân, StudentsLife còn là nơi sinh viên
+              chia sẻ kinh nghiệm, hỗ trợ nhau qua diễn đàn, blog và nhóm học
+              tập
+            </p>
           </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2"><strong>Quản lý thông tin cá nhân</strong></div>
-              <p>
-                Cập nhật và bảo mật các thông tin cá nhân như hồ sơ sinh viên,
-                thông tin liên lạc, mục tiêu học tập – tất cả đều được lưu trữ
-                an toàn và riêng tư
-              </p>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2">
+              <strong>Giúp sinh viên theo dõi tiến trình và phát triển bản
+                thân</strong>
             </div>
+            <p>
+              Hệ thống theo dõi sự tiến bộ học tập, tỷ lệ hoàn thành mục tiêu
+              và thậm chí gợi ý cải thiện, tạo động lực học và sống hiệu quả
+              hơn mỗi ngày
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-box">
+            <div class="mb-2">
+              <strong>Giao diện thân thiện – Dễ dùng – Tối ưu cho sinh viên</strong>
+            </div>
+            <p>
+              Thiết kế hiện đại, tối giản nhưng đầy đủ chức năng – phù hợp với
+              sinh viên công nghệ lẫn không chuyên. Trải nghiệm sử dụng mượt
+              mà trên cả desktop và mobile
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Điểm khác biệt -->
-      <div class="container my-5" id="diemkhacbiet">
-        <h4><strong>Điểm khác biệt của hệ thống</strong></h4>
-        <div class="mb-4">
-          Tích hợp tất cả các chức năng của một hệ thống quản lý đời sống sinh
-          viên
-        </div>
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2">
-                <strong>Tập trung cho đời sống sinh viên</strong>
+    <!-- Phản hồi khách hàng -->
+    <div class="container py-5" id="phanhoi">
+      <h4 class="mb-4"><strong>Phản hồi</strong></h4>
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm rounded">
+            <h5 class="fw-bold mb-3">Bùi Minh Đức</h5>
+            <div class="d-flex align-items-center">
+              <img src="../assets/img/profile-img.jpg" class="rounded-circle me-3" width="50" height="50" />
+              <div>
+                <div class="fw-semibold text-secondary">Skibidi</div>
+                <div class="text-muted small">Toilet</div>
               </div>
-              <p>
-                Không chỉ là một nền tảng học tập, StudentsLife còn hỗ trợ sinh
-                viên trong cả quản lý tài chính, thời gian, mục tiêu và phát
-                triển bản thân – tất cả trong một.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2">
-                <strong>Cá nhân hóa theo nhu cầu sinh viên</strong>
-              </div>
-              <p>
-                Hệ thống tự động đề xuất nội dung, công cụ và lời nhắc phù hợp
-                với hành vi và mục tiêu học tập cá nhân của từng người dùng
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2">
-                <strong>Tích hợp và đồng bộ thông minh</strong>
-              </div>
-              <p>
-                Lịch học, ghi chú, mục tiêu, chi tiêu – tất cả được đồng bộ và
-                hiển thị trực quan trên một giao diện duy nhất, giúp sinh viên
-                quản lý dễ dàng hơn
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2">
-                <strong>Cộng đồng sinh viên tích cực và hỗ trợ lẫn nhau</strong>
-              </div>
-              <p>
-                Không chỉ là công cụ cá nhân, StudentsLife còn là nơi sinh viên
-                chia sẻ kinh nghiệm, hỗ trợ nhau qua diễn đàn, blog và nhóm học
-                tập
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2">
-                <strong
-                  >Giúp sinh viên theo dõi tiến trình và phát triển bản
-                  thân</strong
-                >
-              </div>
-              <p>
-                Hệ thống theo dõi sự tiến bộ học tập, tỷ lệ hoàn thành mục tiêu
-                và thậm chí gợi ý cải thiện, tạo động lực học và sống hiệu quả
-                hơn mỗi ngày
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="custom-box">
-              <div class="mb-2">
-                <strong
-                  >Giao diện thân thiện – Dễ dùng – Tối ưu cho sinh viên</strong
-                >
-              </div>
-              <p>
-                Thiết kế hiện đại, tối giản nhưng đầy đủ chức năng – phù hợp với
-                sinh viên công nghệ lẫn không chuyên. Trải nghiệm sử dụng mượt
-                mà trên cả desktop và mobile
-              </p>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Phản hồi khách hàng -->
-      <div class="container py-5" id="phanhoi">
-        <h4 class="mb-4"><strong>Phản hồi</strong></h4>
-        <div class="row g-4">
-          <!-- Card 1 -->
-          <div class="col-md-4">
-            <div class="card p-3 shadow-sm rounded">
-              <h5 class="fw-bold mb-3">Bùi Minh Đức</h5>
-              <div class="d-flex align-items-center">
-                <img
-                  src="../assets/img/profile-img.jpg"
-                  class="rounded-circle me-3"
-                  width="50"
-                  height="50"
-                />
-                <div>
-                  <div class="fw-semibold text-secondary">Skibidi</div>
-                  <div class="text-muted small">Toilet</div>
-                </div>
+        <!-- Card 2 -->
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm rounded">
+            <h5 class="fw-bold mb-3">Vũ Văn Điền</h5>
+            <div class="d-flex align-items-center">
+              <img src="../assets/img/profile-img.jpg" class="rounded-circle me-3" width="50" height="50" />
+              <div>
+                <div class="fw-semibold text-secondary">Tôi đẹp trai</div>
+                <div class="text-muted small">okela</div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Card 2 -->
-          <div class="col-md-4">
-            <div class="card p-3 shadow-sm rounded">
-              <h5 class="fw-bold mb-3">Vũ Văn Điền</h5>
-              <div class="d-flex align-items-center">
-                <img
-                  src="../assets/img/profile-img.jpg"
-                  class="rounded-circle me-3"
-                  width="50"
-                  height="50"
-                />
-                <div>
-                  <div class="fw-semibold text-secondary">Tôi đẹp trai</div>
-                  <div class="text-muted small">okela</div>
-                </div>
+        <!-- Card 3 -->
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm rounded">
+            <h5 class="fw-bold mb-3">Nguyễn Danh Sáng</h5>
+            <div class="d-flex align-items-center">
+              <img src="../assets/img/profile-img.jpg" class="rounded-circle me-3" width="50" height="50" />
+              <div>
+                <div class="fw-semibold text-secondary">I am king</div>
+                <div class="text-muted small">okela</div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Card 3 -->
-          <div class="col-md-4">
-            <div class="card p-3 shadow-sm rounded">
-              <h5 class="fw-bold mb-3">Nguyễn Danh Sáng</h5>
-              <div class="d-flex align-items-center">
-                <img
-                  src="../assets/img/profile-img.jpg"
-                  class="rounded-circle me-3"
-                  width="50"
-                  height="50"
-                />
-                <div>
-                  <div class="fw-semibold text-secondary">I am king</div>
-                  <div class="text-muted small">okela</div>
-                </div>
+        <!-- Card 4 -->
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm rounded">
+            <h5 class="fw-bold mb-3">Lê Đức Anh</h5>
+            <div class="d-flex align-items-center">
+              <img src="../assets/img/profile-img.jpg" class="rounded-circle me-3" width="50" height="50" />
+              <div>
+                <div class="fw-semibold text-secondary">Sản phẩm ổn</div>
+                <div class="text-muted small">okela</div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Card 4 -->
-          <div class="col-md-4">
-            <div class="card p-3 shadow-sm rounded">
-              <h5 class="fw-bold mb-3">Lê Đức Anh</h5>
-              <div class="d-flex align-items-center">
-                <img
-                  src="../assets/img/profile-img.jpg"
-                  class="rounded-circle me-3"
-                  width="50"
-                  height="50"
-                />
-                <div>
-                  <div class="fw-semibold text-secondary">Sản phẩm ổn</div>
-                  <div class="text-muted small">okela</div>
-                </div>
+        <!-- Card 5 -->
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm rounded">
+            <h5 class="fw-bold mb-3">Điền Bá Quang</h5>
+            <div class="d-flex align-items-center">
+              <img src="../assets/img/profile-img.jpg" class="rounded-circle me-3" width="50" height="50" />
+              <div>
+                <div class="fw-semibold text-secondary">Tuyệt vời</div>
+                <div class="text-muted small">okela</div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Card 5 -->
-          <div class="col-md-4">
-            <div class="card p-3 shadow-sm rounded">
-              <h5 class="fw-bold mb-3">Điền Bá Quang</h5>
-              <div class="d-flex align-items-center">
-                <img
-                  src="../assets/img/profile-img.jpg"
-                  class="rounded-circle me-3"
-                  width="50"
-                  height="50"
-                />
-                <div>
-                  <div class="fw-semibold text-secondary">Tuyệt vời</div>
-                  <div class="text-muted small">okela</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 6 -->
-          <div class="col-md-4">
-            <div class="card p-3 shadow-sm rounded">
-              <h5 class="fw-bold mb-3">Đỗ Nam Trung</h5>
-              <div class="d-flex align-items-center">
-                <img
-                  src="../assets/img/profile-img.jpg"
-                  class="rounded-circle me-3"
-                  width="50"
-                  height="50"
-                />
-                <div>
-                  <div class="fw-semibold text-secondary">Thuế 50% nhé</div>
-                  <div class="text-muted small">okela</div>
-                </div>
+        <!-- Card 6 -->
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm rounded">
+            <h5 class="fw-bold mb-3">Đỗ Nam Trung</h5>
+            <div class="d-flex align-items-center">
+              <img src="../assets/img/profile-img.jpg" class="rounded-circle me-3" width="50" height="50" />
+              <div>
+                <div class="fw-semibold text-secondary">Thuế 50% nhé</div>
+                <div class="text-muted small">okela</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
-    <!-- End #main -->
+    </div>
+  </main>
+  <!-- End #main -->
 
-    <!-- ======= Footer ======= -->
-      <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer" style="background-color: #F9FAFE;">
     <div class="parent mx-5" style="height: 200px ;">
       <div class="div1">
         <div class="social-links mt-5 fs-3 "> <!-- fs-3: tăng kích thước icon -->
@@ -519,31 +409,29 @@
       </div>
     </div>
   </footer>
-    <!-- End Footer -->
+  <!-- End Footer -->
 
-    <a
-      href="#"
-      class="back-to-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 
-    <!-- jQuery (bắt buộc) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- jQuery (bắt buộc) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Moment.js -->
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-  </body>
+  <!-- Moment.js -->
+  <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+</body>
+
 </html>

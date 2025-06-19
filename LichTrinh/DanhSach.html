@@ -240,7 +240,7 @@
             box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
         }
 
-        .form-check-input.is-invalid ~ .form-check-label {
+        .form-check-input.is-invalid~.form-check-label {
             color: #dc3545;
         }
 
@@ -354,9 +354,11 @@
                 </li>
                 <li class="nav-item pe-3"><a class="nav-link" href="../TaiLieu/qltl.html"><strong>Tài liệu</strong></a>
                 </li>
-                <li class="nav-item pe-3"><a class="nav-link" href="../index.html"><strong>Điểm khác biệt</strong></a>
+                <li class="nav-item pe-3"><a class="nav-link" href="../index.html#diemkhacbiet"><strong>Điểm khác
+                            biệt</strong></a>
                 </li>
-                <li class="nav-item pe-3"><a class="nav-link" href="../index.html"><strong>Phản hồi</strong></a></li>
+                <li class="nav-item pe-3"><a class="nav-link" href="../index.html#phanhoi"><strong>Phản hồi</strong></a>
+                </li>
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-2" href="../HoSo/users-profile.html">
                         <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
@@ -389,7 +391,8 @@
             <div class="calendar-main">
                 <div class="search-container mb-3" style="max-width: 400px;">
                     <div class="input-group border rounded-pill">
-                        <button class="icon-btn" type="button" id="searchButton" tabindex="-1" style="margin-left: 4px;">
+                        <button class="icon-btn" type="button" id="searchButton" tabindex="-1"
+                            style="margin-left: 4px;">
                             <i class="bi bi-search"></i>
                         </button>
                         <input type="text" class="form-control border-0" placeholder="Tìm kiếm" id="basicSearch">
@@ -402,13 +405,16 @@
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <div class="crud-title mb-0">Kế hoạch sinh viên</div>
                     <div class="d-flex align-items-center" style="gap: 10px;">
-                        <button class="btn btn-primary btn-add-schedule d-flex align-items-center" type="button" style="min-width: 150px; font-weight: 500;">
+                        <button class="btn btn-primary btn-add-schedule d-flex align-items-center" type="button"
+                            style="min-width: 150px; font-weight: 500;">
                             <i class="bi bi-plus-lg me-2"></i> Thêm lịch trình
                         </button>
-                        <button class="icon-btn" title="Làm mới" type="button"><i class="bi bi-arrow-clockwise"></i></button>
+                        <button class="icon-btn" title="Làm mới" type="button"><i
+                                class="bi bi-arrow-clockwise"></i></button>
                         <button class="icon-btn" title="Cài đặt" type="button"><i class="bi bi-gear"></i></button>
                         <button class="icon-btn" title="Bộ lọc" type="button"><i class="bi bi-funnel"></i></button>
-                        <button class="icon-btn" title="Toàn màn hình" type="button"><i class="bi bi-arrows-fullscreen"></i></button>
+                        <button class="icon-btn" title="Toàn màn hình" type="button"><i
+                                class="bi bi-arrows-fullscreen"></i></button>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -529,23 +535,29 @@
     <!-- Modal thêm/sửa lịch trình -->
     <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-sm" style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
                 <div class="position-relative px-3 pt-3 pb-0">
                     <!-- Nút đóng -->
-                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                     <!-- Tiêu đề Modal -->
                     <h5 class="mb-3 fw-bold" id="scheduleModalLabel">Thêm lịch trình mới</h5>
                     <form id="scheduleForm" autocomplete="off" class="d-flex flex-column gap-2">
                         <!-- Tiêu đề -->
                         <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
-                            <label for="eventTitle" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
-                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;" placeholder="Nhập tiêu đề" id="eventTitle" required>
+                            <label for="eventTitle" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu
+                                đề</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;"
+                                placeholder="Nhập tiêu đề" id="eventTitle" required>
                             <div class="error-message" id="titleError">Vui lòng nhập đầy đủ tiêu đề</div>
                         </div>
                         <!-- Mô tả -->
                         <div class="bg-white p-2 rounded mb-2" style="border-radius: 8px;">
-                            <label for="eventDescription" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
-                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;" placeholder="Nhập mô tả" id="eventDescription">
+                            <label for="eventDescription" class="form-label mb-1 fw-semibold"
+                                style="font-size: 1rem;">Mô tả</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" style="font-size: 0.97rem;"
+                                placeholder="Nhập mô tả" id="eventDescription">
                             <div class="error-message" id="descriptionError">Vui lòng nhập đầy đủ mô tả</div>
                         </div>
                         <!-- Thời gian -->
@@ -553,18 +565,26 @@
                             <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
                             <div class="row g-1 align-items-center" style="margin-left: 0; margin-right: 0;">
                                 <div class="col-auto d-flex align-items-center">
-                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="startTime" style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;" value="01:30">
-                                    <span class="time-suffix" id="startTimeSuffix" style="font-size: 0.75rem; margin-left: 2px; margin-right: 4px;"></span>
+                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="startTime"
+                                        style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;"
+                                        value="01:30">
+                                    <span class="time-suffix" id="startTimeSuffix"
+                                        style="font-size: 0.75rem; margin-left: 2px; margin-right: 4px;"></span>
                                 </div>
                                 <div class="col-auto d-flex align-items-center">
                                     <span style="font-size: 0.85rem; margin-right: 2px;">-</span>
                                 </div>
                                 <div class="col-auto d-flex align-items-center">
-                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="endTime" style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;" value="02:45">
-                                    <span class="time-suffix" id="endTimeSuffix" style="font-size: 0.75rem; margin-left: 2px;"></span>
+                                    <input type="text" class="form-control border-0 px-0 py-1 time-input" id="endTime"
+                                        style="width: 60px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-right: 2px;"
+                                        value="02:45">
+                                    <span class="time-suffix" id="endTimeSuffix"
+                                        style="font-size: 0.75rem; margin-left: 2px;"></span>
                                 </div>
                                 <div class="col-auto d-flex align-items-center">
-                                    <input type="text" class="form-control border-0 px-0 py-1 date-input" id="eventDate" style="width: 120px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-left: 8px;" value="Thứ 5, 17 tháng 12" readonly>
+                                    <input type="text" class="form-control border-0 px-0 py-1 date-input" id="eventDate"
+                                        style="width: 120px; font-size: 0.85rem; background-color: #f9fafe; border-radius: 0; margin-left: 8px;"
+                                        value="Thứ 5, 17 tháng 12" readonly>
                                 </div>
                             </div>
                             <div class="error-message" id="timeError">Vui lòng chọn thời gian bắt đầu, kết thúc</div>
@@ -577,19 +597,27 @@
                                 <label class="form-check-label" for="study" style="font-size: 0.97rem;">Học tập</label>
                             </div>
                             <div class="form-check mb-1">
-                                <input class="form-check-input" type="radio" name="eventType" id="personal" value="personal">
-                                <label class="form-check-label" for="personal" style="font-size: 0.97rem;">Cá nhân</label>
+                                <input class="form-check-input" type="radio" name="eventType" id="personal"
+                                    value="personal">
+                                <label class="form-check-label" for="personal" style="font-size: 0.97rem;">Cá
+                                    nhân</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="eventType" id="club" value="club">
-                                <label class="form-check-label" for="club" style="font-size: 0.97rem;">Câu lạc bộ</label>
+                                <label class="form-check-label" for="club" style="font-size: 0.97rem;">Câu lạc
+                                    bộ</label>
                             </div>
                             <div class="error-message" id="typeError">Vui lòng chọn loại lịch trình</div>
                         </div>
                         <!-- Footer nút -->
-                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2" style="padding-left: 2px; padding-right: 2px;">
-                            <button type="button" class="btn btn-primary fw-semibold" style="border-radius: 4px; min-width: 100px; font-size: 1rem;" id="saveScheduleBtn">Lưu</button>
-                            <button type="button" class="btn fw-semibold" style="border-radius: 4px; min-width: 100px; font-size: 1rem; background: #fff; border: 1px solid #dee2e6;" data-bs-dismiss="modal">Quay lại</button>
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2"
+                            style="padding-left: 2px; padding-right: 2px;">
+                            <button type="button" class="btn btn-primary fw-semibold"
+                                style="border-radius: 4px; min-width: 100px; font-size: 1rem;"
+                                id="saveScheduleBtn">Lưu</button>
+                            <button type="button" class="btn fw-semibold"
+                                style="border-radius: 4px; min-width: 100px; font-size: 1rem; background: #fff; border: 1px solid #dee2e6;"
+                                data-bs-dismiss="modal">Quay lại</button>
                         </div>
                     </form>
                 </div>
@@ -598,9 +626,12 @@
     </div>
 
     <!-- Modal xác nhận xóa -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="position: fixed; top: 30px; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2000;">
-            <div class="modal-content" style="border-radius: 6px; max-width: 450px; min-width: 450px; width: 100%; box-shadow: 0 4px 18px rgba(0,0,0,0.07);">
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog"
+            style="position: fixed; top: 30px; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2000;">
+            <div class="modal-content"
+                style="border-radius: 6px; max-width: 450px; min-width: 450px; width: 100%; box-shadow: 0 4px 18px rgba(0,0,0,0.07);">
                 <div class="modal-body py-4 px-4">
                     <div class="d-flex align-items-center mb-4" style="gap: 10px;">
                         <span style="font-size: 1.5rem; color: #fbbc04;">
@@ -611,7 +642,8 @@
                         </span>
                     </div>
                     <div class="d-flex justify-content-end gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-flat btn-action-modal" id="cancelDeleteBtn" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-outline-primary btn-flat btn-action-modal"
+                            id="cancelDeleteBtn" data-bs-dismiss="modal">
                             Không xóa
                         </button>
                         <button type="button" class="btn btn-primary btn-flat btn-action-modal" id="confirmDeleteBtn">
@@ -624,12 +656,15 @@
     </div>
 
     <!-- Modal xem chi tiết lịch trình -->
-    <div class="modal fade" id="viewScheduleModal" tabindex="-1" aria-labelledby="viewScheduleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="viewScheduleModal" tabindex="-1" aria-labelledby="viewScheduleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-sm" style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
                 <div class="position-relative px-3 pt-3 pb-0">
                     <!-- Nút đóng -->
-                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                     <!-- Tiêu đề Modal -->
                     <h5 class="mb-3 fw-bold" id="viewScheduleModalLabel">Chi tiết lịch trình</h5>
                     <div class="d-flex flex-column gap-2">
@@ -658,8 +693,11 @@
                             <div class="px-0 py-1" style="font-size: 0.97rem;" id="viewEventType"></div>
                         </div>
                         <!-- Footer nút -->
-                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2" style="padding-left: 2px; padding-right: 2px;">
-                            <button type="button" class="btn btn-primary fw-semibold" style="border-radius: 4px; min-width: 100px; font-size: 1rem;" data-bs-dismiss="modal">Quay lại</button>
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2"
+                            style="padding-left: 2px; padding-right: 2px;">
+                            <button type="button" class="btn btn-primary fw-semibold"
+                                style="border-radius: 4px; min-width: 100px; font-size: 1rem;"
+                                data-bs-dismiss="modal">Quay lại</button>
                         </div>
                     </div>
                 </div>
@@ -668,12 +706,13 @@
     </div>
 
     <!-- Toast thông báo thành công -->
-    <div id="successToast" class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true" 
+    <div id="successToast" class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true"
         style="position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 20000; min-width: 450px; max-width: 450px; width: 450px; height: 65px; background: #f6fff2; border: 1.5px solid #8de885; box-shadow: 0 2px 18px rgba(0,0,0,0.05); border-radius: 8px; display: none; color: #222;">
         <div class="d-flex justify-content-center align-items-center h-100" style="gap: 18px; height: 100%;">
             <span style="font-size: 2rem; color: #42cb39;"><i class="bi bi-check-circle"></i></span>
             <span class="fw-semibold fs-5" id="successToastMsg" style="color: #222;">Thành công!</span>
-            <button type="button" class="btn-close" aria-label="Close" onclick="hideSuccessToast()" style="font-size: 2.1rem; width: 2.4rem; height: 2.4rem; align-self: center;"></button>
+            <button type="button" class="btn-close" aria-label="Close" onclick="hideSuccessToast()"
+                style="font-size: 2.1rem; width: 2.4rem; height: 2.4rem; align-self: center;"></button>
         </div>
     </div>
 
@@ -705,10 +744,10 @@
                 const startTime = row.cells[3].textContent.toLowerCase();
                 const endTime = row.cells[4].textContent.toLowerCase();
 
-                if (title.includes(query) || 
-                    description.includes(query) || 
-                    type.includes(query) || 
-                    startTime.includes(query) || 
+                if (title.includes(query) ||
+                    description.includes(query) ||
+                    type.includes(query) ||
+                    startTime.includes(query) ||
                     endTime.includes(query)) {
                     row.style.display = '';
                 } else {
@@ -752,7 +791,7 @@
         function handleEditSchedule(row) {
             resetForm();
             editingRow = row;
-            
+
             // Lấy dữ liệu từ row
             const title = row.cells[0].textContent;
             const description = row.cells[1].textContent;
@@ -986,7 +1025,7 @@
         }
 
         // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Xử lý tìm kiếm khi trang load
             const urlParams = new URLSearchParams(window.location.search);
             const searchQuery = urlParams.get('search');
@@ -999,7 +1038,7 @@
             document.getElementById('searchButton').addEventListener('click', handleSearch);
 
             // Thêm event listener cho input khi nhấn Enter
-            document.getElementById('basicSearch').addEventListener('keypress', function(e) {
+            document.getElementById('basicSearch').addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     handleSearch();
                 }
@@ -1015,7 +1054,7 @@
             document.getElementById('saveScheduleBtn').addEventListener('click', saveSchedule);
 
             // Nút xóa trong modal xác nhận
-            document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
                 if (editingRow) {
                     editingRow.remove();
                     showSuccessToast('Xóa lịch trình thành công');
@@ -1024,18 +1063,18 @@
             });
 
             // Clear validation errors khi nhập liệu
-            document.getElementById('eventTitle').addEventListener('input', function() {
+            document.getElementById('eventTitle').addEventListener('input', function () {
                 this.classList.remove('is-invalid');
                 document.getElementById('titleError').classList.remove('show');
             });
 
-            document.getElementById('eventDescription').addEventListener('input', function() {
+            document.getElementById('eventDescription').addEventListener('input', function () {
                 this.classList.remove('is-invalid');
                 document.getElementById('descriptionError').classList.remove('show');
             });
 
             document.querySelectorAll('input[name="eventType"]').forEach(radio => {
-                radio.addEventListener('change', function() {
+                radio.addEventListener('change', function () {
                     document.querySelectorAll('input[name="eventType"]').forEach(r => r.classList.remove('is-invalid'));
                     document.getElementById('typeError').classList.remove('show');
                 });

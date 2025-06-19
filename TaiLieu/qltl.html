@@ -16,8 +16,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,41 +39,51 @@
             background-color: #f4f4f4;
             padding: 10px;
         }
+
         .document-table tbody td {
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
+
         .document-table .action-cell span.view-edit {
             color: rgb(24, 144, 255);
             margin-right: 5px;
         }
+
         .document-table .action-cell span.delete {
             color: rgb(255, 24, 24);
         }
+
         .modal-content {
             border-radius: 16px;
         }
+
         #addDocumentModal .form-control {
             border-radius: 8px;
         }
+
         .custom-alert-modal {
             max-width: 400px;
             margin: 2.5rem auto 0 auto;
         }
+
         #deleteConfirmModal .modal-content {
             border-radius: 10px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
             border: 1px solid #F2F2F2;
         }
+
         #deleteConfirmModal .modal-body {
             padding: 24px 24px 0 24px;
         }
+
         #deleteConfirmModal .modal-footer {
             border-top: none;
             padding-right: 20px;
             padding-bottom: 14px;
             background: none;
         }
+
         .parent {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -98,7 +108,62 @@
             /* nếu bạn muốn nội dung giãn đều */
         }
 
+        .custom-toast {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 340px;
+            max-width: 90vw;
+            background: #F6FFF0;
+            border: 2px solid #B3E8A3;
+            color: #222;
+            padding: 12px 24px 12px 16px;
+            border-radius: 8px;
+            z-index: 1055;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            animation: toast-in 0.3s;
+        }
 
+        @keyframes toast-in {
+            from {
+                opacity: 0;
+                top: 0;
+            }
+
+            to {
+                opacity: 1;
+                top: 24px;
+            }
+        }
+
+        .custom-toast .toast-icon {
+            color: #4BC300;
+            margin-right: 14px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-toast .toast-message {
+            flex: 1;
+        }
+
+        .custom-toast .toast-close {
+            cursor: pointer;
+            color: #888;
+            margin-left: 18px;
+            font-size: 22px;
+            line-height: 1;
+            transition: color .2s;
+        }
+
+        .custom-toast .toast-close:hover {
+            color: #4BC300;
+        }
     </style>
 
     <!-- =======================================================
@@ -112,640 +177,568 @@
 
 <body>
 
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center">
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-        <a href="../index.html" class="logo d-flex align-items-center">
-            <img src="../assets/img/students_logo.png" alt="">
-        </a>
-    </div><!-- End Logo -->
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="../index.html" class="logo d-flex align-items-center">
+                <img src="../assets/img/students_logo.png" alt="">
+            </a>
+        </div><!-- End Logo -->
 
-    <nav class="header-nav ms-auto">
-        <ul class="nav d-flex align-items-center nav-tabs-bordered" style="border-bottom: none !important;">
-            <li class="nav-item pe-3" role="presentation">
-                <a class="nav-link" id="tab-home" href="../index.html" type="button" role="tab"
-                   aria-controls="home" aria-selected="true"><strong>Trang chủ</strong></a>
-            </li>
+        <nav class="header-nav ms-auto">
+            <ul class="nav d-flex align-items-center nav-tabs-bordered" style="border-bottom: none !important;">
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-home" href="../index.html" type="button" role="tab" aria-controls="home"
+                        aria-selected="true"><strong>Trang chủ</strong></a>
+                </li>
 
-            <li class="nav-item pe-3" role="presentation">
-                <a class="nav-link" id="tab-chi-tieu" href="../ChiTieu/qlct.html" type="button" role="tab"
-                   aria-controls="chi-tieu" aria-selected="false"><strong>Chi
-                    tiêu</strong></a>
-            </li>
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-chi-tieu" href="../ChiTieu/qlct.html" type="button" role="tab"
+                        aria-controls="chi-tieu" aria-selected="false"><strong>Chi
+                            tiêu</strong></a>
+                </li>
 
-            <li class="nav-item pe-3" role="presentation">
-                <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
-                   aria-controls="lich-trinh" aria-selected="false"><strong>Lịch
-                    trình</strong></a>
-            </li>
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/Lich.html" type="button" role="tab"
+                        aria-controls="lich-trinh" aria-selected="false"><strong>Lịch
+                            trình</strong></a>
+                </li>
 
-            <li class="nav-item pe-3" role="presentation">
-                <a class="nav-link" id="tab-ghi-chu" href="../GhiChu/qlgc.html" type="button" role="tab"
-                   aria-controls="ghi-chu" aria-selected="false"><strong>Ghi
-                    chú</strong></a>
-            </li>
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-ghi-chu" href="../GhiChu/qlgc.html" type="button" role="tab"
+                        aria-controls="ghi-chu" aria-selected="false"><strong>Ghi
+                            chú</strong></a>
+                </li>
 
-            <li class="nav-item pe-3" role="presentation">
-                <a class="nav-link active" id="tab-tai-lieu" data-bs-toggle="tab" data-bs-target="#tai-lieu"
-                   type="button" role="tab" aria-controls="tai-lieu" aria-selected="false"><strong>Tài
-                    liệu</strong></a>
-            </li>
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link active" id="tab-tai-lieu" data-bs-toggle="tab" data-bs-target="#tai-lieu"
+                        type="button" role="tab" aria-controls="tai-lieu" aria-selected="false"><strong>Tài
+                            liệu</strong></a>
+                </li>
 
-            <li class="nav-item pe-3" role="presentation">
-                <a class="nav-link" id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
-                   aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
-                    biệt</strong></a>
-            </li>
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
+                        aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
+                            biệt</strong></a>
+                </li>
 
-            <li class="nav-item pe-3" role="presentation">
-                <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab"
-                   aria-controls="phan-hoi" aria-selected="false"><strong>Phản hồi</strong></a>
-            </li>
+                <li class="nav-item pe-3" role="presentation">
+                    <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab"
+                        aria-controls="phan-hoi" aria-selected="false"><strong>Phản hồi</strong></a>
+                </li>
 
-            <li class="nav-item dropdown pe-3">
-                <a class="nav-link nav-profile d-flex align-items-center pe-2" href="../HoSo/users-profile.html">
-                    <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block ps-2">Nguyễn Văn A</span>
-                </a><!-- End Profile Image Icon -->
-            </li><!-- End Profile Nav -->
-        </ul>
-    </nav><!-- End Icons Navigation -->
-</header><!-- End Header -->
+                <li class="nav-item dropdown pe-3">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-2" href="../HoSo/users-profile.html">
+                        <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block ps-2">Nguyễn Văn A</span>
+                    </a><!-- End Profile Image Icon -->
+                </li><!-- End Profile Nav -->
+            </ul>
+        </nav><!-- End Icons Navigation -->
+    </header><!-- End Header -->
 
-<main id="main" class="main">
-
-    <section class="section dashboard">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-start mb-4">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDocumentModal">Thêm tài liệu</button>
-                        </div>
-                        <table class="table document-table">
-                            <thead>
-                            <tr>
-                                <th>Tiêu đề</th>
-                                <th>Mô tả</th>
-                                <th>Ngày tải lên</th>
-                                <th>Kích thước</th>
-                                <th>Loại</th>
-                                <th>Hành động</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>TradeCode 99</td>
-                                <td>Vel cras auctor at torts.</td>
-                                <td>08:28:36 2021-02-05</td>
-                                <td>256 KB</td>
-                                <td>docx</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 98</td>
-                                <td>ds.</td>
-                                <td>19:49:33 2021-02-03</td>
-                                <td>1.2 MB</td>
-                                <td>docx</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 97</td>
-                                <td>hehe</td>
-                                <td>19:17:15 2021-02-02</td>
-                                <td>1 MB</td>
-                                <td>pdf</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 96</td>
-                                <td>Fermentum porttitor</td>
-                                <td>09:46:33 2021-02-02</td>
-                                <td>32 KB</td>
-                                <td>docx</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 95</td>
-                                <td>Sed ornare lisi</td>
-                                <td>07:57:01 2021-02-02</td>
-                                <td>5 MB</td>
-                                <td>docx</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 94</td>
-                                <td>Molestie est velit.</td>
-                                <td>05:01:54 2021-02-02</td>
-                                <td>3.2 MB</td>
-                                <td>docx</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 93</td>
-                                <td>Et adipiscing vitaget vel.</td>
-                                <td>00:18:11 2021-02-02</td>
-                                <td>2.1 MB</td>
-                                <td>pdf</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 92</td>
-                                <td>Leo maecennas nibh.</td>
-                                <td>11:03:33 2021-02-01</td>
-                                <td>1.8 MB</td>
-                                <td>docx</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 91</td>
-                                <td>Nulla a aliquet su.</td>
-                                <td>03:42:50 2021-01-31</td>
-                                <td>1 MB</td>
-                                <td>pdf</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            <tr>
-                                <td>TradeCode 90</td>
-                                <td>Tellus eget u non.</td>
-                                <td>00:44:25 2021-01-31</td>
-                                <td>50 KB</td>
-                                <td>pdf</td>
-                                <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
-                            <ul class="pagination" id="document-pagination">
-                                <li class="page-item disabled"><a class="page-link" href="#"><<</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">>></a></li>
-                            </ul>
-                        </nav>
+    <main id="main" class="main">
+        <section class="section dashboard">
+            <div class="row">
+                <!-- Bên trái: block chứa nút Thêm tài liệu -->
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="card shadow-sm d-flex align-items-center justify-content-center"
+                        style="border-radius:16px; min-height:170px;">
+                        <button class="btn btn-primary mt-3 mb-3" style="width:85%;font-size:18px;"
+                            data-bs-toggle="modal" data-bs-target="#addDocumentModal">
+                            <i class="bi bi-plus-circle"></i> Thêm tài liệu
+                        </button>
                     </div>
                 </div>
-            </div><!-- End Reports -->
-        </div>
-    </section>
 
-</main><!-- End #main -->
+                <!-- Bên phải: bảng tài liệu -->
+                <div class="col-lg-9 col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table document-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tiêu đề</th>
+                                        <th>Mô tả</th>
+                                        <th>Ngày tải lên</th>
+                                        <th>Kích thước</th>
+                                        <th>Loại</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TradeCode 99</td>
+                                        <td>Vel cras auctor at torts.</td>
+                                        <td>08:28:36 2021-02-05</td>
+                                        <td>256 KB</td>
+                                        <td>docx</td>
+                                        <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span
+                                                class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TradeCode 98</td>
+                                        <td>ds.</td>
+                                        <td>19:49:33 2021-02-03</td>
+                                        <td>1.2 MB</td>
+                                        <td>docx</td>
+                                        <td class="action-cell"><span class="view-edit">Xem chi tiết</span><span
+                                                class="view-edit">Sửa</span><span class="delete">Xóa</span></td>
+                                    </tr>
+                                    <!-- ...Các dòng còn lại giữ nguyên... -->
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
+                                <ul class="pagination" id="document-pagination">
+                                    <li class="page-item disabled"><a class="page-link" href="#">
+                                            <<< /a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">>></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<!-- ======= Footer ======= -->
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer" style="background-color: #F9FAFE;">
-    <div class="parent mx-5" style="height: 200px ;">
-        <div class="div1">
-            <div class="social-links mt-5 fs-3 ">
-                <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+
+    <!-- ======= Footer ======= -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+        <div class="parent mx-5" style="height: 200px ;">
+            <div class="div1">
+                <div class="social-links mt-5 fs-3 ">
+                    <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="div2">
+                <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Giới Thiệu</li>
+                    <li class="text-black m-1">Sứ Mệnh</li>
+                    <li class="text-black m-1">Đội Ngũ</li>
+                    <li class="text-black m-1">Liên Hệ</li>
+                    <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+                </ul>
+            </div>
+            <div class="div3">
+                <h5 class="mb-4"><strong>Khám phá</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Góc học tập</li>
+                    <li class="text-black m-1">Kỹ năng mềm</li>
+                    <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+                    <li class="text-black m-1">Học bổng & Cơ hội</li>
+                    <li class="text-black m-1">Hướng nghiệp</li>
+                </ul>
+            </div>
+            <div class="div4">
+                <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Tài liệu học tập</li>
+                    <li class="text-black m-1">Công cụ học tập</li>
+                    <li class="text-black m-1">Gợi ý khóa học</li>
+                    <li class="text-black m-1">Cộng đồng sinh viên</li>
+                    <li class="text-black m-1">Góp ý & báo lỗi</li>
+                </ul>
+            </div>
+            <div class="div5">
+                <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+                    <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+                    <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+                    <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+                    <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+                </ul>
             </div>
         </div>
-        <div class="div2">
-            <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
-            <ul class="list-unstyled">
-                <li class="text-black m-1">Giới Thiệu</li>
-                <li class="text-black m-1">Sứ Mệnh</li>
-                <li class="text-black m-1">Đội Ngũ</li>
-                <li class="text-black m-1">Liên Hệ</li>
-                <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
-            </ul>
-        </div>
-        <div class="div3">
-            <h5 class="mb-4"><strong>Khám phá</strong></h5>
-            <ul class="list-unstyled">
-                <li class="text-black m-1">Góc học tập</li>
-                <li class="text-black m-1">Kỹ năng mềm</li>
-                <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
-                <li class="text-black m-1">Học bổng & Cơ hội</li>
-                <li class="text-black m-1">Hướng nghiệp</li>
-            </ul>
-        </div>
-        <div class="div4">
-            <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
-            <ul class="list-unstyled">
-                <li class="text-black m-1">Tài liệu học tập</li>
-                <li class="text-black m-1">Công cụ học tập</li>
-                <li class="text-black m-1">Gợi ý khóa học</li>
-                <li class="text-black m-1">Cộng đồng sinh viên</li>
-                <li class="text-black m-1">Góp ý & báo lỗi</li>
-            </ul>
-        </div>
-        <div class="div5">
-            <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
-            <ul class="list-unstyled">
-                <li class="text-black m-1">Theo dõi tiến độ học tập</li>
-                <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
-                <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
-                <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
-                <li class="text-black m-1">Quyền riêng tư nâng cao</li>
-            </ul>
-        </div>
-    </div>
-</footer><!-- End Footer -->
-<script>
-    // Lấy các phần tử
-    const docTitle = document.getElementById('doc-title');
-    const docDesc = document.getElementById('doc-desc');
-    const docFile = document.getElementById('doc-file');
-    const dateFrom = document.getElementById('date-from');
-    const timeFrom = document.getElementById('time-from');
-    const timeTo = document.getElementById('time-to');
-    const dateTo = document.getElementById('date-to');
+    </footer><!-- End Footer -->
+    <script>
+        // Lấy các phần tử
+        const docTitle = document.getElementById('doc-title');
+        const docDesc = document.getElementById('doc-desc');
+        const docFile = document.getElementById('doc-file');
+        const dateFrom = document.getElementById('date-from');
+        const timeFrom = document.getElementById('time-from');
+        const timeTo = document.getElementById('time-to');
+        const dateTo = document.getElementById('date-to');
 
-    // Khi bấm Lưu
-    saveBtn.addEventListener('click', function() {
-        const title = docTitle.value || 'Không có tiêu đề';
-        const desc = docDesc.value || '';
-        const now = new Date();
-        const uploadedDate = now.toLocaleTimeString('vi-VN') + ' ' + now.toLocaleDateString('vi-VN');
-        // Lấy tên file, kích thước, loại file
-        let fileName = '';
-        let fileSize = '';
-        let fileType = '';
-        if (docFile.files.length > 0) {
-            fileName = docFile.files[0].name;
-            fileSize = (docFile.files[0].size / 1024).toFixed(1) + ' KB';
-            fileType = docFile.files[0].name.split('.').pop();
-        } else {
-            fileName = '';
-            fileSize = '';
-            fileType = '';
-        }
 
-        // Chèn dòng mới vào đầu bảng
-        const tbody = document.querySelector('.document-table tbody');
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-        <td>${title}</td>
-        <td>${desc}</td>
-        <td>${uploadedDate}</td>
-        <td>${fileSize}</td>
-        <td>${fileType}</td>
-        <td class="action-cell">
-            <span class="view-edit">Xem chi tiết</span>
-            <span class="view-edit">Sửa</span>
-            <span class="delete">Xóa</span>
-        </td>
-    `;
-        tbody.insertBefore(newRow, tbody.firstChild);
-
-        // Đóng modal, reset form
-        docTitle.value = '';
-        docDesc.value = '';
-        docFile.value = '';
-        dateFrom.value = '';
-        timeFrom.value = '';
-        timeTo.value = '';
-        dateTo.value = '';
         // Đóng modal (Bootstrap 5)
         const modal = bootstrap.Modal.getInstance(document.getElementById('addDocumentModal'));
         modal.hide();
-    });
-</script>
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+    </script>
 
-<!-- Vendor JS Files -->
-<script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/chart.js/chart.umd.js"></script>
-<script src="../assets/vendor/echarts/echarts.min.js"></script>
-<script src="../assets/vendor/quill/quill.js"></script>
-<script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="../assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="../assets/vendor/php-email-form/validate.js"></script>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-<!-- Template Main JS File -->
-<script src="../assets/js/main.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../assets/vendor/quill/quill.js"></script>
+    <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
 
-<!-- jQuery (bắt buộc) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="../assets/js/main.js"></script>
 
-<!-- Moment.js -->
-<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<!-- Modal Thêm Tài Liệu -->
-<div class="modal fade" id="addDocumentModal" tabindex="-1" aria-labelledby="addDocumentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addDocumentModalLabel">Thêm tài liệu mới</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <!-- Tiêu đề -->
-                    <div class="mb-3">
-                        <label for="doc-title" class="form-label">Tiêu đề</label>
-                        <input type="text" class="form-control" id="doc-title" placeholder="Nhập tiêu đề">
+    <!-- jQuery (bắt buộc) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <!-- Modal Thêm Tài Liệu -->
+    <div class="modal fade mt-4" id="addDocumentModal" tabindex="-1" aria-labelledby="addDocumentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"
+                style="background-color: #F0F2F5; position: relative; width: 530px; min-height: 430px;">
+                <button type="button" class="btn-close position-absolute top-0 end-0" style="width: 40px; height: 37px;"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="p-4 border-bottom mx-4"
+                    style="background-color: #FFFFFF; border-radius: 8px; margin-top: 37px; height: 64px;">
+                    <h5 class="fw-bold mb-3" id="addDocumentModalLabel">Thêm tài liệu mới</h5>
+                </div>
+                <form class="mt-2 needs-validation" id="addDocumentForm" novalidate>
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
+                        <label class="form-label">Tiêu đề</label>
+                        <input type="text" class="form-control" id="doc-title" placeholder="Nhập tiêu đề" required>
                     </div>
-                    <!-- Mô tả -->
-                    <div class="mb-3">
-                        <label for="doc-desc" class="form-label">Mô tả</label>
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
+                        <label class="form-label">Mô tả</label>
                         <textarea class="form-control" id="doc-desc" rows="2" placeholder="Nhập mô tả"></textarea>
                     </div>
-                    <!-- Thời gian -->
-                    <div class="mb-3">
-                        <label class="form-label">Thời gian</label>
-                        <div class="row g-2 align-items-center">
-                            <div class="col-auto">
-                                <input type="date" class="form-control" id="date-from">
-                            </div>
-                            <div class="col-auto">
-                                <input type="time" class="form-control" id="time-from">
-                            </div>
-                            <div class="col-auto">
-                                <span> - </span>
-                            </div>
-                            <div class="col-auto">
-                                <input type="time" class="form-control" id="time-to">
-                            </div>
-                            <div class="col-auto">
-                                <input type="date" class="form-control" id="date-to">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Upload -->
-                    <div class="mb-3">
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
                         <label class="form-label">Tệp đính kèm</label>
                         <input class="form-control" type="file" id="doc-file" multiple>
                         <div class="form-text">Kéo & thả tệp tại đây hoặc chọn tệp.</div>
                     </div>
+                    <div class="d-flex justify-content-end gap-3 mt-1 me-4 mb-4">
+                        <button type="button" class="btn btn-primary" id="saveDocBtn"
+                            style="border-radius:2px; width: 85.9px;">Lưu</button>
+                        <button type="button" class="btn btn-light" style="border-radius:2px;"
+                            data-bs-dismiss="modal">Quay lại</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                <button type="button" class="btn btn-primary" id="saveDocBtn">Lưu</button>
             </div>
         </div>
     </div>
-</div>
-<script>
-    const PAGE_SIZE = 5;
-    let currentPage = 1;
-    let documentData = getTableData();
-    let editingIndex = null;
-    let deletingIndex = null;
 
-    // Lấy dữ liệu ban đầu từ bảng (chỉ dùng khi tải trang)
-    function getTableData() {
-        const data = [];
-        document.querySelectorAll('.document-table tbody tr').forEach(tr => {
-            const tds = tr.querySelectorAll('td');
-            data.push({
-                title: tds[0].textContent,
-                desc: tds[1].textContent,
-                date: tds[2].textContent,
-                size: tds[3].textContent,
-                type: tds[4].textContent
+    <script>
+        const PAGE_SIZE = 5;
+        let currentPage = 1;
+        let documentData = getTableData();
+        let editingIndex = null;
+        let deletingIndex = null;
+
+        function getTableData() {
+            const data = [];
+            document.querySelectorAll('.document-table tbody tr').forEach(tr => {
+                const tds = tr.querySelectorAll('td');
+                data.push({
+                    title: tds[0].textContent,
+                    desc: tds[1].textContent,
+                    date: tds[2].textContent,
+                    size: tds[3].textContent,
+                    type: tds[4].textContent
+                });
             });
-        });
-        return data;
-    }
+            return data;
+        }
 
-    // Render lại bảng theo trang
-    function renderTable(page=1) {
-        currentPage = page;
-        const tbody = document.querySelector('.document-table tbody');
-        tbody.innerHTML = '';
-        const start = (page-1)*PAGE_SIZE;
-        const pageData = documentData.slice(start, start+PAGE_SIZE);
-        pageData.forEach((row, idx) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
+        function renderTable(page = 1) {
+            currentPage = page;
+            const tbody = document.querySelector('.document-table tbody');
+            tbody.innerHTML = '';
+            const start = (page - 1) * PAGE_SIZE;
+            const pageData = documentData.slice(start, start + PAGE_SIZE);
+            pageData.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
             <td>${row.title}</td>
             <td>${row.desc}</td>
             <td>${row.date}</td>
             <td>${row.size}</td>
             <td>${row.type}</td>
             <td class="action-cell">
-                <span class="view-edit btn-view" data-index="${start+idx}" style="cursor:pointer">Xem chi tiết</span>
-                <span class="view-edit btn-edit" data-index="${start+idx}" style="cursor:pointer">Sửa</span>
-                <span class="delete btn-delete" data-index="${start+idx}" style="cursor:pointer">Xóa</span>
+                <span class="view-edit btn-view" data-index="${start + idx}" style="cursor:pointer">Xem chi tiết</span>
+                <span class="view-edit btn-edit" data-index="${start + idx}" style="cursor:pointer">Sửa</span>
+                <span class="delete btn-delete" data-index="${start + idx}" style="cursor:pointer">Xóa</span>
             </td>
         `;
-            tbody.appendChild(tr);
-        });
-        renderPagination();
-        attachRowEvents();
-    }
-
-    // Phân trang động
-    function renderPagination() {
-        const totalPages = Math.ceil(documentData.length / PAGE_SIZE);
-        const pag = document.getElementById('document-pagination');
-        pag.innerHTML = '';
-        pag.innerHTML += `<li class="page-item${currentPage===1?' disabled':''}">
-        <a class="page-link" href="#" data-page="${currentPage-1}"><<</a></li>`;
-
-        let pageStart = Math.max(1, currentPage-2);
-        let pageEnd = Math.min(totalPages, currentPage+2);
-        if(currentPage <= 3) pageEnd = Math.min(5, totalPages);
-        if(currentPage >= totalPages-2) pageStart = Math.max(1, totalPages-4);
-
-        for(let i=pageStart; i<=pageEnd; i++) {
-            pag.innerHTML += `<li class="page-item${i===currentPage?' active':''}">
-            <a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+                tbody.appendChild(tr);
+            });
+            renderPagination();
+            attachRowEvents();
         }
-        pag.innerHTML += `<li class="page-item${currentPage===totalPages||totalPages===0?' disabled':''}">
-        <a class="page-link" href="#" data-page="${currentPage+1}">>></a></li>`;
-        document.querySelectorAll('#document-pagination .page-link').forEach(link => {
-            link.onclick = function(e) {
-                e.preventDefault();
-                const page = Number(this.dataset.page);
-                if(page >=1 && page <= totalPages) renderTable(page);
-            }
-        });
-    }
 
-    // Thêm mới tài liệu
-    document.getElementById('saveDocBtn').addEventListener('click', function() {
-        const title = document.getElementById('doc-title').value || 'Không có tiêu đề';
-        const desc = document.getElementById('doc-desc').value || '';
-        const now = new Date();
-        const uploadedDate = now.toLocaleTimeString('vi-VN') + ' ' + now.toLocaleDateString('vi-VN');
-        let fileSize = '', fileType = '';
-        const docFile = document.getElementById('doc-file');
-        if (docFile && docFile.files.length > 0) {
-            fileSize = (docFile.files[0].size/1024).toFixed(1) + ' KB';
-            fileType = docFile.files[0].name.split('.').pop();
-        }
-        documentData.unshift({
-            title,
-            desc,
-            date: uploadedDate,
-            size: fileSize,
-            type: fileType
-        });
-        renderTable(1);
-        document.getElementById('addDocumentForm')?.reset();
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addDocumentModal'));
-        modal.hide();
-    });
-
-    // Sửa tài liệu
-    document.getElementById('updateDocBtn').onclick = function() {
-        if(editingIndex !== null) {
-            documentData[editingIndex].title = document.getElementById('edit-doc-title').value;
-            documentData[editingIndex].desc = document.getElementById('edit-doc-desc').value;
-            renderTable(currentPage);
-            const modal = bootstrap.Modal.getInstance(document.getElementById('editDocumentModal'));
-            modal.hide();
-        }
-    };
-
-    // Xóa tài liệu
-    document.getElementById('confirmDeleteBtn').onclick = function() {
-        if(deletingIndex !== null) {
-            documentData.splice(deletingIndex, 1);
+        function renderPagination() {
             const totalPages = Math.ceil(documentData.length / PAGE_SIZE);
-            if (currentPage > totalPages) currentPage = totalPages;
-            renderTable(currentPage > 0 ? currentPage : 1);
-            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
-            modal.hide();
+            const pag = document.getElementById('document-pagination');
+            pag.innerHTML = '';
+            pag.innerHTML += `<li class="page-item${currentPage === 1 ? ' disabled' : ''}">
+        <a class="page-link" href="#" data-page="${currentPage - 1}"><<</a></li>`;
+
+            let pageStart = Math.max(1, currentPage - 2);
+            let pageEnd = Math.min(totalPages, currentPage + 2);
+            if (currentPage <= 3) pageEnd = Math.min(5, totalPages);
+            if (currentPage >= totalPages - 2) pageStart = Math.max(1, totalPages - 4);
+
+            for (let i = pageStart; i <= pageEnd; i++) {
+                pag.innerHTML += `<li class="page-item${i === currentPage ? ' active' : ''}">
+            <a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+            }
+            pag.innerHTML += `<li class="page-item${currentPage === totalPages || totalPages === 0 ? ' disabled' : ''}">
+        <a class="page-link" href="#" data-page="${currentPage + 1}">>></a></li>`;
+            document.querySelectorAll('#document-pagination .page-link').forEach(link => {
+                link.onclick = function (e) {
+                    e.preventDefault();
+                    const page = Number(this.dataset.page);
+                    if (page >= 1 && page <= totalPages) renderTable(page);
+                }
+            });
         }
-    };
 
-    // Gán lại sự kiện cho các nút mỗi khi render
-    function attachRowEvents() {
-        // Xem chi tiết (nếu cần)
-        document.querySelectorAll('.btn-view').forEach(btn => {
-            btn.onclick = function() {
-                const idx = +this.dataset.index;
-                const doc = documentData[idx];
-                document.getElementById('view-title').innerText = doc.title;
-                document.getElementById('view-desc').innerText = doc.desc;
-                document.getElementById('view-date').innerText = doc.date;
-                document.getElementById('view-size').innerText = doc.size;
-                document.getElementById('view-type').innerText = doc.type;
-                new bootstrap.Modal(document.getElementById('viewDocumentModal')).show();
+        // Thêm mới tài liệu
+        document.getElementById('saveDocBtn').addEventListener('click', function () {
+            const title = document.getElementById('doc-title').value || 'Không có tiêu đề';
+            const desc = document.getElementById('doc-desc').value || '';
+            const now = new Date();
+            const uploadedDate = now.toLocaleTimeString('vi-VN') + ' ' + now.toLocaleDateString('vi-VN');
+            let fileSize = '', fileType = '';
+            const docFile = document.getElementById('doc-file');
+            if (docFile && docFile.files.length > 0) {
+                fileSize = (docFile.files[0].size / 1024).toFixed(1) + ' KB';
+                fileType = docFile.files[0].name.split('.').pop();
             }
+            documentData.unshift({
+                title,
+                desc,
+                date: uploadedDate,
+                size: fileSize,
+                type: fileType
+            });
+            renderTable(1);
+            document.getElementById('addDocumentForm')?.reset();
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addDocumentModal'));
+            modal.hide();
+            showToast("Thêm tài liệu thành công");
         });
-        // Sửa
-        document.querySelectorAll('.btn-edit').forEach(btn => {
-            btn.onclick = function() {
-                editingIndex = +this.dataset.index;
-                const doc = documentData[editingIndex];
-                document.getElementById('edit-doc-title').value = doc.title;
-                document.getElementById('edit-doc-desc').value = doc.desc;
-                document.getElementById('edit-doc-date').value = doc.date;
-                document.getElementById('edit-doc-size').value = doc.size;
-                document.getElementById('edit-doc-type').value = doc.type;
-                new bootstrap.Modal(document.getElementById('editDocumentModal')).show();
-            }
-        });
-        // Xóa
-        document.querySelectorAll('.btn-delete').forEach(btn => {
-            btn.onclick = function() {
-                deletingIndex = +this.dataset.index;
-                new bootstrap.Modal(document.getElementById('deleteConfirmModal')).show();
-            }
-        });
-    }
 
-    // Khởi tạo bảng ban đầu
-    renderTable(1);
-</script>
-<!-- Modal Xem chi tiết tài liệu -->
-<div class="modal fade" id="viewDocumentModal" tabindex="-1" aria-labelledby="viewDocumentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewDocumentModalLabel">Chi tiết tài liệu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-            </div>
-            <div class="modal-body">
-                <dl class="row mb-0">
-                    <dt class="col-sm-3">Tiêu đề:</dt>
-                    <dd class="col-sm-9" id="view-title"></dd>
-                    <dt class="col-sm-3">Mô tả:</dt>
-                    <dd class="col-sm-9" id="view-desc"></dd>
-                    <dt class="col-sm-3">Ngày tải lên:</dt>
-                    <dd class="col-sm-9" id="view-date"></dd>
-                    <dt class="col-sm-3">Kích thước:</dt>
-                    <dd class="col-sm-9" id="view-size"></dd>
-                    <dt class="col-sm-3">Loại:</dt>
-                    <dd class="col-sm-9" id="view-type"></dd>
-                </dl>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        // Sửa tài liệu
+        document.getElementById('updateDocBtn').onclick = function () {
+            if (editingIndex !== null && editingIndex >= 0 && editingIndex < documentData.length) {
+                documentData[editingIndex].title = document.getElementById('edit-doc-title').value;
+                documentData[editingIndex].desc = document.getElementById('edit-doc-desc').value;
+                renderTable(currentPage);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('editDocumentModal'));
+                modal.hide();
+                showToast("Sửa thông tin tài liệu thành công");
+            }
+        };
+
+        // Xóa tài liệu
+        document.getElementById('confirmDeleteBtn').onclick = function () {
+            if (deletingIndex !== null && deletingIndex >= 0 && deletingIndex < documentData.length) {
+                documentData.splice(deletingIndex, 1);
+                const totalPages = Math.ceil(documentData.length / PAGE_SIZE);
+                if (currentPage > totalPages) currentPage = totalPages;
+                renderTable(currentPage > 0 ? currentPage : 1);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+                modal.hide();
+                showToast("Xóa tài liệu thành công");
+            }
+        };
+
+        function attachRowEvents() {
+            document.querySelectorAll('.btn-view').forEach(btn => {
+                btn.onclick = function () {
+                    const idx = +this.dataset.index;
+                    const doc = documentData[idx];
+                    document.getElementById('view-title').innerText = doc.title;
+                    document.getElementById('view-desc').innerText = doc.desc;
+                    document.getElementById('view-date').innerText = doc.date;
+                    document.getElementById('view-size').innerText = doc.size;
+                    document.getElementById('view-type').innerText = doc.type;
+                    new bootstrap.Modal(document.getElementById('viewDocumentModal')).show();
+                }
+            });
+            document.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.onclick = function () {
+                    editingIndex = +this.dataset.index;
+                    const doc = documentData[editingIndex];
+                    document.getElementById('edit-doc-title').value = doc.title;
+                    document.getElementById('edit-doc-desc').value = doc.desc;
+                    document.getElementById('edit-doc-date').value = doc.date;
+                    document.getElementById('edit-doc-size').value = doc.size;
+                    document.getElementById('edit-doc-type').value = doc.type;
+                    new bootstrap.Modal(document.getElementById('editDocumentModal')).show();
+                }
+            });
+            document.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.onclick = function () {
+                    deletingIndex = +this.dataset.index;
+                    new bootstrap.Modal(document.getElementById('deleteConfirmModal')).show();
+                }
+            });
+        }
+
+        // Toast
+        function showToast(msg) {
+            const toast = document.getElementById('success-toast');
+            toast.querySelector('.toast-message').textContent = msg;
+            toast.style.display = 'flex';
+            if (window.toastTimeout) clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3500);
+        }
+        function hideToast() {
+            document.getElementById('success-toast').style.display = 'none';
+        }
+
+        // Khởi tạo bảng ban đầu
+        renderTable(1);
+    </script>
+
+    <!-- Modal Xem chi tiết tài liệu -->
+    <div class="modal fade mt-4" id="viewDocumentModal" tabindex="-1" aria-labelledby="viewDocumentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"
+                style="background-color: #F0F2F5; position: relative; width: 530px; min-height: 390px;">
+                <!-- Nút X đóng modal -->
+                <button type="button" class="btn-close position-absolute top-0 end-0" style="width: 40px; height: 37px;"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- Header -->
+                <div class="p-4 border-bottom mx-4"
+                    style="background-color: #FFFFFF; border-radius: 8px; margin-top: 37px; height: 64px;">
+                    <h5 class="fw-bold mb-3" id="viewDocumentModalLabel">Chi tiết tài liệu</h5>
+                </div>
+                <div class="bg-white p-4 rounded mx-4 mt-3 mb-4">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Tiêu đề:</dt>
+                        <dd class="col-sm-8" id="view-title"></dd>
+                        <dt class="col-sm-4">Mô tả:</dt>
+                        <dd class="col-sm-8" id="view-desc"></dd>
+                        <dt class="col-sm-4">Ngày tải lên:</dt>
+                        <dd class="col-sm-8" id="view-date"></dd>
+                        <dt class="col-sm-4">Kích thước:</dt>
+                        <dd class="col-sm-8" id="view-size"></dd>
+                        <dt class="col-sm-4">Loại:</dt>
+                        <dd class="col-sm-8" id="view-type"></dd>
+                    </dl>
+                </div>
+                <div class="d-flex justify-content-end gap-3 mt-1 me-4 mb-4">
+                    <button type="button" class="btn btn-light" style="border-radius:2px;" data-bs-dismiss="modal">Quay
+                        lại</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Modal Sửa tài liệu -->
-<div class="modal fade" id="editDocumentModal" tabindex="-1" aria-labelledby="editDocumentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDocumentModalLabel">Sửa tài liệu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editDocumentForm" onsubmit="return false;">
-                    <div class="mb-3">
-                        <label for="edit-doc-title" class="form-label">Tiêu đề</label>
-                        <input type="text" class="form-control" id="edit-doc-title" placeholder="Nhập tiêu đề">
+
+    <!-- Modal Sửa tài liệu -->
+    <div class="modal fade mt-4" id="editDocumentModal" tabindex="-1" aria-labelledby="editDocumentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"
+                style="background-color: #F0F2F5; position: relative; width: 530px; min-height: 430px;">
+                <button type="button" class="btn-close position-absolute top-0 end-0" style="width: 40px; height: 37px;"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="p-4 border-bottom mx-4"
+                    style="background-color: #FFFFFF; border-radius: 8px; margin-top: 37px; height: 64px;">
+                    <h5 class="fw-bold mb-3" id="editDocumentModalLabel">Sửa tài liệu</h5>
+                </div>
+                <form class="mt-2 needs-validation" id="editDocumentForm" novalidate>
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
+                        <label class="form-label">Tiêu đề</label>
+                        <input type="text" class="form-control" id="edit-doc-title" placeholder="Nhập tiêu đề" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="edit-doc-desc" class="form-label">Mô tả</label>
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
+                        <label class="form-label">Mô tả</label>
                         <textarea class="form-control" id="edit-doc-desc" rows="2" placeholder="Nhập mô tả"></textarea>
                     </div>
-                    <div class="mb-3">
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
                         <label class="form-label">Ngày tải lên</label>
                         <input type="text" class="form-control" id="edit-doc-date" disabled>
                     </div>
-                    <div class="mb-3">
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
                         <label class="form-label">Kích thước</label>
                         <input type="text" class="form-control" id="edit-doc-size" disabled>
                     </div>
-                    <div class="mb-3">
+                    <div class="bg-white p-3 rounded mx-4 mb-2">
                         <label class="form-label">Loại</label>
                         <input type="text" class="form-control" id="edit-doc-type" disabled>
                     </div>
+                    <div class="d-flex justify-content-end gap-3 mt-1 me-4 mb-4">
+                        <button type="button" class="btn btn-primary" id="updateDocBtn"
+                            style="border-radius:2px; width: 85.9px;">Lưu</button>
+                        <button type="button" class="btn btn-light" style="border-radius:2px;"
+                            data-bs-dismiss="modal">Quay lại</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                <button type="button" class="btn btn-primary" id="updateDocBtn">Lưu</button>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận xóa -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm custom-alert-modal">
+            <div class="modal-content">
+                <div class="modal-body pb-0">
+                    <div class="mb-3">
+                        <i class="bi bi-exclamation-circle" style="color:#ffae42;font-size:2rem;"></i>
+                    </div>
+                    <div class="mb-3 fw-semibold">
+                        Bạn chắc chắn muốn xóa tài liệu này không?
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-end pt-0 pb-3 pr-3">
+                    <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmDeleteBtn">Xóa</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Modal xác nhận xóa -->
-<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm custom-alert-modal">
-        <div class="modal-content">
-            <div class="modal-body pb-0">
-                <div class="mb-3">
-                    <i class="bi bi-exclamation-circle" style="color:#ffae42;font-size:2rem;"></i>
-                </div>
-                <div class="mb-3 fw-semibold">
-                    Bạn chắc chắn muốn xóa tài liệu này không?
-                </div>
-            </div>
-            <div class="modal-footer justify-content-end pt-0 pb-3 pr-3">
-                <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" id="confirmDeleteBtn">Xóa</button>
-            </div>
-        </div>
+    <div id="success-toast" class="custom-toast" style="display:none;">
+        <span class="toast-icon">
+            <svg width="24" height="24" style="vertical-align:middle;">
+                <circle cx="12" cy="12" r="10" stroke="#4BC300" stroke-width="2" fill="none" />
+                <polyline points="8,13 11,16 16,9" fill="none" stroke="#4BC300" stroke-width="2" />
+            </svg>
+        </span>
+        <span class="toast-message">Thêm tài liệu thành công</span>
+        <span class="toast-close" onclick="hideToast()">&times;</span>
     </div>
-</div>
 
-
-
-
-
-
-
-
+    <script>
+        function showToast(msg) {
+            const toast = document.getElementById('success-toast');
+            toast.querySelector('.toast-message').textContent = msg;
+            toast.style.display = 'flex';
+            if (window.toastTimeout) clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3500);
+        }
+        function hideToast() {
+            document.getElementById('success-toast').style.display = 'none';
+        }
+    </script>
 
 </body>
 

@@ -111,7 +111,7 @@
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
+                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/Lich.html" type="button" role="tab"
                         aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
                 </li>
 
@@ -126,13 +126,13 @@
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
-                        aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
+                    <a class="nav-link" id="tab-diem-khac-biet" href="../index.html#diemkhacbiet" type="button"
+                        role="tab" aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
                             biệt</strong></a>
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab"
+                    <a class="nav-link" id="tab-phan-hoi" href="../index.html#phanhoi" type="button" role="tab"
                         aria-controls="phan-hoi" aria-selected="false"><strong>Phản hồi</strong></a>
                 </li>
 
@@ -168,7 +168,7 @@
             <!-- Alert Success chiTieuTuDong -->
             <div id="alertSuccess_chiTieuTuDong" class="alert alert-success alert-dismissible fade show d-none"
                 role="alert"
-                style="width: 420px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+                style="width: 420px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;  background-color: #F6FFED; color: white; border-color: #52C41A;">
                 <p class="text-dark mt-1 mb-1 me-3">
                     <i class="bi bi-check-circle text-success"></i> Thêm khoản chi tiêu định kỳ thành công.
                 </p>
@@ -714,7 +714,7 @@
 
     <!-- số tiền chi tiêu-->
     <script>
-        const input = document.getElementById('soTienInput');
+        const input = document.getElementById('inputSoTien');
 
         input.addEventListener('input', function (e) {
             let value = e.target.value.replace(/[^0-9]/g, '');
@@ -741,17 +741,17 @@
             }
 
             // ===== LOẠI GIAO DỊCH =====
-            const loaiGiaoDichRadios = modalEl.querySelectorAll('input[name="loaiGiaoDich"]');
+
             const loaiGiaoDichChecked = modalEl.querySelector('input[name="loaiGiaoDich"]:checked');
             const errorLoaiGiaoDich = modalEl.querySelector('#errorLoaiGiaoDich');
 
             if (!loaiGiaoDichChecked) {
-                loaiGiaoDichRadios.forEach(radio => radio.classList.add('is-invalid'));
+
                 if (errorLoaiGiaoDich) errorLoaiGiaoDich.classList.remove('d-none');
                 if (errorLoaiGiaoDich) errorLoaiGiaoDich.classList.add('d-block');
                 isValid = false;
             } else {
-                loaiGiaoDichRadios.forEach(radio => radio.classList.remove('is-invalid'));
+
                 if (errorLoaiGiaoDich) errorLoaiGiaoDich.classList.add('d-none');
             }
 
@@ -834,7 +834,7 @@
                 setTimeout(() => {
                     const bsAlert = bootstrap.Alert.getOrCreateInstance(alertBox);
                     bsAlert.close();
-                }, 5000);
+                }, 3000);
             }
         });
     </script>

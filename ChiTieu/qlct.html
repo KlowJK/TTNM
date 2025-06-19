@@ -187,7 +187,7 @@
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
+          <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/Lich.html" type="button" role="tab"
             aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
         </li>
 
@@ -202,14 +202,14 @@
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link" id="tab-diem-khac-biet" href="../index.html" type="button" role="tab"
+          <a class="nav-link" id="tab-diem-khac-biet" href="../index.html#diemkhacbiet" type="button" role="tab"
             aria-controls="diem-khac-biet" aria-selected="false"><strong>Điểm khác
               biệt</strong></a>
         </li>
 
         <li class="nav-item pe-3" role="presentation">
-          <a class="nav-link" id="tab-phan-hoi" href="../index.html" type="button" role="tab" aria-controls="phan-hoi"
-            aria-selected="false"><strong>Phản hồi</strong></a>
+          <a class="nav-link" id="tab-phan-hoi" href="../index.html#phanhoi" type="button" role="tab"
+            aria-controls="phan-hoi" aria-selected="false"><strong>Phản hồi</strong></a>
         </li>
 
 
@@ -234,17 +234,21 @@
     <section class="section dashboard">
 
       <!-- Alert Success ghiNhanChiTieu -->
+
+
       <div id="alertSuccess_ghiNhanChiTieu" class="alert alert-success alert-dismissible fade show d-none" role="alert"
-        style="width: 300px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; ">
+        style="width: 300px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+         z-index: 9999; background-color: #F6FFED; color: white; border-color: #52C41A;">
+
         <p class="text-dark mt-1 mb-1 me-3">
-          <i class="bi bi-check-circle text-success"></i> Lưu chi tiêu thành công.
+          <i class="bi bi-check-circle text-success "></i> Lưu chi tiêu thành công.
         </p>
         <button type="button" class="btn-close mt-1 mb-1" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 
       <!-- Alert Error ghiNhanChiTieu -->
       <div id="alertError_ghiNhanChiTieu" class="alert alert-danger alert-dismissible fade show d-none" role="alert"
-        style="width: 300px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        style="width: 300px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; ">
         <p class="text-dark mt-1 mb-1 me-3">
           <i class="bi bi-x-circle text-danger"></i> Lưu chi tiêu thất bại.
         </p>
@@ -253,7 +257,7 @@
 
       <!-- Alert Success cài đặt ngân sách-->
       <div id="alertSuccess_caiDatNganSach" class="alert alert-success alert-dismissible fade show d-none" role="alert"
-        style="width: 350px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        style="width: 350px; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999;  background-color: #F6FFED; color: white; border-color: #52C41A;">
         <p class="text-dark mt-1 mb-1 me-3">
           <i class="bi bi-check-circle text-success"></i> Cài đặt ngân sách thành công.
         </p>
@@ -546,8 +550,8 @@
                       <span class="text-danger">*</span> Số tiền
                     </label>
                     <div class="position-relative" style="height: 37.6px; width: auto;">
-                      <input type="text" class="form-control text-end pe-5 h-100" id="soTienInput" placeholder="0"
-                        required>
+                      <input type="text" class="form-control text-end pe-5 h-100" id="soTienInput_nganSach"
+                        placeholder="0" required>
                       <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted">VND</span>
                       <div class="invalid-feedback">Vui lòng nhập số tiền chi tiêu.</div>
                     </div>
@@ -2054,6 +2058,18 @@
     });
   </script>
 
+  <script>
+    const input_nganSach = document.getElementById('soTienInput_nganSach');
+
+    input_nganSach.addEventListener('input', function (e) {
+      let value = e.target.value.replace(/[^0-9]/g, '');
+      if (value) {
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      }
+      e.target.value = value;
+    });
+  </script>
+
   <!-- Cập nhật thanh trượt cảnh báo -->
   <script>
     const range = document.getElementById('warningRange');
@@ -2168,7 +2184,7 @@
         setTimeout(() => {
           const bsAlert = bootstrap.Alert.getOrCreateInstance(alertBox);
           bsAlert.close();
-        }, 5000);
+        }, 3000);
       }
     });
   </script>
@@ -2178,7 +2194,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       const modalEl = document.getElementById('nganSachModal');
       const danhMucSelect = document.getElementById('danhMucSelect_nganSach');
-      const soTienInput = modalEl.querySelector('#soTienInput');
+      const soTienInput = modalEl.querySelector('#soTienInput_nganSach');
       const thangSelect = modalEl.querySelector('#selectMonth');
       const dateRangeInput = modalEl.querySelector('#customDateRange3');
       const dateError = modalEl.querySelector('#thoiGianApDungError');
@@ -2283,7 +2299,7 @@
         setTimeout(() => {
           const bsAlert = bootstrap.Alert.getOrCreateInstance(alertBox);
           bsAlert.close();
-        }, 5000);
+        }, 3000);
       }
     });
   </script>
@@ -2329,12 +2345,8 @@
         inputDateRange.disabled = radioQuy.checked;
       });
 
-
-
       form.addEventListener("submit", function (e) {
         let isValid = true;
-
-
         // Validate "Quý" selection
         if (radioQuy.checked) {
           if (!selectQuy.value) {

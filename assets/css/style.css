@@ -38,6 +38,104 @@ h6 {
   font-family: "Nunito", sans-serif;
 }
 
+.hero-section {
+  background: #EDF6F9;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #006D77;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #83C5BE;
+}
+
+.custom-box {
+  width: 340px;
+  height: 180px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+
+/* Thong bao */
+
+.custom-toast {
+  width: 435px;
+  height: 83px;
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background-color: #f1fbe9;
+  color: #333;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00a000;
+  font-size: 18px;
+  border: 2px solid #00a000;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.message-text {
+  margin-left: 16px;
+  font-weight: 500;
+  flex-grow: 1;
+  color: black;
+}
+
+.error-toast {
+  background-color: #fff3f3;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+/* Icon X màu đỏ */
+.icon-fail {
+  color: #dc3545;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.fixed-btn {
+  min-width: 90px;
+  /* hoặc width: 100px; nếu bạn muốn cố định */
+  height: 38px;
+  /* Chiều cao cố định */
+  padding: 6px 12px;
+  /* Căn chỉnh lề trong */
+  text-align: center;
+  /* Căn giữa chữ */
+}
+
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/

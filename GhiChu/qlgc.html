@@ -42,6 +42,221 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .note-card {
+        background-color: #e5e5e5;
+        border-radius: 30px;
+        padding: 2rem;
+    }
+
+    .note-item {
+        background-color: #fff;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .footer-links {
+        font-size: 0.9rem;
+    }
+
+    .pagination .page-link {
+        border-radius: 10px;
+    }
+
+    .fake-tablet-notch {
+        width: 80px;
+        height: 8px;
+        background-color: #333;
+        margin: 0 auto 1rem;
+        border-radius: 8px;
+    }
+</style>
+<style>
+    .calendar-table {
+        background: #fff;
+        min-width: 900px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    }
+
+    .calendar-table th,
+    .calendar-table td {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        position: relative;
+        height: 48px;
+        /* giữ dòng cao đều */
+        vertical-align: top;
+    }
+
+    .calendar-table th {
+        background: #fff;
+        color: #666;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .calendar-table th.active {
+        color: #2196f3;
+        font-weight: 700;
+        background: #f0f7fd;
+    }
+
+    .calendar-table .calendar-time {
+        font-size: 15px;
+        color: #bbb;
+        background: #fafbfc;
+        font-weight: 500;
+        text-align: right;
+        padding-right: 8px;
+    }
+
+    .task-block {
+        background: #c6e7fa;
+        color: #222;
+        border-radius: 8px;
+        font-size: 14px;
+        padding: 2px 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-left: 10px;
+        margin-top: 4px;
+        max-width: 170px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .task-dot {
+        width: 9px;
+        height: 9px;
+        background: #f44336;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    #custom-alert {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<style>
+    .event-block .event-time {
+        color: #555;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    .event-block {
+        background: #c6e7fa !important;
+        color: #222 !important;
+        border-radius: 8px !important;
+        font-size: 14px !important;
+        font-weight: 500;
+        padding: 4px 10px !important;
+        display: block;
+        /* hoặc flex nếu muốn, nhưng block là đủ */
+        margin: 2px 0;
+        min-width: 90px;
+        max-width: 100%;
+        border: none !important;
+        box-shadow: none !important;
+        cursor: pointer;
+        position: static;
+        /* ĐỔI từ absolute sang static */
+        width: 100%;
+        white-space: normal !important;
+        overflow: visible !important;
+        z-index: 3;
+    }
+
+    .event-block .event-title {
+        font-weight: 700;
+        font-size: 15px;
+        white-space: normal !important;
+        overflow: visible !important;
+        word-break: break-word;
+    }
+
+    .add-note-btn {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border: 3px solid #000;
+        border-radius: 24px;
+        padding: 6px 18px 6px 12px;
+        box-shadow: 0 2px 6px rgba(60, 60, 60, 0.13);
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: box-shadow 0.15s;
+    }
+
+    .add-note-btn:hover {
+        box-shadow: 0 4px 12px rgba(60, 60, 60, 0.18);
+        background: #f6f8fa;
+    }
+
+    .plus-icon {
+        font-size: 21px;
+        font-weight: bold;
+        margin-right: 8px;
+    }
+</style>
+<style>
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: 1fr;
+        /* hoặc auto nếu bạn muốn chiều cao theo nội dung cao nhất */
+        gap: 15px;
+        height: 250px;
+        /* tùy theo bạn muốn card cao tối đa cỡ nào */
+    }
+
+    .parent>div {
+        height: 85%;
+        /* Giúp các div1 - div5 fill chiều cao của hàng */
+    }
+
+    .sales-card {
+        height: 100% !important;
+        /* Ghi đè inline style để fill toàn bộ */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* nếu bạn muốn nội dung giãn đều */
+    }
+
+    input.is-invalid {
+        background-image: none !important;
+    }
+
+    select.form-select.is-invalid {
+        background-image: none !important;
+    }
+
+    .money-icon {
+        width: 35px;
+        height: 35px;
+        border: 3px solid #000;
+        border-radius: 50%;
+        font-size: 24px;
+    }
+</style>
 
 <body>
 
@@ -69,7 +284,7 @@
                 </li>
 
                 <li class="nav-item pe-3" role="presentation">
-                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/qltg.html" type="button" role="tab"
+                    <a class="nav-link" id="tab-lich-trinh" href="../LichTrinh/Lich.html" type="button" role="tab"
                         aria-controls="lich-trinh" aria-selected="false"><strong>Lịch trình</strong></a>
                 </li>
 
@@ -112,128 +327,126 @@
 
     <!-- ======= Sidebar ======= -->
 
+    <div class="container-fluid mt-4 "
+        class="d-flex align-items-center justify-content-between bg-white rounded-3 p-3 mb-3"
+        style="opacity:0.6; min-height:56px;">
+        <div class="row">
+            <!-- Sidebar trái -->
+            <div class="col-md-2">
+                <hr>
+                <hr>
+                <hr>
+                <!-- Nút chỉ hiện khi ở chế độ Lịch -->
+                <button id="btn-calendar-only" class="add-note-btn" data-bs-toggle="modal"
+                    data-bs-target="#addNoteModal">
+                    <span class="plus-icon">+</span> Thêm ghi chú
+                </button>
+                <br>
 
-    <main id="main" class="main">
 
-        <!--<div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div>-->
-        <!-- End Page Title -->
-        <section class="section dashboard">
-
-
-            <div class="row">
-
-                <!-- Reports -->
-                <div class="col-12">
-                    <div class="card">
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="card-body">
-                            <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                            <!-- Line Chart -->
-                            <div id="reportsChart"></div>
-
-                            <script>
-                                document.addEventListener("DOMContentLoaded", () => {
-                                    new ApexCharts(document.querySelector("#reportsChart"), {
-                                        series: [{
-                                            name: 'Sales',
-                                            data: [31, 40, 28, 51, 42, 82, 56],
-                                        }, {
-                                            name: 'Revenue',
-                                            data: [11, 32, 45, 32, 34, 52, 41]
-                                        }, {
-                                            name: 'Customers',
-                                            data: [15, 11, 32, 18, 9, 24, 11]
-                                        }],
-                                        chart: {
-                                            height: 350,
-                                            type: 'area',
-                                            toolbar: {
-                                                show: false
-                                            },
-                                        },
-                                        markers: {
-                                            size: 4
-                                        },
-                                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                                        fill: {
-                                            type: "gradient",
-                                            gradient: {
-                                                shadeIntensity: 1,
-                                                opacityFrom: 0.3,
-                                                opacityTo: 0.4,
-                                                stops: [0, 90, 100]
-                                            }
-                                        },
-                                        dataLabels: {
-                                            enabled: false
-                                        },
-                                        stroke: {
-                                            curve: 'smooth',
-                                            width: 2
-                                        },
-                                        xaxis: {
-                                            type: 'datetime',
-                                            categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                                        },
-                                        tooltip: {
-                                            x: {
-                                                format: 'dd/MM/yy HH:mm'
-                                            },
-                                        }
-                                    }).render();
-                                });
-                            </script>
-                            <!-- End Line Chart -->
-
-                        </div>
-
+                <label for="viewMode" class="form-label">Chế độ hiển thị</label>
+                <select class="form-select mb-3" id="viewMode">
+                    <option value="calendar">Lịch</option>
+                    <option value="list">Danh sách</option>
+                </select>
+                <!-- Giả lập lịch nhỏ -->
+                <!-- Mini Calendar Sidebar -->
+                <div class="calendar-small border rounded p-2 bg-white">
+                    <div class="d-flex align-items-center mb-2 mt-2">
+                        <select id="calendar-year" class="form-select form-select-sm me-2"
+                            style="width: 80px;"></select>
+                        <select id="calendar-month" class="form-select form-select-sm" style="width: 63px;"></select>
                     </div>
-                </div><!-- End Reports -->
 
+                    <table class="table table-sm mb-0 text-center" id="calendar-table">
+                        <!-- JS sẽ tự động render lịch -->
+                    </table>
+                </div>
             </div>
-            </div><!-- End Left side columns -->
+            <!-- Vùng nội dung -->
+            <div class="col-md-10">
+                <!-- DẠNG DANH SÁCH -->
+                <div id="note-list-view">
+                    <div class="note-card d-flex flex-column" style="height: 600px">
+                        <div class="fake-tablet-notch"></div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5>Ghi chú sinh viên</h5>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#addNoteModal">+ Thêm ghi chú</button>
+                        </div>
+                        <div class="note-item">
+                            <span>
+                                <input class="form-check-input me-2" type="checkbox" />
+                                My first task
+                            </span>
+                            <span class="text-muted">20:49:33 2021-02-03</span>
+                            <span>
+                                <a href="#" class="me-2" data-bs-toggle="modal"
+                                    data-bs-target="#noteDetailModal">Xem</a>
+                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#editNoteModal">Sửa</a>
+                                <a href="#" class="text-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteNoteModal">Xoá</a>
+                            </span>
+                        </div>
+                        <div class="note-item">
+                            <span>
+                                <input class="form-check-input me-2" type="checkbox" />
+                                My second task
+                            </span>
+                            <span class="text-muted">21:30:33 2021-02-03</span>
+                            <span>
+                                <a href="#" class="me-2">Xem</a>
+                                <a href="#" class="me-2">Sửa</a>
+                                <a href="#" class="text-danger">Xoá</a>
+                            </span>
+                        </div>
+                        <nav class="mt-auto">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">50</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- DẠNG LỊCH -->
+                <div class="calendar-scroll-wrapper" style="max-height:600px; overflow-y:auto; display:none;"
+                    id="calendar-view">
+                    <hr>
+                    <hr>
+                    <div class="calendar-main">
+                        <div class="table-responsive">
+                            <table class="table mb-0 text-center" id="note-calendar-table">
+                                <thead class="bg-light">
+                                    <tr id="note-calendar-header-row">
+                                        <th style="width:80px;">GMT+07</th>
+                                        <th>T2</th>
+                                        <th>T3</th>
+                                        <th>T4</th>
+                                        <th>T5</th>
+                                        <th>T6</th>
+                                        <th>T7</th>
+                                        <th>CN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- JS sẽ render từng hàng giờ từ 6h đến 22h (hoặc 0-23 tuỳ chọn) -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-        </section>
-
-    </main><!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
         </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </footer><!-- End Footer -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    </div>
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -254,7 +467,677 @@
     <!-- Moment.js -->
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
+    <!-- Modal Thêm Ghi Chú -->
+    <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="mb-3 fw-bold" id="addNoteModalLabel">Thêm ghi chú</h5>
 
+                    <form id="noteForm" class="d-flex flex-column gap-2 needs-validation" novalidate>
+                        <div class="bg-white p-2 rounded">
+                            <label for="title" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu
+                                đề</label>
+                            <input type="text" class="form-control border-0 px-0 py-1" id="title"
+                                placeholder="Nhập tiêu đề" required>
+                            <div class="invalid-feedback">Vui lòng nhập tiêu đề.</div>
+                        </div>
+
+                        <div class="bg-white p-2 rounded">
+                            <label for="description" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô
+                                tả</label>
+                            <textarea class="form-control border-0 px-0 py-1" id="description" rows="3"
+                                placeholder="Nhập mô tả" required></textarea>
+                            <div class="invalid-feedback">Vui lòng nhập mô tả.</div>
+                        </div>
+
+                        <div class="bg-white p-2 rounded">
+                            <label for="time" class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời
+                                gian</label>
+                            <input type="datetime-local" class="form-control border-0 px-0 py-1" id="time">
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-3 mt-2 pb-2">
+                            <button type="submit" class="btn btn-primary fw-semibold"
+                                style="border-radius: 4px; min-width: 100px;">Thêm</button>
+                            <button type="button" class="btn fw-semibold"
+                                style="border-radius: 4px; min-width: 100px; background: #fff; border: 1px solid #dee2e6;"
+                                data-bs-dismiss="modal">Quay lại</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Chi tiết Ghi chú -->
+    <div class="modal fade" id="noteDetailModal" tabindex="-1" aria-labelledby="noteDetailModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="mb-3 fw-bold" id="noteDetailModalLabel">Chi tiết ghi chú</h5>
+
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
+                        <input type="text" class="form-control border-0 px-0 py-1" readonly>
+                    </div>
+
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
+                        <textarea class="form-control border-0 px-0 py-1" rows="3" readonly></textarea>
+                    </div>
+
+                    <div class="bg-white p-2 rounded mb-3">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                        <div class="text-muted px-1 py-1" style="font-size: 0.9rem;" id="noteDetailTime">
+                            <!-- sẽ được thay bằng JS -->
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 pb-2">
+                        <button type="button" class="btn fw-semibold"
+                            style="border-radius: 4px; min-width: 100px; background: #fff; border: 1px solid #dee2e6;"
+                            data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Sửa Ghi Chú -->
+    <div class="modal fade" id="editNoteModal" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-sm"
+                style="background: #f5f7fa; border-radius: 12px; min-width: 340px; max-width: 380px;">
+                <div class="position-relative px-3 pt-3 pb-0">
+                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="mb-3 fw-bold" id="editNoteModalLabel">Sửa ghi chú</h5>
+
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Tiêu đề</label>
+                        <input type="text" class="form-control border-0 px-0 py-1">
+                    </div>
+
+                    <div class="bg-white p-2 rounded mb-2">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Mô tả</label>
+                        <textarea class="form-control border-0 px-0 py-1" rows="3"></textarea>
+                    </div>
+
+                    <div class="bg-white p-2 rounded mb-3">
+                        <label class="form-label mb-1 fw-semibold" style="font-size: 1rem;">Thời gian</label>
+                        <input type="datetime-local" class="form-control border-0 px-0 py-1" id="time">
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 pb-2">
+                        <button type="button" class="btn btn-primary fw-semibold"
+                            style="border-radius: 4px; min-width: 100px;">Lưu</button>
+                        <button type="button" class="btn fw-semibold"
+                            style="border-radius: 4px; min-width: 100px; background: #fff; border: 1px solid #dee2e6;"
+                            data-bs-dismiss="modal">Quay lại</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Xoá Ghi Chú -->
+    <div class="modal fade" id="deleteNoteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-3 mt-4"> <!-- thêm mt-4 để đẩy modal xuống từ top -->
+                <div class="modal-body d-flex align-items-center">
+                    <span class="me-2 text-warning fs-4"><i class="bi bi-exclamation-circle text-warning"></i>
+                    </span>
+                    <span>Bạn chắc chắn muốn xoá ghi chú này không?</span>
+                </div>
+                <div class="modal-footer border-0 justify-content-end">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Không xoá</button>
+                    <button type="button" class="btn btn-primary">Xoá ghi chú</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current datetime-local value for the input
+        window.addEventListener('DOMContentLoaded', function () {
+            var now = new Date();
+            var offset = now.getTimezoneOffset();
+            now = new Date(now.getTime() - (offset * 60 * 1000));
+            var formatted = now.toISOString().slice(0, 16);
+            var timeInput = document.getElementById('time');
+            if (timeInput) timeInput.value = formatted;
+        });
+
+        // Ẩn/hiện 2 chế độ
+        const modeSelect = document.getElementById("viewMode");
+        const listView = document.getElementById("note-list-view");
+        const calendarView = document.getElementById("calendar-view");
+        const calendarOnlyButton = document.getElementById("btn-calendar-only"); // <- THÊM DÒNG NÀY
+
+
+        function switchView() {
+            if (modeSelect.value === "calendar") {
+                listView.style.display = "none";
+                calendarView.style.display = "block";
+                calendarOnlyButton.style.display = "block";//hiện nút chỉ khi ở chế độ lịch
+            } else {
+                listView.style.display = "block";
+                calendarView.style.display = "none";
+                calendarOnlyButton.style.display = "none";// ẩn nút khi ở chế độ danh sách
+            }
+        }
+        modeSelect.addEventListener("change", switchView);
+        // Tự động mở đúng chế độ khi tải trang
+        switchView();
+    </script>
+    <script>
+        const NOTES_PER_PAGE = 5;
+        let currentPage = 1;
+
+        // ================= DỮ LIỆU ================
+        let notes = JSON.parse(localStorage.getItem('studentNotes')) || [];
+        let currentEditId = null;
+
+        // ================== HIỂN THỊ DANH SÁCH GHI CHÚ =================
+        function renderNotes() {
+            const container = document.querySelector('#note-list-view .note-card');
+            const pagination = container.querySelector('nav');
+            container.querySelectorAll('.note-item').forEach(el => el.remove());
+
+            const totalPages = Math.ceil(notes.length / NOTES_PER_PAGE);
+            const start = (currentPage - 1) * NOTES_PER_PAGE;
+            const end = start + NOTES_PER_PAGE;
+            const pageNotes = notes.slice(start, end);
+
+            pageNotes.forEach(note => {
+                const noteEl = document.createElement('div');
+                noteEl.className = 'note-item';
+                noteEl.innerHTML = `
+            <span>
+                <input class="form-check-input me-2" type="checkbox" />
+                ${note.title}
+            </span>
+            <span class="text-muted">${formatTime(note.time)}</span>
+            <span>
+                <a href="#" class="me-2 text-primary" onclick="viewNote(${note.id})" data-bs-toggle="modal" data-bs-target="#noteDetailModal">Xem</a>
+                <a href="#" class="me-2 text-success" onclick="editNote(${note.id})" data-bs-toggle="modal" data-bs-target="#editNoteModal">Sửa</a>
+                <a href="#" class="text-danger" onclick="confirmDeleteNote(${note.id})" data-bs-toggle="modal" data-bs-target="#deleteNoteModal">Xoá</a>
+            </span>
+        `;
+                container.insertBefore(noteEl, pagination);
+            });
+
+            localStorage.setItem('studentNotes', JSON.stringify(notes));
+            renderPagination(totalPages);
+        }
+        // Hàm định dạng thời gian
+        function renderPagination(totalPages) {
+            const container = document.querySelector('#note-list-view .pagination');
+            container.innerHTML = '';
+
+            container.innerHTML += `
+        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+            <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">«</a>
+        </li>
+    `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                container.innerHTML += `
+            <li class="page-item ${i === currentPage ? 'active' : ''}">
+                <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+            </li>
+        `;
+            }
+
+            container.innerHTML += `
+        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+            <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">»</a>
+        </li>
+    `;
+        }
+        // Hàm thay đổi trang
+        function changePage(page) {
+            const totalPages = Math.ceil(notes.length / NOTES_PER_PAGE);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderNotes();
+        }
+
+
+        // ================= THÊM GHI CHÚ ===============
+        document.getElementById("noteForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Kiểm tra hợp lệ bằng HTML5
+            if (!this.checkValidity()) {
+                this.classList.add("was-validated");
+                return;
+            }
+
+            const title = document.getElementById("title").value.trim();
+            const description = document.getElementById("description").value.trim();
+            const time = new Date().toISOString();
+
+            notes.push({
+                id: Date.now(),
+                title,
+                description,
+                time
+            });
+
+            this.reset();
+            this.classList.remove("was-validated"); // xoá viền đỏ khi mở lại
+            $('#addNoteModal').modal('hide');
+            renderNotes();
+            renderNoteCalendar();
+            showAlert('<i class="bi bi-check-circle text-success me-1"></i> Thêm ghi chú thành công!', "success");
+        });
+
+
+        // ================= XEM GHI CHÚ =================
+
+        function viewNote(id) {
+            const note = notes.find(n => n.id === id);
+            const modal = document.getElementById('noteDetailModal');
+            modal.querySelector('input').value = note.title;
+            modal.querySelector('textarea').value = note.description;
+
+            const timeEl = modal.querySelector('#noteDetailTime');
+            if (timeEl && note.time) {
+                timeEl.textContent = formatTime(note.time);
+            }
+        }
+        // ================ SỬA GHI CHÚ ==================
+        function editNote(id) {
+            const note = notes.find(n => n.id === id);
+            currentEditId = id;
+            const modal = document.getElementById('editNoteModal');
+            const inputs = modal.querySelectorAll('input');
+            const textareas = modal.querySelectorAll('textarea');
+
+            inputs[0].value = note.title;
+            textareas[0].value = note.description;
+            inputs[1].value = new Date(note.time).toISOString().slice(0, 16); // cập nhật thời gian
+        }
+
+
+        document.querySelector('#editNoteModal .btn-primary').addEventListener('click', () => {
+            const modal = document.getElementById('editNoteModal');
+            const title = modal.querySelector('input').value;
+            const description = modal.querySelector('textarea').value;
+            const note = notes.find(n => n.id === currentEditId);
+            note.title = title;
+            note.description = description;
+            renderNotes();
+            renderNoteCalendar();
+            $('#editNoteModal').modal('hide');
+            showAlert('<i class="bi bi-check-circle text-success me-1"></i> Sửa ghi chú thành công!', "success"); // Hiển thị thông báo thành công
+        });
+
+        // ================ XOÁ GHI CHÚ ==================
+        let noteToDeleteId = null;
+        function confirmDeleteNote(id) {
+            noteToDeleteId = id;
+        }
+
+        document.querySelector('#deleteNoteModal .btn-primary').addEventListener('click', () => {
+            notes = notes.filter(n => n.id !== noteToDeleteId);
+            renderNotes();
+            renderNoteCalendar();
+            $('#deleteNoteModal').modal('hide');
+            showAlert('<i class="bi bi-check-circle text-success me-1"></i> Xoá ghi chú thành công!', "success"); // Hiển thị thông báo thành công
+        });
+
+        // ================= KHỞI TẠO ==================
+        function showAlert(message, type = "success") {
+            const alertBox = document.getElementById("custom-alert");
+            const alertText = document.getElementById("custom-alert-text");
+
+            alertText.innerHTML = message;
+
+            alertBox.className = `alert alert-${type} alert-dismissible fade show text-center position-fixed top-0 start-50 translate-middle-x mt-3`;
+            alertBox.style.display = "block";
+
+            // Tự ẩn sau 3 giây
+            setTimeout(() => {
+                hideAlert();
+            }, 3000);
+        }
+
+        function hideAlert() {
+            const alertBox = document.getElementById("custom-alert");
+            alertBox.style.display = "none";
+        }
+
+
+        renderNotes();
+
+        // ================== DẠNG LỊCH ==================
+        // Đặt ở đầu <script> (sau biến notes...)
+        const vietnameseWeekdays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+        const vietnameseMonths = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+        const today = new Date();
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+        let currentWeekStart = null; // Lưu thứ 2 đầu tuần đang xem
+
+        // Render bảng lịch tuần (6h-22h)
+        function renderNoteCalendarTable() {
+            const tbody = document.querySelector('#note-calendar-table tbody');
+            tbody.innerHTML = '';
+            for (let hour = 0; hour <= 23; hour++) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<th class="calendar-time-cell"><span class="hour-label">${hour}:00</span></th>` +
+                    Array(7).fill().map((_, d) => `<td data-day="${d}" data-hour="${hour}" style="position:relative;"></td>`).join('');
+                tbody.appendChild(tr);
+            }
+        }
+        renderNoteCalendarTable();
+        // Hàm render notes lên lịch tuần
+        function renderNoteCalendar() {
+            // Xóa các event-block cũ
+            document.querySelectorAll('#note-calendar-table .event-block').forEach(e => e.remove());
+
+            let weekStart = currentWeekStart;
+            if (!weekStart) {
+                const now = new Date();
+                weekStart = new Date(now);
+                weekStart.setDate(now.getDate() - (now.getDay() + 6) % 7); // Thứ 2 đầu tuần
+            }
+
+            notes.forEach(note => {
+                let d = new Date(note.time);
+                if (isNaN(d.getTime())) return;
+
+                let weekDayIdx = (d.getDay() + 6) % 7;
+                if (
+                    d >= weekStart && d < (new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + 7))
+                ) {
+                    const hour = d.getHours();
+                    if (hour < 0 || hour > 24) return;
+                    const cell = document.querySelector(`#note-calendar-table td[data-day="${weekDayIdx}"][data-hour="${hour}"]`);
+                    if (!cell) return;
+
+                    const block = document.createElement('div');
+                    block.className = 'event-block';
+                    block.innerHTML = `<div class="event-title">${note.title}</div>`;
+                    block.onclick = function (e) {
+                        e.stopPropagation();
+                        showNotePopup(note, block);
+                    };
+                    cell.appendChild(block);
+                }
+            });
+        }
+
+
+
+        function renderCalendar(year, month) {
+            const tbl = document.getElementById('calendar-table');
+            // Header
+            let html = '<thead><tr>';
+            for (let i = 0; i < 7; ++i) html += `<th>${vietnameseWeekdays[i]}</th>`;
+            html += '</tr></thead><tbody>';
+
+            // Ngày đầu tiên trong tuần, số ngày/tháng, số ngày tháng trước
+            let firstDay = new Date(year, month, 1).getDay();
+            let daysInMonth = new Date(year, month + 1, 0).getDate();
+            let prevDays = new Date(year, month, 0).getDate();
+
+            let date = 1;
+            let nextMonthDate = 1;
+            for (let row = 0; row < 6; ++row) {
+                html += '<tr>';
+                for (let col = 0; col < 7; ++col) {
+                    if (row === 0 && col < firstDay) {
+                        html += `<td class="calendar-other-month">${prevDays - firstDay + col + 1}</td>`;
+                    } else if (date <= daysInMonth) {
+                        // Gắn data-date cho ngày tháng này
+                        let isToday = (date === today.getDate() && year === today.getFullYear() && month === today.getMonth());
+                        let dataDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
+                        html += `<td${isToday ? ' class="calendar-today"' : ''} data-date="${dataDate}">${date}</td>`;
+                        date++;
+                    } else {
+                        html += `<td class="calendar-other-month">${nextMonthDate++}</td>`;
+                    }
+                }
+                html += '</tr>';
+                if (date > daysInMonth) break;
+            }
+            html += '</tbody>';
+            tbl.innerHTML = html;
+
+            // Sau khi render xong, gắn click vào các ngày trong tháng này
+            setTimeout(() => {
+                document.querySelectorAll('#calendar-table td[data-date]').forEach(td => {
+                    td.style.cursor = 'pointer';
+                    td.onclick = function (e) {
+                        let dateStr = this.getAttribute('data-date'); // "2024-06-18"
+                        let [y, m, d] = dateStr.split('-').map(Number);
+                        setCurrentWeek(new Date(y, m - 1, d)); // GỌI setCurrentWeek để đổi tuần
+                        renderNoteCalendar();
+                        renderWeekHeader(currentWeekStart);
+                    };
+
+                });
+            }, 10);
+
+            // Khi load mặc định vẫn render tuần của hôm nay
+            let selectedDay = today.getDate(); // hoặc biến đang chọn nếu có
+            let selectedYear = year;
+            let selectedMonth = month;
+            const weekDates = getWeekDates(selectedYear, selectedMonth, selectedDay);
+            renderWeekHeader(weekDates);
+        }
+
+        function populateSelects() {
+            const yearSelect = document.getElementById('calendar-year');
+            const monthSelect = document.getElementById('calendar-month');
+            yearSelect.innerHTML = '';
+            for (let y = currentYear - 5; y <= currentYear + 5; ++y) {
+                yearSelect.innerHTML += `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`;
+            }
+            monthSelect.innerHTML = '';
+            for (let m = 0; m < 12; ++m) {
+                monthSelect.innerHTML += `<option value="${m}" ${m === currentMonth ? 'selected' : ''}>${vietnameseMonths[m]}</option>`;
+            }
+        }
+
+        function setCurrentWeek(date) {
+            // Tìm thứ 2 đầu tuần
+            let monday = new Date(date);
+            let day = monday.getDay();
+            // JS: 0 là Chủ nhật, ta cần thứ 2
+            if (day === 0) monday.setDate(monday.getDate() - 6);
+            else monday.setDate(monday.getDate() - day + 1);
+
+            currentWeekStart = monday;
+            renderNoteCalendarTable();
+            renderNoteCalendar();
+        }
+        //dom
+        document.addEventListener('DOMContentLoaded', function () {
+            populateSelects();
+            renderCalendar(currentYear, currentMonth);
+
+            document.getElementById('calendar-year').addEventListener('change', function () {
+                currentYear = parseInt(this.value);
+                renderCalendar(currentYear, currentMonth);
+            });
+            document.getElementById('calendar-month').addEventListener('change', function () {
+                currentMonth = parseInt(this.value);
+                renderCalendar(currentYear, currentMonth);
+            });
+            setCurrentWeek(new Date()); // Hiện tuần hiện tại khi vào trang
+
+            // ... các hàm khác
+        });
+        function renderWeekHeader(weekStart) {
+            const headerRow = document.getElementById('note-calendar-header-row');
+            headerRow.innerHTML = `<th style="width:80px;">GMT+07</th>`;
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(weekStart);
+                d.setDate(weekStart.getDate() + i);
+                let text = `${vietnameseWeekdays[i]}<br><span style="font-size:13px">${d.getDate()}/${d.getMonth() + 1}</span>`;
+                headerRow.innerHTML += `<th>${text}</th>`;
+            }
+        }
+
+        // Hiển thị popup khi click vào block ghi chú
+        function showNotePopup(note, block) {
+            // Đặt nội dung popup
+            document.getElementById('popupTitle').textContent = note.title;
+            document.getElementById('popupTime').textContent = formatTime(note.time);
+            document.getElementById('popupDescription').textContent = note.description;
+
+            // Đặt vị trí popup (gần block)
+            const popup = document.getElementById('popupNoteDetail');
+            popup.style.display = 'block';
+            const rect = block.getBoundingClientRect();
+            popup.style.top = (window.scrollY + rect.top + rect.height + 6) + 'px';
+            popup.style.left = (window.scrollX + rect.left) + 'px';
+
+            // Lưu lại note id cho các icon
+            popup.dataset.noteId = note.id;
+        }
+        // Đóng popup khi click ngoài
+        document.addEventListener('click', function () {
+            document.getElementById('popupNoteDetail').style.display = 'none';
+        });
+        document.getElementById('popupNoteDetail').addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+
+
+
+        //render
+        function formatTime(isoString) {
+            if (!isoString) return '';
+            const d = new Date(isoString);
+            if (isNaN(d.getTime())) return '';
+            // Format: Thứ 3, 18/06/2024 21:03
+            const weekday = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+            return `${weekday[d.getDay()]}, ${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear()} ${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
+        }
+
+    </script>
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer" style="background-color: #F9FAFE;">
+        <div class="parent mx-5" style="height: 200px ;">
+            <div class="div1">
+                <div class="social-links mt-5 fs-3 "> <!-- fs-3: tăng kích thước icon -->
+                    <a href="#" class="twitter m-3 text-dark"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook m-3 text-dark"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram m-3 text-dark"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin m-3 text-dark"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="div2">
+                <h5 class="mb-4"><strong>Về StudentsLife</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Giới Thiệu</li>
+                    <li class="text-black m-1">Sứ Mệnh</li>
+                    <li class="text-black m-1">Đội Ngũ</li>
+                    <li class="text-black m-1">Liên Hệ</li>
+                    <li class="text-black m-1">Câu hỏi thường gặp(FAQ)</li>
+                </ul>
+            </div>
+            <div class="div3">
+                <h5 class="mb-4"><strong>Khám phá</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Góc học tập</li>
+                    <li class="text-black m-1">Kỹ năng mềm</li>
+                    <li class="text-black m-1">Chia sẻ kinh nghiệm</li>
+                    <li class="text-black m-1">Học bổng & Cơ hội</li>
+                    <li class="text-black m-1">Hướng nghiệp</li>
+                </ul>
+            </div>
+            <div class="div4">
+                <h5 class="mb-4"><strong>Tiện ích sinh viên</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Tài liệu học tập</li>
+                    <li class="text-black m-1">Công cụ học tập</li>
+                    <li class="text-black m-1">Gợi ý khóa học</li>
+                    <li class="text-black m-1">Cộng đồng sinh viên</li>
+                    <li class="text-black m-1">Góp ý & báo lỗi</li>
+                </ul>
+            </div>
+            <div class="div5">
+                <h5 class="mb-4"><strong>Điểm nổi bật</strong></h5>
+                <ul class="list-unstyled">
+                    <li class="text-black m-1">Theo dõi tiến độ học tập</li>
+                    <li class="text-black m-1">Gợi ý chi tiêu thông minh</li>
+                    <li class="text-black m-1">Thống kê & báo cáo toàn diện</li>
+                    <li class="text-black m-1">Tích hợp lịch học/lịch cá nhân</li>
+                    <li class="text-black m-1">Quyền riêng tư nâng cao</li>
+                </ul>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+
+
+
+
+    <!-- ALERT TUỲ CHỈNH CÓ NÚT X -->
+    <div id="custom-alert"
+        class="alert alert-success alert-dismissible fade show text-center position-fixed top-0 start-50 translate-middle-x mt-3"
+        style="z-index: 1055; display: none; min-width: 300px; max-width: 500px;">
+        <span id="custom-alert-text">Nội dung thông báo</span>
+        <button type="button" class="btn-close" onclick="hideAlert()" aria-label="Đóng"></button>
+    </div>
+    <!-- pop up chi tiết  -->
+    <div id="popupNoteDetail" class="position-absolute shadow rounded p-3 bg-white border"
+        style="display: none; width: 320px; z-index: 9999; font-size: 0.95rem;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="fw-bold" id="popupTitle">My Task</div>
+            <div>
+                <i class="bi bi-pencil-square me-2 text-primary" style="cursor:pointer;" id="popupEditBtn"></i>
+                <i class="bi bi-trash text-danger" style="cursor:pointer;" id="popupDeleteBtn"></i>
+                <i class="bi bi-x-lg ms-2" style="cursor:pointer;" id="popupCloseBtn"></i>
+            </div>
+        </div>
+        <div class="text-muted" id="popupTime">Thứ 4, 16 tháng 6 lúc 7:30 AM</div>
+        <div id="popupDescription" class="mt-2">Mô tả ghi chú...</div>
+    </div>
+
+    <script>
+        // Đặt đoạn JS này ở ĐÂY hoặc cuối trang
+        document.getElementById('popupEditBtn').onclick = function () {
+            var noteId = parseInt(document.getElementById('popupNoteDetail').dataset.noteId);
+            document.getElementById('popupNoteDetail').style.display = 'none';
+            editNote(noteId);
+            var modal = new bootstrap.Modal(document.getElementById('editNoteModal'));
+            modal.show();
+        };
+        document.getElementById('popupDeleteBtn').onclick = function () {
+            var noteId = parseInt(document.getElementById('popupNoteDetail').dataset.noteId);
+            document.getElementById('popupNoteDetail').style.display = 'none';
+            confirmDeleteNote(noteId);
+            var modal = new bootstrap.Modal(document.getElementById('deleteNoteModal'));
+            modal.show();
+        };
+        document.getElementById('popupCloseBtn').onclick = function () {
+            document.getElementById('popupNoteDetail').style.display = 'none';
+        };
+    </script>
 
 </body>
 
